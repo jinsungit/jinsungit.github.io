@@ -1,0 +1,29 @@
+Discriminator Model 
+
+PyTorch Summary:
+----------------------------------------------------------------
+  (model): Sequential(
+    (0): Linear(in_features=256, out_features=128, bias=True)
+    (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+    (3): LeakyReLU(negative_slope=0.2, inplace=True)
+    (4): Linear(in_features=64, out_features=1, bias=True)
+  )
+
+
+Params and Shape Summary:
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Linear-1                  [-1, 128]          32,896
+         LeakyReLU-2                  [-1, 128]               0
+            Linear-3                   [-1, 64]           8,256
+         LeakyReLU-4                   [-1, 64]               0
+            Linear-5                    [-1, 1]              65
+================================================================
+Total params: 41,217
+Trainable params: 41,217
+Non-trainable params: 0
+----------------------------------------------------------------
+
+

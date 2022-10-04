@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<head>
+<title>Hidden Footprints</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+  background-color: #fffdf9;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 15%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+/*  <!--background-color: #ececeb;--> */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 2px 2px;
+  height: 1000px;
+  //background-color: #faeee7;
+}
+
+//#Manual Labels {background-color: #3f4d71;}
+//#Waymo Videos {background-color: #55ae95;}
+//#Cityscapes Examples {background-color: #ffac8e;}
+</style>
+</head>
+
+
+<div style="text-align:center">
+
+    <h1>Hidden Footprints: Learning Contextual Walkability from 3D Human Trails</h1>
+
+    <h2> Supplementary Material </h2>
+
+
+
+</div>
+
+
+<div style="text-align:center">
+    <p style="text-align:left;width:80%;margin:auto">
+     <!--Please click on the tabs below for: video comparisons on the Waymo data (<b>Waymo Videos</b>), examples of the manually labeled set (<b>Manual Labels</b>), examples on the Cityscapes data (<b>Cityscapes Results</b>), generalization beyond humans (<b>Learning on Cars</b>), and additional implementation details of our system (<b>Additional Details</b>).</p>-->
+     Please click on the tabs below for: examples of the manually labeled set (<b>Manual Labels</b>), examples on the Cityscapes data (<b>Cityscapes Results</b>), generalization beyond humans (<b>Learning on Cars</b>), and additional implementation details of our system (<b>Additional Details</b>).</p>
+    <br />
+<!--<button class="tablink" onclick="openPage('waymo', this, '#55ae95')" id="defaultOpen">Waymo Videos</button>-->
+<button class="tablink" onclick="openPage('manual', this, '#3f4d71')" id="defaultOpen">Manual Labels</button>
+<button class="tablink" onclick="openPage('cityscapes', this, '#ffac8e')">Cityscapes Results</button>
+<button class="tablink" onclick="openPage('cars', this, '#2ECC71')">Learning on Cars</button>
+<button class="tablink" onclick="openPage('details', this, '#878f99')">Additional Details</button>
+
+</div>
+<hr>
+<!--<div id="waymo" class="tabcontent">-->
+     <!--<div style="color:black; text-align:left; width:70%; margin:auto;">-->
+         <!--<p>We show side-by-side video comparisons of input video sequences, propagated footprints, and our predicted heatmaps on the <b>validation set</b> of the Waymo dataset. Greener means higher score for walkability. Our model is able to predict reasonable walkable regions of diverse scenes, and under day/night conditions.-->
+         <!--<p>Please select different sequences below to play and click 'Play/Pause' for playback controls.</p>-->
+    <!--</div>-->
+    <!--<iframe src="videos/index.html" width="100%" height="100%" frameBorder="0"></iframe>-->
+<!--</div>-->
+
+<div id="manual" class="tabcontent">
+    <div style="color:black; text-align:left; width:70%; margin:auto;">
+  <p>We show examples of our manually labeled walkable regions in Waymo Open Dataset's validation set.</p>
+  <p>White regions represent valid walkable regions.
+  Note that we ignore regions where people may be jaywalking on.</p>
+    </div>
+    <iframe src="pics/waymo-manual/index.html" width="100%" height="800px" frameBorder="0"></iframe>
+</div>
+
+
+<div id="cityscapes" class="tabcontent">
+     <div style="color:black; text-align:left; width:70%; margin:auto;">
+         <p>We show additional examples on the Cityscapes dataset.</p>
+         <p>Our model produces reasonable predictions on a wide variety of scenes, <b>without any finetuning</b> on this dataset.</p>
+    </div>
+    <iframe src="pics/cityscapes/index.html" width="100%" height="1200px" frameBorder="0"></iframe>
+</div>
+
+
+<div id="cars" class="tabcontent">
+     <div style="color:black; text-align:left; width:70%; margin:auto;">
+         <p>Our framework is flexible and supports objects beyond humans. Here we show additional results of <b>cars</b> on predicting <i>drivable regions</i> and <i>directions</i>.</p>
+         <p>Similar to the human footprints propagation process, we collect 3D labeled cuboids of cars in the Waymo dataset and project their locations and heading directions to all frames in a capture sequence. We then train separate networks using the same training procedure described in the main paper on these two tasks.</p>
+         <p>In the following we show examples of the predicted regions of where a car can be driven (middle column), and the driving direction of a car on road segments (right column). Directional arrows are color-coded using a popular <a target="_blank" href="https://github.com/tomrunia/OpticalFlow_Visualization">optical-flow visualization scheme</a>.</p>
+         <p>
+Notice the predicted directions are adaptive to a road's configuration: for example a diverse set of directions at an intersection (first row), both forward and backward directions in a two-way street (second row and last row), and the movement surrounding trees in the middle of a street (third row).
+
+Also, our drivable regions prediction is not only about roads but also <i>lanes</i> (second row): cars usually don't drive in the median of a two-way street.
+
+<!--Note the predicted driving regions are nicely separated into two lanes: cars usually don't drive in the middle of a two-way street. -->
+<!--Also, our model predicted correctly the two-way driving directions clearly separated by the road median.-->
+         </p>
+    </div>
+    <iframe src="pics/cars/index.html" width="100%" height="1100px" frameBorder="0"></iframe>
+</div>
+
+
+<div id="details" class="tabcontent">
+     <!--<div style="color:black; text-align:left; width:70%; margin:auto;">-->
+         <!--[><p>We show implementation details of our system.</p><]-->
+    <!--</div>-->
+    <iframe src="details/index.html" width="100%" height="100%" frameBorder="0"></iframe>
+</div>
+
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+
+
+</body>
+</html>
