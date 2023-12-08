@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+}
+
+
+td, th {
+  border: 0px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* tr:nth-child(even) {
+  background-color: #982b32;
+} */
+
+.discussion {
+    /* background-color: #f1f0dd; */
+    text-align: left;
+}
+
+.colored {
+    background-color: #f7f2d7;
+}
+
+.centered {
+    margin: auto;
+    width: 80%;
+}
+
+a:link {
+  color: rgb(46, 155, 233);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(4, 159, 38);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(251, 196, 106);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(156, 250, 140);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+
+<h2>CSCI 8000: New and Hot Topics in Computer Vision and Deep Learning</h2>
+ <h3>Spring 2023</h3>
+ <h3>Instructor: Prof. Jin Sun</h3>
+4 Credit Hours
+
+<br>
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Catalog Description:</b>
+Students will learn about the newest development and understanding of algorithms, systems, and best practices in computer vision and deep learning research and engineering. The class will focus on new and hot topics including: the family of vision and language transformers, diffusion models, neural scene representation and rendering, massive scale supervised and unsupervised learning, and neural network foundations. Students will read research papers and code implementations as exercises, present and lead discussions, and work on projects that are closely related to those interesting topics. The course is designed to provide students a state-of-the-art perspective to current computer vision and deep learning research with the goal to inspire future impactful research on those hot topics.
+</div>
+
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Prerequisties:</b>
+Students should have knowledge about computer vision and deep learning basics.
+</div>
+
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Class Location and Times:</b>
+<table style="width:70%;margin-left: 0%;">
+    <tr>
+        <td>Tue & Thu</td>
+        <td>9:35 am - 10:50 am</td>
+        <td><s>222 Boyd</s> Miller Plant Science Building, Room 2102</td>
+    </tr>
+    <tr>
+        <td>Wed</td>
+        <td>10:20 am - 11:10 am</td>
+        <td><s>222 Boyd</s> Miller Plant Science Building, Room 1102</td>
+    </tr>
+    <tr><td colspan="3">Google Map <a href="https://goo.gl/maps/uSKgV4Q9WQyrnkZu5">Direction</a></td></tr>
+</table>
+</div>
+
+<br> 
+
+
+<div style="text-align: left;" class="centered">
+<b>Reading Materials:</b>
+<ul>
+    <li>“Deep Learning” (2016) by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. A free online version is available <a href="http://www.deeplearningbook.org">here</a>.</li>
+    <li>“Dive into Deep Learning” (2021) by Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola. A free online version is available <a href="https://d2l.ai/">here</a>.</li>
+    <li>“Computer Vision: Algorithms and Applications” (2022, 2nd ed) by Richard Szeliski. A free online version is available <a href="https://szeliski.org/Book/">here</a>.</li>
+</ul>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Student Outcomes:</b>
+<ol>
+<li>Demonstrate understanding of computer vision and deep neural network fundamentals.</li>	
+<li>Gain experience deploying deep learning models on computer vision and nlp problems.</li>	
+<li>Enhanced research skills, including reading papers, performing literature research, and analyzing cutting-edge research.</li>	
+</ol>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Instructor Contact:</b><br><br>
+Prof. Jin Sun<br>
+Office Hours: Thursdays 11 - 12 am or By Appointment<br>
+Office: 804 Boyd<br>
+Email: jinsun@uga.edu<br>
+</div>
+
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Evaluation and Grading:</b>
+The final course grade will be weighted as the follows:
+<table style="width:20%;margin-left: 0%;">
+    <tr>
+        <td>Paper presentations</td>
+        <td>40%</td>
+    </tr>
+    <tr>
+        <td>Paper readings</td>
+        <td>20%</td>
+    </tr>
+    <tr>
+        <td>Course project</td>
+        <td>40%</td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Paper presentations:</b> For each required reading paper, we will have around two students presenting the paper (about 45 mins) and leading the class discussion (about 20 mins). Since we will cover a wide-range of topics and problems, a good coverage of background or context for each paper will be very useful. Several essential components of a high-quality presentation are:
+<ol>
+    <li><b>Background:</b> What problem this paper is working on? Why is it important?</li>
+    <li><b>Related work:</b> Before this work, how do other people work on this problem?</li>
+    <li><b>Motivation of the proposed work:</b> What makes the author(s) propose this work?</li>
+    <li><b>Method:</b> Describe the proposed algorithm and/or workflow.</li>
+    <li><b>Evaluation:</b> How is the method evaluated? What are the results?</li>
+    <li><b>Summary and future directions:</b> What is the main takeaway message? What follow-up work can be done?</li>
+</ol>
+
+<br>
+Each student might present 1-2 times over the whole semester.
+</div>
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Paper readings:</b> Every week, you will pick one of the required papers and write a short reading summary. This is to practice your skills in reading literature and critical thinking.
+
+Such a summary should include:
+<ol>
+    <li><b>Main message:</b> What does the paper propose? Describe the main points in two or three sentences.</li>
+    <li><b>Pros:</b> What are the strengths of this paper? 1-3 bullet points are fine.</li>
+    <li><b>Cons:</b> What are the weaknesses of this paper? 1-3 bullet points are fine.</li>
+    <li><b>Future directions:</b> Discuss possible follow-up work from this paper. Two or three sentences are fine.</li>
+</ol>
+You don't need to write a summary for the week you are presenting a paper.
+</div>
+
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Team Project:</b> You will work in a team on a course project. Each team should have 2-3 members. You are encouraged to design the project to solve a real-world application using deep learning and computer vision. Feel free to use any programming language or software packages of your choice. The schedule for the project is as follows:
+
+<ol>
+<li><b>Project Proposal:</b> The project proposal should clearly state what your team plan to do. It should be four pages long (not including references). It should contain a timeline. You should list the questions the project will address and that will be discussed in the report. You should list what software you will be using or will build upon. Describe the datasets you will use and how will you know if the project is successful. Describe the hypotheses you will test and the related work. You should be able to reuse much of the text for the final report.</li><br>
+
+<li><b>Project Milestone:</b> You can re-use the project proposal for this report but expand it with additional content. You should talk about preliminary results and/or other measurable items listed in the proposal. </li><br>
+
+<li><b>Project Report and Presentation:</b> The final report contains a complete description of the project: what you have done and what the result looks like. It should be about six to eight pages long (not including references). You are encouraged to format it in CVPR format. We will have a presentation session for all projects at the last day of the class. Make sure every member in your team participate in the presentation.</li><br>
+
+</ol>
+
+</div>
+
+
+
+<div style="text-align: center;" class="centered">
+<h3>Class Schedule</h3>
+</div>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Topic</th>
+    <th>Required Readings</th>
+    <th>Presenter(s)</th>
+    <th>Background and Additional Readings</th>
+  </tr>
+  <!-- wk1 -->
+  <tr>
+    <td>Jan 10 (Tue)</td>
+    <td>Introduction and Background</td>
+    <td></td>
+    <td>Prof. Sun</td>
+    <td></td>
+  </tr>
+  <tr class="discussion">
+    <td>Jan 11 (Wed)</td>
+    <td>Deep Learning Review</td>
+    <td></td>
+    <td>Prof. Sun</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Jan 12 (Thu)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;"></td>
+  </tr>
+  <!-- wk2 -->
+  <tr class="colored">
+    <td>Jan 17 (Tue)</td>
+    <td>Attention and Transformers</td>
+    <td><a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need (Transformer)</a></td>
+    <td>Pradeep Kumar Ragu Chanthar, Srinivasa Sai Deepak Varukol, [<a href="1-17.pdf">slides</a>]</td>
+    <td><a href="https://jalammar.github.io/illustrated-transformer/">Illustrated Transformer</a><br>
+      <a href="https://lilianweng.github.io/posts/2018-06-24-attention/">Attention? Attention!</a><br>
+      <a href="https://theaisummer.com/self-attention/">Why multi-head self attention works?</a>
+    </td>
+ </tr>
+  <tr class="colored">
+    <td>Jan 18 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Deep learning development basics, <a href="https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html">Attention and transformer playground</a></td>
+  </tr>
+  <tr class="colored">
+    <td>Jan 19 (Thu)</td>
+    <td>Vision Transformer</td>
+    <td><a href="https://arxiv.org/abs/2010.11929">An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale (ViT)</a></td>
+    <td>Sixiang Zhang, Spencer King, [<a href="1-19.pdf">slides</a>]</td>
+    <td><a href="https://arxiv.org/abs/2103.14030">Swin Transformer: Hierarchical Vision Transformer using Shifted Windows</a></td>
+ 
+ </tr>
+  <!-- wk3 -->
+  <tr class="colored">
+    <td>Jan 24 (Tue)</td>
+    <td>Transformers and Foundation Models</td>
+    <td><a href="https://arxiv.org/abs/2005.14165">Language Models are Few-Shot Learners (GPT-3)</a></td>
+    <td>Vaishnavi Thesma, Akhila Devabhaktuni, Zihao Wu, [<a href="1-24.pdf">slides</a>]</td>
+    <td></td>
+ 
+ </tr>
+  <tr class="colored">
+    <td>Jan 25 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Vision Transformer playground <a href="https://d2l.ai/chapter_attention-mechanisms-and-transformers/vision-transformer.html">d2l</a>, <a href="https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial15/Vision_Transformer.html">uva</a></td>
+  </tr>
+  <tr class="colored">
+    <td>Jan 26 (Thu)</td>
+    <td>Transformers and Foundation Models</td>
+    <td><a href="https://arxiv.org/abs/2109.01652">Finetuned language models are zero-shot learners</a></td>
+    <td>Hemanth Reddy Jakkannapally, Wen Zhang, [<a href="1-26.pdf">slides</a>]</td>
+    <td><a href="https://storage.googleapis.com/pathways-language-model/PaLM-paper.pdf">PaLM: Scaling Language Modeling with Pathways</a><br>
+      <a href="https://arxiv.org/abs/2212.07677">Transformers learn in-context by gradient descent</a>
+    </td>
+ 
+ </tr>
+  <!-- wk4 -->
+  <tr class="colored">
+    <td>Jan 31 (Tue)</td>
+    <td>Transformers and Foundation Models</td>
+    <td><a href="https://arxiv.org/abs/2208.10442">Image as a Foreign Language: BEiT Pretraining for All Vision and Vision-Language Tasks</a></td>
+    <td>Yuchen Zhang, Kriti Ghosh, [<a href="1-31.pdf">slides</a>]</td>
+    <td></td>
+ 
+ </tr>
+  <tr class="colored">
+    <td>Feb 1 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Data processing</td>
+  </tr>
+  <tr class="colored">
+    <td>Feb 2 (Thu)</td>
+    <td>Transformers and Foundation Models</td>
+    <td><a href="https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html">A ConvNet for the 2020s</a></td>
+    <td>Jashwanthreddy Katamreddy, Chenqian Xu, [<a href="2-2.pdf">slides</a>]</td>
+    <td></td>
+ 
+ </tr>
+  <!-- wk5 -->
+  <tr>
+    <td>Feb 7 (Tue)</td>
+    <td>Image Generation</td>
+    <td><a href="https://arxiv.org/abs/2006.11239">Denoising Diffusion Probabilistic Models</a></td>
+    <td>Xuansheng Wu, Daniel Redder, [<a href="2-7.pdf">slides</a>]</td>
+    <td></td>
+ 
+ </tr>
+  <tr class="discussion">
+    <td>Feb 8 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Diffusion model playground</td>
+  </tr>
+  <tr>
+    <td>Feb 9 (Thu)</td>
+   <td>Image Generation</td>
+    <td><a href="https://arxiv.org/abs/2112.10752">High-Resolution Image Synthesis with Latent Diffusion Models (Stable Diffusion)</a></td>
+    <td>Jacobi Coleman, Dongliang Guo, [<a href="2-9.pdf">slides</a>]</td>
+    <td></td>
+  
+ </tr>
+  <!-- wk6 -->
+  <tr>
+    <td>Feb 14 (Tue)</td>
+    <td>Image Generation and Edits</td>
+    <td><a href="https://arxiv.org/abs/2208.12242">DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation</a></td>
+    <td>Ehsan Latif, Chetan Dhamane, [<a href="2-14.pdf">slides</a>]</td>
+    <td></td>
+ </tr>
+  <tr>
+    <td>Feb 15 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Stable diffusion and inversion playground</td>
+  </tr>
+  <tr>
+    <td>Feb 16 (Thu)</td>
+    <td>Image Generation and Edits</td>
+    <td><a href="https://textual-inversion.github.io/">An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion</a></td>
+    <td>Venkatesh Morpoju, Padmaja Saraf, [<a href="2-16.pdf">slides</a>] </td>
+    <td><a href="https://arxiv.org/abs/2208.01626">Prompt-to-Prompt Image Editing with Cross Attention Control</a></td>
+ 
+ </tr>
+  <!-- wk7 -->
+  <tr class="colored">
+    <td>Feb 21 (Tue)</td>
+    <td>Understanding Neural Networks</td>
+    <td><a href="https://arxiv.org/pdf/2206.07682.pdf">Emergent Abilities of Large Language Models</a></td>
+    <td>Mohammed Aldosari, Rutuja Talekar, [<a href="2-21.pdf">slides</a>]</td>
+    <td></td>
+ 
+ </tr>
+  <tr class="colored">
+    <td>Feb 22 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Understanding backpropagation, gradient flows, and the optimization process</td>
+  </tr>
+  <tr class="colored">
+    <td>Feb 23 (Thu)</td>
+    <td>Understanding Neural Networks</td>
+    <td><a href="https://arxiv.org/abs/2212.06727">What do Vision Transformers Learn? A Visual Exploration</a></td>
+    <td>Krishna Paladugu, Keerthana Garimella, [<a href="2-23.pdf">slides</a>]</td>
+    <td></td>
+  </tr>
+  <!-- wk8 -->
+  <tr class="colored">
+    <td>Feb 28 (Tue)</td>
+    <td>Understanding Neural Networks</td>
+    <td><a href="https://arxiv.org/abs/2203.08124">Can Neural Nets Learn the Same Model Twice? Investigating Reproducibility and Double Descent from the Decision Boundary Perspective</a></td>
+    <td>Maansi Reddy Jakkidi, Nasid Habib Barna, [<a href="2-28.pdf">slides</a>]</td>
+    <td></td>
+ </tr>
+  <tr class="colored">
+    <td>Mar 1 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Neural network training dynamics</td>
+  </tr>
+  <tr class="colored">
+    <td>Mar 2 (Thu) - Midterm</td>
+    <td>Understanding Neural Networks</td>
+    <td><a href="https://dl.acm.org/doi/10.1145/3446776">Understanding deep learning (still) requires rethinking generalization</a></td>
+    <td>Afsaneh Shams, Subas Rana, [<a href="3-2.pdf">slides</a>]</td>
+    <td><a href="https://arxiv.org/abs/2105.14368">Fit without fear: remarkable mathematical phenomena of deep learning through the prism of interpolation</a></td>
+ 
+  </tr>
+  <!-- wk9 -->
+  <tr style="text-align: center;background-color: #c2c2c2;">
+    <td>Mar 7-9</td>
+    <td colspan="4" style="text-align: center;">Spring Break</td>
+  </tr>
+  <!-- <tr style="text-align: center;background-color: #c2c2c2;">
+    <td>Mar 8 (Wed)</td>
+    <td colspan="4" style="text-align: center;">Spring Break</td>
+</tr>
+   <tr style="text-align: center;background-color: #c2c2c2;">
+    <td>Mar 9 (Thu)</td>
+    <td colspan="4" style="text-align: center;">Spring Break</td>
+  </tr> -->
+ <!-- wk10 -->
+  <tr>
+    <td>Mar 14-16</td>
+    <td colspan="4" style="text-align: center;">Project Milestone Presentation</td>
+  </tr>
+ 
+  <tr>
+    <td>Mar 21 (Tue)</td>
+    <td>Neural Scene Representation and Reconstruction</td>
+    <td><a href="https://arxiv.org/abs/2003.08934">NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</a></td>
+    <td>Vatsal Thakkar, Sheung Hang Sean Kan, [<a href="3-21.pdf">slides</a>]</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mar 22 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Neural reconstruction playground</td>
+  </tr>
+  <tr>
+    <td>Mar 23 (Thu)</td>
+    <td>Neural Scene Representation and Reconstruction</td>
+    <td><a href="https://arxiv.org/abs/2112.05131">Plenoxels: Radiance Fields without Neural Networks</a></td>
+    <td>Likitha Karnati, Sakshi Seth, Ratish Jha, [<a href="3-23.pdf">slides</a>]</td>
+    <td></td>
+ 
+
+  </tr>
+  <!-- wk11 -->
+  <tr class="colored">
+    <td>Mar 28 (Tue)</td>
+    <td>Training Large-Scale Neural Networks</td>
+    <td><a href="https://arxiv.org/abs/2203.15556">Training Compute-Optimal Large Language Models (Chinchila)</a></td>
+    <td>Krushi Karukala, Rezwan Mahmud, [<a href="3-28.pdf">slides</a>]</td>
+    <td></td>
+  </tr>
+  <tr class="colored">
+    <td>Mar 29 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Working with GPUs</td>
+  </tr>
+  <tr class="colored">
+    <td>Mar 30 (Thu)</td>
+    <td>Training Large-Scale Neural Networks</td>
+    <td><a href="https://huggingface.co/blog/rlhf">Reinforcement Learning from Human Feedback (RLHF)</a></td>
+    <td>Swarali Gujarathi, Shivam Yadav, [<a href="3-30.pdf">slides</a>]</td>
+    <td><a href="https://cdn.openai.com/papers/Training_language_models_to_follow_instructions_with_human_feedback.pdf">Training language models to follow instructions with human feedback</a></td>
+  </tr>
+  <!-- wk12 -->
+  <tr class="colored">
+    <td>Apr 4 (Tue)</td>
+    <!-- <td>Making Neural Networks Smaller and More Efficient</td>
+    <td><a href="https://arxiv.org/abs/2301.00774">Massive Language Models Can Be Accurately Pruned in One-Shot</a></td>
+    <td></td>
+    <td><a href="https://arxiv.org/abs/1803.03635">The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks</a></td> -->
+    <td>Training Large-Scale Neural Networks</td>
+    <td><a href="https://arxiv.org/abs/2210.08402v1">LAION-5B: An open large-scale dataset for training next generation image-text models</a><br><a href="https://arxiv.org/abs/2212.00794">Scaling Language-Image Pre-training via Masking</a></td>
+    <td>Noyon Dey, Vijay Iyengar</td>
+    <td><a href="https://arxiv.org/abs/2106.04560">Scaling Vision Transformers</a></td>
+  </tr>
+  <tr class="colored">
+    <td>Apr 5 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Mixed precision, parallelism, hardware</td>
+  </tr>
+  <tr class="colored">
+    <td>Apr 6 (Thu)</td>
+     <td>Training Large-Scale Neural Networks</td>
+    <td><a href="https://lilianweng.github.io/posts/2021-09-25-train-large/">How to train really large models on many GPUs?</a></td>
+    <!-- <td>Making Neural Networks Smaller and More Efficient</td>
+    <td><a href="https://arxiv.org/abs/1806.08342">Quantizing deep convolutional networks for efficient inference: A whitepaper</a></td> -->
+    <td>Rajat Rajesh Mhetre, Yucheng Shi</td>
+    <td></td>
+  </tr>
+  <!-- wk13 -->
+  <tr>
+    <td>Apr 11 (Tue)</td>
+    <td>Self-supervised Learning</td>
+    <td><a href="https://openaccess.thecvf.com/content/CVPR2022/html/He_Masked_Autoencoders_Are_Scalable_Vision_Learners_CVPR_2022_paper.html">Masked Autoencoders Are Scalable Vision Learners</a></td>
+    <td>Pranavpalreddy Pingili, Zhengliang Liu</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Apr 12 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Visualizing neural networks</td>
+  </tr>
+  <tr>
+    <td>Apr 13 (Thu)</td>
+    <td>Self-supervised Learning</td>
+    <td><a href="http://proceedings.mlr.press/v139/zbontar21a.html">Barlow Twins: Self-Supervised Learning via Redundancy Reduction</a></td>
+    <td>Aishwary Nigam, Pranathi Vankineni</td>
+    <td></td>
+  </tr>
+  <!-- wk14 -->
+  <tr>
+    <td>Apr 18 (Tue)</td>
+    <td>Self-supervised Learning</td>
+    <td><a href="https://arxiv.org/abs/2104.14294">Emerging Properties in Self-Supervised Vision Transformers</a></td>
+    <td>Yousef Fekri, Vaibhav Goyal</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Apr 19 (Wed)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;">Explore self-supervision signals</td>
+  </tr>
+  <tr>
+    <td>Apr 20 (Thu)</td>
+    <td>Self-supervised Learning</td>
+    <td><a href="https://arxiv.org/abs/2006.07733">Bootstrap your own latent: A new approach to self-supervised Learning</a></td>
+    <td>Hao Zhen, Shanmukha Sai Jasti</td>
+    <td></td>
+  </tr>
+  <!-- wk15
+  <tr>
+    <td>Apr 25 (Tue)</td>
+    <td>Rethinking Standard DL Components</td>
+    <td><a href="https://arxiv.org/abs/2104.14294">Evaluation of Neural Architectures Trained with Square Loss vs Cross-Entropy in Classification Tasks</a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="discussion">
+    <td>Apr 26 (Wed)</td>
+    <td colspan="4" style="text-align: center;">Ready-to-use tools</td>
+  </tr>
+  <tr>
+    <td>Apr 27 (Thu)</td>
+    <td>Rethinking Standard DL Components</td>
+    <td><a href="https://arxiv.org/abs/2210.11466">Surgical Fine-Tuning Improves Adaptation to Distribution Shifts</a></td>
+    <td></td>
+    <td></td>
+  </tr> -->
+  <!-- wk15 -->
+  <tr class="colored">
+    <td>Apr 25 (Tue)</td>
+    <td colspan="4">Project Presentation</td>
+  </tr>
+  <tr class="colored">
+    <td>Apr 26 (Wed)</td>
+    <td colspan="4">Project Presentation</td>
+  </tr>
+  <tr class="colored">
+    <td>Apr 27 (Thu)</td>
+    <td colspan="4">Project Presentation</td>
+  </tr>
+
+</table>
+
+<div class="centered" style="background-color: #85b2e9;width: 100%; color:beige;">
+    <br>
+    School of Computing | University of Georgia | 2023
+<br>
+<br>
+</div>
+
+</body>
+</html>

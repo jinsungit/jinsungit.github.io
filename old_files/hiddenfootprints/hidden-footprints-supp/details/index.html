@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div style="text-align:left; width:70%; margin:auto; font-size: 17px; font-family: Arial; ">
+<h2>Network</h2>
+<p>
+All implementations are in PyTorch. The walkability prediction models in our experiments are based on a generic U-Net style dense prediction structure with an ImageNet pretrained ResNet-50 network as the backbone.
+Note that our method is not limited to any particular network architecture.
+</p>
+
+<p>
+We use up to layer3 in the ResNet-50 model for feature extraction and add two skip connections to the decoder net.
+The network takes an input image of size 640x480 and produces a 160x120 single channel map, where at each position a score represents the likelihood of a person walking there.
+Features sampled from the layer before the last single-channel output layer are used in the adversarial feature loss computation described in the main paper.
+</p>
+
+<a target="_blank" href="dense_network.txt">Detailed dense prediction network summary</a>
+
+<p>
+A three-layer fully connected network is used as the discriminator, which takes a 256-D feature vector and predicts a single score.
+
+</p>
+
+<a target="_blank" href="discriminator_network.txt">Detailed discriminator network summary</a>
+
+<h2>Training</h2>
+<p>
+We train networks using Adam with betas set to 0.5 and 0.999.
+Images are resized to 480 pixels in height and then randomly cropped along the width to 640x480 pixels.
+The initial learning rate is 1e^-4 and is reduced by 10% when the validation loss reaches a plateau.
+For each model, the training takes about 60K iterations with a batch size of 10.
+</p>
+<p>
+For the rectified classification loss described in Section 4.1 in the main paper, we use <i>per image</i> positive and negative class weights that are obtained by taking the reciprocal of their frequencies in the current image: their ratio is on average about 1e^5.
+</p>
+<p>
+Adversarial training is done with a WGAN loss with Gradient Penalty following <a target="_blank" href="https://arxiv.org/pdf/1704.00028.pdf">the orginal paper (Eq. 3)</a>.
+In our problem, the dense prediction network is the 'Generator' network in a standard GAN training setting.
+We optimize the discriminator so that it couldn't tell if a feature is extracted from a ground-truth region or our predicted region.
+</p>
+
+
+</div>
+
+</body>
+
+</html>

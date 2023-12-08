@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  padding: 1px;
+margin: auto;
+}
+.grid-item {
+  /*background-color: rgba(255, 255, 255, 0.8);-->*/
+  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+  padding: 1px;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  border: 2px;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 6px;
+  font-size: 17px;
+  width: 20%;
+  margin: 2px;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+.playbutton {
+  background-color: #55ae95; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
+.playbutton:hover {
+    background-color: #444;
+}
+
+</style>
+</head>
+<body onload="setVid(20, 0)">
+
+<div style="text-align:center"> 
+
+<button class="tablink" onclick="setVid(3, 1)" id="defaultOpen">Day - Construction</button>
+<button class="tablink" onclick="setVid(12, 1)">Day - Downhill</button>
+<br>
+<button class="tablink" onclick="setVid(16, 1)">Night - Road</button>
+<button class="tablink" onclick="setVid(20, 1)" id="defaultOpen">Night - Intersection</button>
+<br>
+
+<!--</div> -->
+
+
+<!--<div style="text-align:center"> -->
+  <button class="playbutton" onclick="playPause()">Play/Pause</button> 
+  <br>
+
+    <div class="grid-container">
+    <div class="grid-item">Video Sequence</div>
+    <div class="grid-item">Footprints Propagation</div>
+    <div class="grid-item">Predicted Walkable Regions</div>
+    <div class="grid-item">
+      <video id="raw" width="100%" loop muted>
+        <source src="3_raw_small.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <div class="grid-item">
+      <video id="gt" width="100%" loop muted>
+        <source src="3_gt_small.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <div class="grid-item">
+      <video id="pred" width="100%" loop muted>
+        <source src="3_pred_small.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    </div> 
+
+    <div>
+      <p id="highlight-sen"><b>Highlight:</b> Our model makes reliable predictions on clutter roads under construction.</p>
+      <img width="80%" src="highlights/seq3-highlight-green.png" id="highlight-img">
+  </div>
+
+<script> 
+var rawVideo = document.getElementById("raw"); 
+var gtVideo = document.getElementById("gt"); 
+var predVideo = document.getElementById("pred"); 
+
+var highlight_sentences = {
+3: "<b>Highlight:</b> Reliable predictions on cluttered roads under construction.", 
+12: "<b>Highlight:</b> Predictions nicely spread around walkable regions at a downhill intersection. Note regions near the stop sign have high scores.",
+16: "<b>Highlight:</b> Reliable predictions in night scenes.",
+20: "<b>Highlight:</b> Our model clearly predicts crosswalks and sidewalks to be walkable in a night time city intersection."
+} 
+
+
+function setVid(selectedVid, autoplay) {
+    <!--var e = document.getElementById("vidlist");-->
+    <!--var selectedVid = e.options[e.selectedIndex].value;-->
+    rawVideo["src"] = selectedVid + '_raw_small.mp4'
+    gtVideo["src"] = selectedVid + '_gt_small.mp4'
+    predVideo["src"] = selectedVid + '_pred_small.mp4'
+
+    var curHLSentence = document.getElementById("highlight-sen");
+    curHLSentence.innerHTML = highlight_sentences[selectedVid];
+    var curHLImg = document.getElementById("highlight-img");
+    curHLImg["src"] = "highlights/seq"+selectedVid+"-highlight-green.png"
+    //curHLImg["src"] = "highlights/seq"+selectedVid+"-highlight.png"
+    
+    if (autoplay==1) {
+        playPause()
+    }
+}
+
+function playPause() { 
+
+  if (rawVideo.paused){ 
+    rawVideo.play(); 
+    gtVideo.play(); 
+    predVideo.play(); 
+}
+  else {
+    rawVideo.pause(); 
+    gtVideo.pause(); 
+    predVideo.pause(); 
+}
+} 
+</script> 
+
+
+</body>
+</html>
+

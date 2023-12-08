@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+}
+
+
+td, th {
+  border: 0px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* tr:nth-child(even) {
+  background-color: #982b32;
+} */
+
+.discussion {
+    /* background-color: #f1f0dd; */
+    text-align: left;
+}
+
+.colored {
+    background-color: #f7f2d7;
+}
+
+.centered {
+    margin: auto;
+    width: 80%;
+}
+
+a:link {
+  color: rgb(46, 155, 233);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(4, 159, 38);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(251, 196, 106);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: rgb(156, 250, 140);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+
+<h2>CSCI 8945 Advanced Representation Learning</h2>
+ <h3>Fall 2023</h3>
+ <h3>Instructor: Prof. Jin Sun</h3>
+4 Credit Hours
+<br>
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Catalog Description:</b>
+Advanced Representation Learning is a course designed to delve deeper into the fundamental concepts of representation learning and its applications. In this class, students will explore various representation learning techniques, including both classical and deep learning methods, and learn how to apply these techniques to solve complex problems in computer vision, natural language processing, audio, and other areas. By working on the research project component of the course, the students will develop novel methods and theories about representation learning and prepare manuscripts describing their findings. By the end of this course, the students will have a solid understanding of the state-of-the-art in representation learning and be able to apply these techniques to solve real-world problems. 
+</div>
+
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Prerequisties:</b>
+Students should have a solid understanding of machine learning basics and relevant math concepts.
+</div>
+
+<br>
+
+<div style="text-align: left;" class="centered">
+<b>Class Location and Times:</b>
+<table style="width:70%;margin-left: 0%;">
+    <tr>
+        <td>Tue & Thu</td>
+        <td>12:45 pm - 2:00 pm</td>
+        <td>222 Boyd</td>
+    </tr>
+    <tr>
+        <td>Wed</td>
+        <td>12:40 pm - 1:30 pm</td>
+        <td>222 Boyd</td>
+    </tr>
+</table>
+</div>
+
+<br> 
+
+
+<div style="text-align: left;" class="centered">
+<b>Reading Materials:</b>
+<ul>
+    <li>“Deep Learning” (2016) by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. A free online version is available <a href="http://www.deeplearningbook.org">here</a>.</li>
+    <li>“Dive into Deep Learning” (2021) by Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola. A free online version is available <a href="https://d2l.ai/">here</a>.</li>
+    <li>“Computer Vision: Algorithms and Applications” (2022, 2nd ed) by Richard Szeliski. A free online version is available <a href="https://szeliski.org/Book/">here</a>.</li>
+    <li>"Machine Learning: a Probabilistic Perspective" by Kevin Murphy.</li>
+    <li>"Foundations of Data Science" by Avrim Blum, John Hopcroft, and Ravindran Kannan.</li>
+</ul>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Student Outcomes:</b>
+<ol>
+<li>Demonstrate understanding of machine learning and deep neural network fundamentals.</li>
+<li>Gain experience deploying deep learning models in computer vision, natural language processing, and audio domains.</li>	
+</ol>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Instructor Contact:</b><br>
+Prof. Jin Sun<br>
+Office Hours: Thursdays 4-5 pm or by appointment<br>
+Office: 804 Boyd<br>
+Email: jinsun@uga.edu<br>
+</div>
+
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Evaluation and Grading:</b>
+The final course grade will be weighted as the follows:
+<table style="width:20%;margin-left: 0%;">
+    <tr>
+        <td>Paper presentations</td>
+        <td>20%</td>
+    </tr>
+    <tr>
+        <td>Homework</td>
+        <td>20%</td>
+    </tr>
+    <tr>
+        <td>Midterm exam</td>
+        <td>20%</td>
+    </tr>
+    <tr>
+        <td>Course project and presentation</td>
+        <td>40%</td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Homework assignments:</b> Your homework submission should be in PDF format. You are encouraged to use LaTeX (for online editing, use Overleaf). Cite any references used (including books, online webpages, and code). Your homework should be done by yourself, not as a group.
+<br>
+The PDF file should contain all essential text, equations, figures, code, and program outputs. Attach your code as the appendix. 
+</div>
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Midterm exam:</b> You will take an in-class exam to test your knowledge on the essential concepts covered in the class including general representation learning techniques and various domain-specific representations such as word embeddings.
+</div>
+
+
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Paper presentations:</b> You will choose one research paper to present in the later part of the semester. Make sure you cover all the essential components and main messages about the paper and lead insightful discussions with the class.
+</div>
+
+
+
+<br>
+<div style="text-align: left;" class="centered">
+<b>Team Project:</b> You will work in a team on a course project. Each team should have 2-3 members. You are encouraged to design the project to solve a real-world application using deep learning and computer vision. Feel free to use any programming language or software packages of your choice. The schedule for the project is as follows:
+
+<ol>
+<li><b>Project Proposal:</b> The project proposal should clearly state what your team plan to do. It should be four pages long (not including references). It should contain a timeline. You should list the questions the project will address and that will be discussed in the report. You should list what software you will be using or will build upon. Describe the datasets you will use and how will you know if the project is successful. Describe the hypotheses you will test and the related work. You should be able to reuse much of the text for the final report.</li><br>
+
+<li><b>Project Milestone:</b> You can re-use the project proposal for this report but expand it with additional content. You should talk about preliminary results and/or other measurable items listed in the proposal. </li><br>
+
+<li><b>Project Report and Presentation:</b> The final report contains a complete description of the project: what you have done and what the result looks like. It should be about six to eight pages long (not including references). You are encouraged to format it in CVPR format. We will have a presentation session for all projects at the last day of the class. Make sure every member in your team participate in the presentation.</li><br>
+
+</ol>
+
+</div>
+
+
+
+<div style="text-align: center;" class="centered">
+<h3>Class Schedule</h3>
+</div>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Topic</th>
+    <th>Day Schedule</th>
+    <th>Homeworks</th>
+  </tr>
+  <tr class="colored">
+    <td>8/16</td>
+    <td>Introduction and background</td>
+    <td>Introduction and overview</td>
+    <td></td>
+  </tr>
+  <tr class="colored">
+    <td>8/17</td>
+    <td></td>
+    <td>Data and dimensionality</td>
+    <td></td>
+  </tr>
+  <!-- <tr>
+    <td>Jan 12 (Thu)</td>
+    <td style="text-align:right;">Discussion</td>
+    <td colspan="3" style="text-align: left;"></td>
+  </tr> -->
+  <tr>
+    <td>8/22</td>
+    <td>Data representation space and structures</td>
+    <td>Dimension reduction, metric learning, PCA, MDS</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>8/23</td>
+    <td></td>
+    <td>Deep learning workflow and useful programming tools</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>8/24</td>
+    <td></td>
+    <td>Structures in data spaces, manifolds, subspaces, sparse coding</td>
+    <td></td>
+  </tr>
+
+  <tr class="colored">
+    <td>8/29</td>
+    <td>Visual representations</td>
+    <td>Pixels, 3D points, and cameras</td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td>8/30</td>
+    <td></td>
+    <td>Image operations</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>8/31</td>
+    <td></td>
+    <td>Semantics</td>
+    <td>HW1 assignment</td>
+  </tr>
+
+  <tr>
+    <td>9/5</td>
+    <td></td>
+    <td>Videos</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>9/6</td>
+    <td></td>
+    <td>Project and research discussion, how to do research?</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>9/7</td>
+    <td></td>
+    <td>Image subspaces and manipulations</td>
+    <td></td>
+  </tr>
+
+  <tr class="colored">
+    <td>9/12</td>
+    <td>Language representations</td>
+    <td>Representing words and sentences</td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td>9/13</td>
+    <td></td>
+    <td>Project and research discussion, how to read a paper?</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>9/14</td>
+    <td></td>
+    <td>Language model pretraining</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>9/19</td>
+    <td></td>
+    <td>NLP tasks</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>9/20</td>
+    <td></td>
+    <td>Project and research discussion, how to write a paper?</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>9/21</td>
+    <td></td>
+    <td>Zero-shot and in-context learning</td>
+    <td>HW1 due</td>
+  </tr>
+
+  <tr class="colored">
+    <td>9/26</td>
+    <td>Audio representations</td>
+    <td>Representing sound</td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td>9/27</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>9/28</td>
+    <td></td>
+    <td>Audio generation and editing</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>10/3</td>
+    <td>Graphs</td>
+    <td>Graphs and neural networks</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>10/4</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>10/5</td>
+    <td></td>
+    <td>GNN applications</td>
+    <td>HW2 assignment</td>
+  </tr>
+
+  <tr class="colored">
+    <td>10/10</td>
+    <td>Multi-modal representations</td>
+    <td>Midterm</td>
+    <td>Midterm</td>
+  </tr>
+   <tr class="colored">
+    <td>10/11</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>10/12</td>
+    <td></td>
+    <td>Overview of multi-modal learning: <a href="https://arxiv.org/abs/2209.03430">Foundations & Trends in Multimodal Machine Learning: Principles, Challenges, and Open Questions</a></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>10/17</td>
+    <td></td>
+    <td>Multimodal representation alignment: <a href="https://cmu-multicomp-lab.github.io/mmml-course/fall2022/schedule/#:~:text=Lecture%204.2%3A%20Alignment%20and%20grounding">reference</a></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>10/18</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>10/19</td>
+    <td></td>
+    <td>Multimodal reasoning: <a href="https://cmu-multicomp-lab.github.io/mmml-course/fall2022/schedule/#:~:text=Lecture%206.2%3A%20Multimodal%20Reasoning">reference</a></td>
+    <td></td>
+  </tr>
+
+  <tr class="colored">
+    <td>10/24</td>
+    <td>Advanced Topics - Implicit representation</td>
+    <td><a href="https://arxiv.org/abs/2006.09661">Implicit Neural Representations with Periodic Activation Functions</a></td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td>10/25</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>10/26</td>
+    <td></td>
+    <td><a href="https://arxiv.org/abs/1806.07366">Neural Ordinary Differential Equations</a></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>10/31</td>
+    <td>Advanced Topics - Meta-learning and multi-domain learning</td>
+    <td><a href="https://arxiv.org/abs/2004.05439">Meta-Learning in Neural Networks: A Survey</a></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>11/1</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>11/2</td>
+    <td></td>
+    <td><a href="https://arxiv.org/abs/2103.02503">Domain Generalization: A Survey</a></td>
+    <td></td>
+  </tr>
+
+  <tr class="colored">
+    <td>11/7</td>
+    <td>Advanced Topics - Adapter approach</td>
+    <td><a href="https://arxiv.org/abs/2303.16199">LLaMA-Adapter: Efficient Fine-tuning of Language Models with Zero-init Attention</a></td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td>11/8</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td>11/9</td>
+    <td></td>
+    <td><a href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>11/14</td>
+    <td>Advanced Topics - Beyond perception</td>
+    <td><a href="https://arxiv.org/abs/2303.03378">PaLM-E: An Embodied Multimodal Language Model</a></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>11/15</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>11/16</td>
+    <td></td>
+    <td><a href=https://www.youtube.com/watch?v=caZyFlSSKtI>Representation Learning for Autonomous Robots</a></td>
+    <td>HW2 due (11/19)</td>
+  </tr>
+
+  <tr class="colored">
+    <td>11/21</td>
+    <td>Class review and summary</td>
+    <td>Class wrap-up and discussion</td>
+    <td></td>
+  </tr>
+   <tr class="colored">
+    <td></td>
+    <td>--Thanksgiving--</td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr class="colored">
+    <td></td>
+    <td>--Thanksgiving--</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>11/28</td>
+    <td>Project</td>
+    <td>Project presentation and discussion</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>11/29</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+    <tr>
+    <td>11/30</td>
+    <td></td>
+    <td>Project and research discussion</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>12/5</td>
+    <td>No class</td>
+    <td>No class (Friday Schedule)</td>
+    <td></td>
+  </tr>
+ 
+
+
+
+
+
+
+</table>
+
+<div class="centered" style="background-color: #85b2e9;width: 100%; color:beige;">
+    <br>
+    School of Computing | University of Georgia | 2023
+<br>
+<br>
+</div>
+
+</body>
+</html>

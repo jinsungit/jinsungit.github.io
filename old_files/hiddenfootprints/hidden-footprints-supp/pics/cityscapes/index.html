@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div style="text-align:center; font-size:20px;">
+
+<div class="row">
+  <div class="column">
+      <p style="margin:1px 1px;">Scenes</p>
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_068772_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_munster_000122_000019_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_017459_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_020046_leftImg8bit.jpg">
+  </div>
+  <div class="column">
+      <p style="margin:1px 1px;">Predicted Walkable Regions</p>
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_068772_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_munster_000122_000019_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_017459_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_020046_leftImg8bit.png_overlay.png">
+  </div>
+
+  <div class="column">
+      <p style="margin:1px 1px;">Scenes</p>
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_002646_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_lindau_000039_000019_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000000_003920_leftImg8bit.jpg">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_075984_leftImg8bit.jpg">
+  </div>
+  <div class="column">
+      <p style="margin:1px 1px;">Predicted Walkable Regions</p>
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_002646_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_lindau_000039_000019_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000000_003920_leftImg8bit.png_overlay.png">
+    <img width="20%" src="waymo_featureWGANGP_select_frankfurt_000001_075984_leftImg8bit.png_overlay.png">
+  </div>
+
+  <div style="text-align:left; width:70%; margin:auto; font-size: 17px; font-family: Arial; ">
+  <h2>Walkable regions by semantic categories</h2>
+  <p>
+    The following figure is a breakdown of walkable regions by semantic categories of ground-truth person locations vs. our predictions in the Cityscapes dataset. Our model produces a similar long-tailed distribution.
+    The KL divergence of the two distributions is reported in our main paper (Section 5.3).
+  </p>
+  <p style="text-align: center">
+  <img src="semantic-hist-horizontal.png" alt="Semantic-categories" style="width:80%">
+  </p>
+</div>
+
+</div>
+
+</body>
+
+</html>
