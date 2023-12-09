@@ -55,4 +55,7 @@ horizontal: false
   </div>
   {%- endif -%}
 {%- endif -%}
+
+*Figures were generated using Stable Diffusion.
 </div>
+
