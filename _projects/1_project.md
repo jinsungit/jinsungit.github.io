@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Understanding humans
-description: human analysis from visual data
+title: Understanding people
+description: "Can we learn to understand all aspects of people, i.e., appearance, behavior, from images and videos?"
 img: assets/img/humans.jpeg
 importance: 1
 category: work

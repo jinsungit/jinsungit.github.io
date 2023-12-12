@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Multi-modal learning
-description: understand data with multiple modalities
+description: "Many interesting data we encounter in real applications are multi-modal: there exists multiple types of data tha reflect the same concept. How can we learn about them?" 
 img: assets/img/multi-modal.jpeg
 importance: 1
 category: work
