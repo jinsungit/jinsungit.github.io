@@ -17,6 +17,8 @@ This class is designed as an introductory study of the theory and practice of da
 - **Textbooks:** 
     * [An introduction to statistical learning](https://www.statlearning.com/)
     * [Python data science handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+- **Syllabus:**
+    [PDF](2024Spring-CSCI3360-syllabus.pdf)
 - **Learning outcomes**
     1.	Demonstrate understanding of data science pipeline fundamentals.
     2.	Familiar with relevant data science libraries and software packages.
