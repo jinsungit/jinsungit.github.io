@@ -1,0 +1,105 @@
+- title: "Introduction and basics"
+
+- date: Week 1 (1/9-1/11)
+  title: >
+    <strong>Introduction and overview</strong>
+  slides: 
+  logistics:
+
+- date: Week 2 (1/16-1/18)
+  title: >
+    <strong>Python and data science basics</strong>
+  slides: 
+  logistics:
+
+- title: "Data"
+
+- date: Week 3 (1/23-1/25)
+  title: >
+    <strong>Data collection and processing</strong>
+  slides: 
+  logistics:
+
+
+- date: Week 4 (1/30-2/1)
+  title: >
+    <strong>Data visualization</strong>
+  slides: 
+  logistics:
+
+
+- title: "Learning"
+
+- date: Week 5 (2/6-2/8)
+  title: >
+    <strong>Probabilistic learning fundation</strong>
+  slides: 
+  logistics:
+
+- date: Week 6 (2/13-2/15)
+  title: >
+    <strong>Regression</strong>
+  slides: 
+  logistics:
+
+
+- date: Week 7 (2/20-2/22)  
+  title: >
+    <strong>Classification</strong>
+  slides: 
+  logistics:
+
+- date: Week 8 (2/27-29)
+  title: >
+    <strong>Unsupervised learning</strong>
+  slides: 
+  logistics:
+
+- date: Week 9 (3/12-3/14)
+  title: >
+    <strong>Trees and boosting</strong>
+  slides: 
+  logistics:
+
+- date: Week 10 (3/19-3/21)
+  title: >
+    <strong>Validation</strong>
+  slides: 
+  logistics:
+
+- title: "Applications"
+
+- date: Week 11 (3/26-3/28)
+  title: >
+    <strong>Vision</strong>
+  slides: 
+  logistics:
+
+- date: Week 12 (4/2-4/4)
+  title: >
+    <strong>Language</strong>
+  slides: 
+  logistics:
+
+
+- date: Week 13 (4/9-4/11)
+  title: >
+    <strong>Recommendation systems</strong>
+  slides: 
+  logistics:
+
+- date: Week 14 (4/16-4/18)
+  title: >
+    <strong>Real world-ready development</strong>
+  slides: 
+  logistics:
+
+
+- date: Week 15 (4/23-4/25)
+  title: >
+    <strong>Project presentation</strong>
+  slides: 
+  logistics:
+
+- date: The week of 5/1
+  title: <strong>Final exam</strong>

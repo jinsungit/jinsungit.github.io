@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var total_str=""
+function debug() {
+  var start_date = document.getElementById("start-date").value;
+  var end_date = document.getElementById("end-date").value;
+  var _sd = start_date.toString()+' 00:00:01 GMT-0500';  
+  var _ed = end_date.toString()+' 00:00:01 GMT-0500'; 
+
+
+  // check which days are checked
+    var monday = document.getElementById("monday").checked;
+    var tuesday = document.getElementById("tuesday").checked;
+    var wednesday = document.getElementById("wednesday").checked;
+    var thursday = document.getElementById("thursday").checked;
+    var friday = document.getElementById("friday").checked;
+
+    // create an array of the days
+    var days = [];
+    if (monday) {
+        days.push(1);
+    }
+    if (tuesday) {
+        days.push(2);
+    }
+    if (wednesday) {
+        days.push(3);
+    }
+    if (thursday) {
+        days.push(4);
+    }
+    if (friday) {
+        days.push(5);
+    }
+
+
+  // loop through the dates
+    var _sd = new Date(_sd);
+    var _ed = new Date(_ed);
+    var _cd = new Date(_sd);
+    var _day = 1000 * 60 * 60 * 24; // milliseconds in a day
+    var _dates = [];
+
+    while (_cd <= _ed) {
+        _dates.push(new Date(_cd));
+        _cd.setTime(_cd.getTime() + _day);
+    }
+
+    // print dates
+    total_str = "";
+    for (var i = 0; i < _dates.length; i++) {
+        //check if the day is a Friday
+        if (days.includes(_dates[i].getDay())) {
+
+            var _d = _dates[i];
+            var _day = _d.getDate();
+            var _month = _d.getMonth() + 1;
+            var _year = _d.getFullYear();
+            var _formattedDate = _month + "/" + _day;
+
+            // schedule format
+            let schedule_format_str = `
+- date: ${_formattedDate}
+  title: >
+    <strong></strong>
+  slides: 
+  logistics:
+`;
+            total_str += schedule_format_str;
+            
+        }
+    }
+
+    // //write total_str to a file and let the user download it
+    // var blob = new Blob([total_str], {type: "text/plain;charset=utf-8"});
+
+    document.getElementById('debug').textContent = total_str;
+
+}
+
+function download(name, type) {
+  var a = document.getElementById("a");
+  var file = new Blob([total_str], {type: type});
+  a.href = URL.createObjectURL(file);
+  a.download = name;
+}
+
+
+</script>
+</head>
+<body>
+
+<h2>Class schedule generator</h2>
+
+<label for="start-date">Start Date:</label> <br />
+<input type="date" id="start-date" name="start-date">
+
+<label for="end-date">End Date:</label> <br />
+<input type="date" id="end-date" name="end-date">
+
+<label for="Monday">Monday</label>
+<input type="checkbox" id="monday">
+
+<label for="Tuesday">Tuesday</label>
+<input type="checkbox" id="tuesday">
+
+<label for="Wednesday">Wednesday</label>
+<input type="checkbox" id="wednesday">
+
+<label for="Thursday">Thursday</label>
+<input type="checkbox" id="thursday">
+
+<label for="Friday">Friday</label>
+<input type="checkbox" id="friday">
+
+<input type="button" onclick="debug()" value="Submit">
+
+<p id="debug"></p>
+
+<a href="" id="a">click here to download your file</a>
+<button onclick="download('schedule.yml', 'text/plain')">Download file</button>
+
+</body>
+</html>
