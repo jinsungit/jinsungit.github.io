@@ -9,8 +9,12 @@
 - date: Week 2 (1/16-1/18)
   title: >
     <strong>Python and data science basics</strong>
-  slides: 
-  logistics:
+  notes: 
+  - <a href="https://colab.research.google.com/drive/1D6vGZyY8vi8uiQo0mKrrJ_c9OO3JyoZw?usp=drive_link" target="_blank">Python notebook</a>
+  - <a href="https://colab.research.google.com/drive/1jViRVw2ZGpQSuIkHXzQbluED4IXU6UGq?usp=sharing" target="_blank">Numpy notebook</a>
+  readings:
+  - <a href="https://github.com/jakevdp/WhirlwindTourOfPython" target="_blank">Whirlwind Tour of Python</a>
+  - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">Python Data Science Handbook</a> Chapter 2
 
 - title: "Data"
 

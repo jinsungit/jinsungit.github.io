@@ -12,7 +12,7 @@ This class is designed as an introductory study of the theory and practice of da
 ***
 
 - **Time and location:** 
-    * Tue & Thu, 2:20pm-3:35pm, Miller Plant Science Building 1102
+    * Tue & Thu, 2:20pm-3:35pm, Science Learning Center 0345
     * Wed, 3:00pm-3:50pm, Conner Hall 0210
 - **Textbooks:** 
     * [An introduction to statistical learning](https://www.statlearning.com/)

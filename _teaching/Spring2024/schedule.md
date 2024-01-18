@@ -29,28 +29,25 @@ is_class: false
     <td colspan="2" align="center">{{ lecture.title }}</td>
     {% else %}
     <td>
-        {% if lecture.lecturer %}({{ lecture.lecturer }}){% endif %}:
-        <br />
         {{ lecture.title }}
         <br />
-        [
             {% if lecture.slides %}
-              <a href="{{ lecture.slides }}" target="_blank">slides</a>
-            {% else %}
-              slides
+              [<a href="{{ lecture.slides }}" target="_blank">slides</a>]
             {% endif %}
             {% if lecture.annotated %}
               (<a href="{{ lecture.annotated }}" target="_blank">annotated</a>)
             {% endif %}
             {% if lecture.video %}
-            | <a href="{{ lecture.video }}" target="_blank">video</a>
+              <a href="{{ lecture.video }}" target="_blank">video</a>
             {% endif %}
             {% if lecture.notes %}
-            | <a href="{{ lecture.notes }}" target="_blank">notebooks</a>
-            {% else %}
-            | notebooks
+            
+            {% for note in lecture.notes %}
+             [{{ note }}]
+            {% endfor %}
+            
+            <!-- | <a href="{{ lecture.notes }}" target="_blank">notebooks</a> -->
             {% endif %}
-        ]
     </td>
     <td>
         {% if lecture.readings %}
