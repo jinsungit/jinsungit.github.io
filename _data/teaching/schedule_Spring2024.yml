@@ -21,7 +21,11 @@
 - date: Week 3 (1/23-1/25)
   title: >
     <strong>Data collection and processing</strong>
-  slides: 
+  slides: /teaching/Spring2024/wk3-data.pdf
+  notes:
+  - <a href="https://colab.research.google.com/drive/1L7yjIFiaeE--8IvFHZBQWnAQuFEi8Xk2?usp=sharing" target="_blank">Pandas notebook</a>
+  readings:
+  - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">Python Data Science Handbook</a> Chapter 3
   logistics:
 
 

@@ -51,6 +51,7 @@ is_class: false
     </td>
     <td>
         {% if lecture.readings %}
+        References:
         <ul>
         {% for reading in lecture.readings %}
             <li>{{ reading }}</li>
