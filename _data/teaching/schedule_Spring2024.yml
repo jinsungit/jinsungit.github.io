@@ -33,6 +33,10 @@
   title: >
     <strong>Data visualization</strong>
   slides: 
+  notes:
+  - <a href="https://colab.research.google.com/drive/1host7oQRq4v21f5Y6NrJmNTg8ZMS4BJy?usp=drive_link" target="_blank">Visualization notebook</a>
+  readings:
+  - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank">Python Data Science Handbook</a> Chapter 4
   logistics:
 
 
@@ -40,7 +44,7 @@
 
 - date: Week 5 (2/6-2/8)
   title: >
-    <strong>Probabilistic learning fundation</strong>
+    <strong>Probabilistic learning foundation</strong>
   slides: 
   logistics:
 
