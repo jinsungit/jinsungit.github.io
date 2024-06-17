@@ -74,6 +74,10 @@
 - date: Week 8 (2/27-29)
   title: >
     <strong>Unsupervised learning</strong>
+  notes:
+  - <a href="https://colab.research.google.com/drive/1KR2rgspqbHtsFSx9MCeoEtVNsqdkr4ca?usp=sharing" target="_blank">Unsupervised learning notebook</a>
+  readings:
+  - <a href="https://www.statlearning.com/" target="_blank">Introduction to Statistical Learning (Python)</a> Chapter 12
   slides: 
   logistics:
 
@@ -87,12 +91,20 @@
   title: >
     <strong>Trees and boosting</strong>
   slides: 
+  notes:
+  - <a href="https://colab.research.google.com/drive/1duJQGhJpJrKiSpZY6PcjRDujEo-riAMA?usp=sharing" target="_blank">Trees and boosting notebook</a>
+  readings: 
+  - <a href="https://www.statlearning.com/" target="_blank">Introduction to Statistical Learning (Python)</a> Chapter 8
   logistics:
 
 - date: Week 10 (3/19-3/21)
   title: >
     <strong>Validation</strong>
   slides: 
+  notes:
+  - <a href="https://colab.research.google.com/drive/1T8tD_1OwDMqS2dsR22sXDa9TC4xFtiPG?usp=sharing" target="_blank">Validation notebook</a>
+  readings: 
+  - <a href="https://www.statlearning.com/" target="_blank">Introduction to Statistical Learning (Python)</a> Chapter 5
   logistics:
 
 - title: "Applications"
@@ -129,5 +141,5 @@
   slides: 
   logistics:
 
-- date: The week of 5/1
+- date: 5/7
   title: <strong>Final exam</strong>
