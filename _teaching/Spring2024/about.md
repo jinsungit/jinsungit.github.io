@@ -5,6 +5,7 @@ title: CSCI 3360 Data Science I
 description: Spring 2024
 news: false
 is_class: true
+active: false
 ---
 
 This class is designed as an introductory study of the theory and practice of data science. Topics covered include fundamentals of data science, practical libraries to handle data, data collection and cleaning, data visualization and analysis, learning algorithms for classification and regression, unsupervised learning, validation metrics, applications in computer vision, natural language processing, and recommendation systems. 

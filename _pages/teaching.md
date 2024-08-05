@@ -13,7 +13,7 @@ Current class:
   {%- assign sorted_teaching = site.teaching | sort: "importance" -%}
   <div class="grid">
     {%- for teaching in sorted_teaching -%}
-      {%- if teaching.is_class -%}
+      {%- if teaching.is_class==true and teaching.active==true -%}
         {% include teaching.html %}
       {%- endif %}
     {%- endfor %}
@@ -23,6 +23,16 @@ Current class:
 ---
 
 Previous classes:
+<div class="teaching">
+  {%- assign sorted_teaching = site.teaching | sort: "importance" -%}
+  <div class="grid">
+    {%- for teaching in sorted_teaching -%}
+      {%- if teaching.is_class == true and teaching.active == false -%}
+        {% include teaching.html %}
+      {%- endif %}
+    {%- endfor %}
+  </div>
+</div>
 
 <div>
     <a href="Fall2023/Fall2023-CSCI8945.html">[Fall 2023] CSCI8945 Advanced Representation Learning</a>
