@@ -7,8 +7,6 @@ nav: true
 nav_order: 5
 ---
 
-Current class:
-
 <div class="teaching">
   {%- assign sorted_teaching = site.teaching | sort: "importance" -%}
   <div class="grid">

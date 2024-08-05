@@ -3,6 +3,7 @@ layout: class_home
 permalink: /teaching/Fall2024/
 title: CSCI 8945 Advanced Representation Learning
 description: Fall 2024
+img: /teaching/Fall2024/8945.png
 news: false
 is_class: true
 active: true
