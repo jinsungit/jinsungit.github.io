@@ -190,7 +190,7 @@
 - title: "Advanced Topics -- Implicit representations"
 - date: 10/22
   title: >
-    <strong></strong>
+    <strong>Implicit Neural Reprsentations with Periodic Activation Functions</strong>
   slides:
   logistics:
 
@@ -202,14 +202,16 @@
 
 - date: 10/24
   title: >
-    <strong></strong>
+    <strong>Deep implicit layers</strong>
   slides:
   logistics:
+  readings:
+  - <a href="https://implicit-layers-tutorial.org/" target="_blank">NeurIPS 2020 tutorial</a>
 
 - title: "Advanced Topics -- Meta-learning and domain adaptation"
 - date: 10/29
   title: >
-    <strong></strong>
+    <strong>Meta-learning</strong>
   slides:
   logistics:
 
@@ -221,14 +223,14 @@
 
 - date: 10/31
   title: >
-    <strong></strong>
+    <strong>Domain adaptation, transfer learning, life-long learning</strong>
   slides:
   logistics:
 
-- title: "Advanced Topics -- Unsupervised learning"
+- title: "Advanced Topics -- Unsupervised and self-supervised learning"
 - date: 11/5
   title: >
-    <strong></strong>
+    <strong>Unsupervised learning and discovery of features</strong>
   slides:
   logistics:
 
@@ -240,7 +242,7 @@
 
 - date: 11/7
   title: >
-    <strong></strong>
+    <strong>Advanced self-supervised learning</strong>
   slides:
   logistics:
 
@@ -266,17 +268,17 @@
 - title: "Final project presentations"
 
 - date: 11/19
-  title: ""
+  title: "Group presentations 1"
   slides:
   logistics:
 
 - date: 11/20
-  title: ""
+  title: "Group presentations 2"
   slides:
   logistics:
 
 - date: 11/21
-  title: ""
+  title: "Group presentations 3"
   slides:
   logistics:
 
