@@ -23,7 +23,7 @@ Advanced Representation Learning is a course designed to delve deeper into the f
     * "Machine Learning: a Probabilistic Perspective" by Kevin Murphy.
     * "Foundations of Data Science" by Avrim Blum, John Hopcroft, and Ravindran Kannan.
 - **Syllabus:**
-    <!-- [PDF](https://) -->
+    [PDF](/teaching/Fall2024/2024Fall-8945-syllabus.pdf)
 - **Learning outcomes**
 1. Demonstrate understanding of machine learning and deep neural network fundamentals.
 2. Gain experience deploying deep learning models in computer vision, natural language processing, and audio domains.
