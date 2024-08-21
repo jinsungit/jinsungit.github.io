@@ -10,7 +10,8 @@
 - date: 8/15
   title: >
     Data and dimensionality
-  slides:
+  slides: /teaching/Fall2024/lec2-data-and-space.pdf
+  notes: <a href="/teaching/Fall2024/lec2-whiteboard.pdf" target="_blank">whiteboard</a>
   logistics:
 
 - title: "Data representation space and structures"

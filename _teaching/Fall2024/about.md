@@ -15,7 +15,7 @@ Advanced Representation Learning is a course designed to delve deeper into the f
 
 - **Time and location:** 
     * Tue & Thu, 12:45pm-2pm, Boyd 222
-    * Wed, 12:45pm-1:30pm, Boyd 222
+    * Wed, 12:40pm-1:30pm, Boyd 222
 - **References:** 
     * [Deep Learning](http://www.deeplearningbook.org/) by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. **Free**
     * [Dive into Deep Learning](https://d2l.ai/)  by Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola. **Free**
