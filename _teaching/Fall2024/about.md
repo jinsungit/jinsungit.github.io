@@ -16,12 +16,14 @@ Advanced Representation Learning is a course designed to delve deeper into the f
 - **Time and location:** 
     * Tue & Thu, 12:45pm-2pm, Boyd 222
     * Wed, 12:40pm-1:30pm, Boyd 222
+- **Office hours:**
+    * Thu, 4pm-5pm, Boyd 804
 - **References:** 
     * [Deep Learning](http://www.deeplearningbook.org/) by Ian Goodfellow, Yoshua Bengio, and Aaron Courville. **Free**
     * [Dive into Deep Learning](https://d2l.ai/)  by Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola. **Free**
     * [Computer Vision: Algorithms and Applications](https://szeliski.org/Book/) by Richard Szeliski. **Free**
     * "Machine Learning: a Probabilistic Perspective" by Kevin Murphy.
-    * "Foundations of Data Science" by Avrim Blum, John Hopcroft, and Ravindran Kannan.
+    * [Foundations of Data Science](https://www.cs.cornell.edu/jeh/book.pdf) by Avrim Blum, John Hopcroft, and Ravindran Kannan. **Free**
 - **Syllabus:**
     [PDF](/teaching/Fall2024/2024Fall-8945-syllabus.pdf)
 - **Learning outcomes**

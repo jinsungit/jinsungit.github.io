@@ -13,6 +13,11 @@
   slides: /teaching/Fall2024/lec2-data-and-space.pdf
   notes: <a href="/teaching/Fall2024/lec2-whiteboard.pdf" target="_blank">whiteboard</a>
   logistics:
+  readings:
+  - <a href="https://www.cs.cmu.edu/~venkatg/teaching/CStheory-infoage/chap1-high-dim-space.pdf" target="_blank">High dim space (CMU lecture)</a>
+  - Foundations of Data Science, Chapter 1
+
+
 
 - title: "Data representation space and structures"
 
@@ -20,6 +25,9 @@
   title: >
     Dimension reduction, metric learning, PCA, MDS
   slides:
+  notes:
+  - <a href="/teaching/Fall2024/lec3-linear-transforms-basis.pdf" target="_blank">Linear transforms and basis</a>
+  - <a href="/teaching/Fall2024/lec3-PCA-MDS.pdf" target="_blank">PCA and MDS</a>
   logistics:
 
 - date: 8/21
