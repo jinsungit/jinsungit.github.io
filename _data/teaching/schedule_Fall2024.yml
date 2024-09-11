@@ -201,9 +201,12 @@
 - title: "Advanced Topics -- Implicit representations"
 - date: 10/22
   title: >
-    Implicit Neural Reprsentations with Periodic Activation Functions
+    Implicit Neural Reprsentations
   slides:
   logistics:
+  readings:
+  - <a href="https://arxiv.org/abs/2006.09661" target="_blank">Implicit Neural Representations with Periodic Activation Functions</a>
+  - <a href="https://arxiv.org/abs/2003.08934" target="_blank">NeRF</a>
 
 - date: 10/23
   title: >
@@ -225,6 +228,9 @@
     Meta-learning
   slides:
   logistics:
+  readings:
+  - <a href="https://arxiv.org/abs/2004.05439" target="_blank">Meta-Learning in Neural Networks A Survey</a>
+  - <a href="https://sites.google.com/mit.edu/aaai2021metalearningtutorial/home" target="_blank">Meta Learning - AAAI 2021 tutorial</a>
 
 - date: 10/30
   title: >
@@ -237,13 +243,22 @@
     Domain adaptation, transfer learning, life-long learning
   slides:
   logistics:
+  readings:
+  - <a href="https://arxiv.org/abs/2103.02503" target="_blank">Domain Generalization A Survey</a>
+  - <a href="https://arxiv.org/abs/1911.02685" target="_blank">A Comprehensive Survey on Transfer Learning</a>
+  - <a href="https://arxiv.org/abs/2302.00487" target="_blank">A Comprehensive Survey of Continual Learning Theory, Method and Application</a>
+
 
 - title: "Advanced Topics -- Unsupervised and self-supervised learning"
 - date: 11/5
   title: >
-    Unsupervised learning and discovery of features
+    Unsupervised learning and discovery
   slides:
   logistics:
+  readings:
+  - <a href="http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/" target="_blank">UFLDL Tutorial</a>
+  - <a href="https://arxiv.org/abs/1606.05908" target="_blank">Tutorial on Variational Autoencoders</a>
+  - <a href="https://yanbeic.github.io/Doc/TPAMI2022-ChenY.pdf" target="_blank">Semi-Supervised and Unsupervised Deep Visual Learning A Survey</a>
 
 - date: 11/6
   title: >
@@ -253,9 +268,13 @@
 
 - date: 11/7
   title: >
-    Advanced self-supervised learning
+    Self-supervised learning
   slides:
   logistics:
+  readings:
+  - <a href="https://cs231n.stanford.edu/slides/2024/lecture_12.pdf"  target="_blank">CS231n lecture 12</a>
+  - <a href="https://arxiv.org/abs/2104.14294" target="_blank">DINO</a>
+  - <a href="https://arxiv.org/abs/2304.07193" target="_blank">DINO v2</a>
 
 - title: "Advanced Topics -- Beyond perception"
 - date: 11/12
@@ -263,6 +282,8 @@
     Robotics
   slides:
   logistics:
+  readings:
+  - <a href="https://cs231n.stanford.edu/slides/2024/lecture_14.pdf" target="_blank">CS231n lecture 14</a>
 
 - date: 11/13
   title: >
@@ -275,6 +296,8 @@
     Embodied intelligence
   slides:
   logistics:
+  readings:
+  - <a href="https://ai-workshops.github.io/building-and-working-in-environments-for-embodied-ai-cvpr-2022/" target="_blank">CVPR 2022 workshop</a>
 
 - title: "Final project presentations"
 
