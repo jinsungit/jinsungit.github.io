@@ -279,11 +279,10 @@
 - title: "Advanced Topics -- Beyond perception"
 - date: 11/12
   title: >
-    Robotics
+    AI Agent
   slides:
   logistics:
   readings:
-  - <a href="https://cs231n.stanford.edu/slides/2024/lecture_14.pdf" target="_blank">CS231n lecture 14</a>
 
 - date: 11/13
   title: >
