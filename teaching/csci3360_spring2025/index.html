@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science I - Jin Sun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/projects/">Research</a>
+            <a href="/publications/">Publications</a>
+            <a href="/teaching/">Teaching</a>
+            <a href="/about">About</a>
+            <!-- <a href="/blog/">Blog</a> -->
+        </nav>
+    </header>
+
+    <main>
+        <div class="course-header">
+  <h1>CSCI 3360: Data Science I</h1>
+  <p class="course-semester">Spring 2025</p>
+</div>
+
+<div class="course-container">
+  <div class="course-toc">
+    <div class="toc-content">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#course-info">Course Information</a></li>
+        <li><a href="#description">Description</a></li>
+        
+          <li><a href="#learning-outcomes">Learning Outcomes</a></li>
+        
+        
+          <li><a href="#textbooks">Required Textbooks</a></li>
+        
+        <li><a href="#schedule">Weekly Schedule</a>
+          <ul>
+            
+              
+                <li><a href="#section-introduction-and-basics">Introduction and basics</a></li>
+              
+            
+              
+            
+              
+            
+              
+                <li><a href="#section-data">Data</a></li>
+              
+            
+              
+            
+              
+            
+              
+                <li><a href="#section-learning">Learning</a></li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li><a href="#section-applications">Applications</a></li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="course-main-content">
+    <div class="course-info">
+      <div class="course-details" id="course-info">
+        <h2>Course Information</h2>
+        <ul>
+          <li><strong>Instructor:</strong> Prof. Jin Sun</li>
+          <li><strong>Time:</strong> Monday 3:00 PM - 3:50 PM, Tuesday/Thursday 2:20 PM - 3:35 PM</li>
+          <li><strong>Location:</strong> Miller Plant Science 2102</li>
+          <li><strong>Office Hours:</strong> Thursdays 4:00 PM - 5:00 PM or by appointment</li>
+        </ul>
+      </div>
+
+      <div class="course-description" id="description">
+        <h2>Description</h2>
+        This class is designed as an introductory study of the theory and practice of data science. Topics covered include fundamentals of data science, practical libraries to handle data, data collection and cleaning, data visualization and analysis, learning algorithms for classification and regression, unsupervised learning, validation metrics, applications in computer vision, natural language processing, and recommendation systems.
+
+      </div>
+
+      
+        <div class="course-outcomes" id="learning-outcomes">
+          <h2>Learning Outcomes</h2>
+          <ul>
+            
+              <li>Demonstrate understanding of data science pipeline fundamentals.</li>
+            
+              <li>Familiar with relevant data science libraries and software packages.</li>
+            
+              <li>Ability to formulate a learning problem from data.</li>
+            
+              <li>Ability to evaluate a learning model.</li>
+            
+              <li>Gain experience deploying learning models in computer vision, natural language processing, and other application domains.</li>
+            
+          </ul>
+        </div>
+      
+
+      
+        <div class="course-textbooks" id="textbooks">
+          <h2>(FREE) Textbooks</h2>
+          <ul>
+            
+              <li>
+                <strong>An Introduction to Statistical Learning</strong>
+                 by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani
+                <br>ISBN: 9781461471370
+                <br><em>https://www.statlearning.com/</em>
+              </li>
+            
+              <li>
+                <strong>Python Data Science Handbook</strong>
+                 by Jake VanderPlas
+                <br>ISBN: 9781491912157
+                <br><em>https://jakevdp.github.io/PythonDataScienceHandbook/</em>
+              </li>
+            
+          </ul>
+        </div>
+      
+
+      
+        <div class="course-syllabus">
+          <h2>Syllabus</h2>
+          <p><a href="../Spring2025/2025SpringCSCI3360.pdf" class="button">Download Syllabus</a></p>
+        </div>
+      
+    </div>
+
+    <div class="course-schedule" id="schedule">
+      <h2>Course Schedule</h2>
+      <div class="schedule-grid">
+        
+          
+            <div class="topic-divider" id="section-introduction-and-basics">
+              <h3>Introduction and basics</h3>
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 1</h3>
+              <p class="week-topic"><strong>Topic:</strong> Introduction and overview</p>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 2</h3>
+              <p class="week-topic"><strong>Topic:</strong> Python and data science basics</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Whirlwind Tour of Python</li>
+                    
+                      <li>Python Data Science Handbook, Chapter 2</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="topic-divider" id="section-data">
+              <h3>Data</h3>
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 3</h3>
+              <p class="week-topic"><strong>Topic:</strong> Data collection and processing</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Python Data Science Handbook, Chapter 3</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 4</h3>
+              <p class="week-topic"><strong>Topic:</strong> Data visualization</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Python Data Science Handbook, Chapter 4</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="topic-divider" id="section-learning">
+              <h3>Learning</h3>
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 5</h3>
+              <p class="week-topic"><strong>Topic:</strong> Probabilistic learning foundation</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 2</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 6</h3>
+              <p class="week-topic"><strong>Topic:</strong> Regression</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 3</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 7</h3>
+              <p class="week-topic"><strong>Topic:</strong> Classification</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 4</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 8</h3>
+              <p class="week-topic"><strong>Topic:</strong> Unsupervised learning</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 12</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 9</h3>
+              <p class="week-topic"><strong>Topic:</strong> Trees and boosting</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 8</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 10</h3>
+              <p class="week-topic"><strong>Topic:</strong> Validation</p>
+              
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    
+                      <li>Introduction to Statistical Learning, Chapter 5</li>
+                    
+                  </ul>
+                </div>
+              
+              
+            </div>
+          
+        
+          
+            <div class="topic-divider" id="section-applications">
+              <h3>Applications</h3>
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 11</h3>
+              <p class="week-topic"><strong>Topic:</strong> Vision</p>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 12</h3>
+              <p class="week-topic"><strong>Topic:</strong> Language</p>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 13</h3>
+              <p class="week-topic"><strong>Topic:</strong> Recommendation systems</p>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 14</h3>
+              <p class="week-topic"><strong>Topic:</strong> Real world-ready development</p>
+              
+              
+            </div>
+          
+        
+          
+            <div class="week-card">
+              <h3>Week 15</h3>
+              <p class="week-topic"><strong>Topic:</strong> Project presentation</p>
+              
+              
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</div> 
+    </main>
+
+    <footer>
+        <p>
+            <span style="text-align:left;">"There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable. There is another theory which states that this has already happened."</span><span style="text-align: right;">-- Douglas Adams</span>
+        </p>
+        <p style="text-align: center;">&copy; 2025 Jin Sun |
+            Last updated: January 06, 2025</p>
+    </footer>
+</body>
+</html>
