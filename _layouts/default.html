@@ -1,63 +1,44 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="icon" href="{{ '/assets/images/favicon.png' | relative_url }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ '/' | relative_url }}">Home</a>
+            <a href="{{ '/projects/' | relative_url }}">Research</a>
+            <a href="{{ '/publications/' | relative_url }}">Publications</a>
+            <a href="{{ '/teaching/' | relative_url }}">Teaching</a>
+            <a href="{{ '/about' | relative_url }}">About</a>
+            <!-- <a href="{{ '/blog/' | relative_url }}">Blog</a> -->
+        </nav>
+    </header>
 
-  <!-- Head -->
-  <head>
-  {%- if page.redirect -%}
-    <meta http-equiv="refresh" content="3; url={{ site.baseurl }}/" />
-  {%- endif -%}
-  {% include head.html %}
-  </head>
-
-  <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
-
-    <!-- Header -->
-    {%- include header.html %}
-
-    <!-- Content -->
-    <div class="container mt-5">
-      {% if page.toc and page.toc.sidebar %}
-        {% if page.toc.sidebar == "right" %}
-        <div class="row">
-          <!-- main content area -->
-          <div class="col-sm-9">
-            {{ content }}
-          </div>
-          <!-- sidebar, which will move to the top on a small screen -->
-          <div class="col-sm-3">
-            <nav id="toc-sidebar" class="sticky-top"></nav>
-          </div>
-        </div>
-        {% else %}
-        <div class="row">
-          <!-- sidebar, which will move to the top on a small screen -->
-          <div class="col-sm-3">
-            <nav id="toc-sidebar" class="sticky-top"></nav>
-          </div>
-          <!-- main content area -->
-          <div class="col-sm-9">
-            {{ content }}
-          </div>
-        </div>
-        {% endif %}
-      {% else %}
+    <main>
         {{ content }}
-      {% endif %}
-    </div>
+    </main>
 
-    <!-- Footer -->
-    {%- include footer.html %}
-
-    <!-- JavaScripts -->
-    {% include scripts/jquery.html %}
-    {% include scripts/bootstrap.html %}
-    {% include scripts/masonry.html %}
-    {% include scripts/misc.html %}
-    {% include scripts/badges.html %}
-    {% include scripts/mathjax.html %}
-    {% include scripts/analytics.html %}
-    {% include scripts/progressBar.html %}
-    {% include scripts/wechatModal.html %}
-  </body>
+    <footer>
+        <p>
+            <span style="text-align:left;">"There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable. There is another theory which states that this has already happened."</span><span style="text-align: right;">-- Douglas Adams</span>
+        </p>
+        <p style="text-align: center;">&copy; {{ site.time | date: '%Y' }} {{ site.title }} |
+            Last updated: {{ site.time | date: '%B %d, %Y' }}</p>
+    </footer>
+</body>
 </html>

@@ -1,0 +1,126 @@
+---
+layout: default
+---
+
+<div class="course-header">
+  <h1>{{ page.code }}: {{ page.title }}</h1>
+  <p class="course-semester">{{ page.semester }}</p>
+</div>
+
+<div class="course-container">
+  <div class="course-toc">
+    <div class="toc-content">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#course-info">Course Information</a></li>
+        <li><a href="#description">Description</a></li>
+        {% if page.learning_outcomes %}
+          <li><a href="#learning-outcomes">Learning Outcomes</a></li>
+        {% endif %}
+        {% if page.textbooks %}
+          <li><a href="#textbooks">Required Textbooks</a></li>
+        {% endif %}
+        <li><a href="#schedule">Weekly Schedule</a>
+          <ul>
+            {% for week in page.schedule %}
+              {% if week.divider %}
+                <li><a href="#section-{{ week.divider | slugify }}">{{ week.divider }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="course-main-content">
+    <div class="course-info">
+      <div class="course-details" id="course-info">
+        <h2>Course Information</h2>
+        <ul>
+          <li><strong>Instructor:</strong> {{ page.instructor }}</li>
+          <li><strong>Time:</strong> {{ page.time }}</li>
+          <li><strong>Location:</strong> {{ page.location }}</li>
+          <li><strong>Office Hours:</strong> {{ page.office_hours }}</li>
+        </ul>
+      </div>
+
+      <div class="course-description" id="description">
+        <h2>Description</h2>
+        {{ page.description }}
+      </div>
+
+      {% if page.learning_outcomes %}
+        <div class="course-outcomes" id="learning-outcomes">
+          <h2>Learning Outcomes</h2>
+          <ul>
+            {% for outcome in page.learning_outcomes %}
+              <li>{{ outcome }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if page.textbooks %}
+        <div class="course-textbooks" id="textbooks">
+          <h2>(FREE) Textbooks</h2>
+          <ul>
+            {% for book in page.textbooks %}
+              <li>
+                <strong>{{ book.title }}</strong>
+                {% if book.authors %} by {{ book.authors }}{% endif %}
+                {% if book.isbn %}<br>ISBN: {{ book.isbn }}{% endif %}
+                {% if book.note %}<br><em>{{ book.note }}</em>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if page.syllabus %}
+        <div class="course-syllabus">
+          <h2>Syllabus</h2>
+          <p><a href="{{ page.syllabus }}" class="button">Download Syllabus</a></p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="course-schedule" id="schedule">
+      <h2>Course Schedule</h2>
+      <div class="schedule-grid">
+        {% for week in page.schedule %}
+          {% if week.divider %}
+            <div class="topic-divider" id="section-{{ week.divider | slugify }}">
+              <h3>{{ week.divider }}</h3>
+            </div>
+          {% else %}
+            <div class="week-card">
+              <h3>Week {{ week.week }}</h3>
+              <p class="week-topic"><strong>Topic:</strong> {{ week.topic }}</p>
+              {% if week.readings %}
+                <div class="week-readings">
+                  <strong>Readings:</strong>
+                  <ul>
+                    {% for reading in week.readings %}
+                      <li>{{ reading }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              {% if week.assignments %}
+                <div class="week-assignments">
+                  <strong>Assignments:</strong>
+                  <ul>
+                    {% for assignment in week.assignments %}
+                      <li>{{ assignment }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> 
