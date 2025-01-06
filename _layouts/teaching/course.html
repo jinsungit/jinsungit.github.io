@@ -5,6 +5,11 @@ layout: default
 <div class="course-header">
   <h1>{{ page.code }}: {{ page.title }}</h1>
   <p class="course-semester">{{ page.semester }}</p>
+  {% if page.cover_image %}
+    <div class="course-header-image">
+      <img src="{{ page.cover_image | relative_url }}" alt="{{ page.title }} cover">
+    </div>
+  {% endif %}
 </div>
 
 <div class="course-container">

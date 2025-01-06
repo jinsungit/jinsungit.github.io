@@ -12,6 +12,11 @@ permalink: /teaching/
   {% assign current_courses = site.teaching | where: "semester", "Spring 2025" %}
   {% for course in current_courses %}
     <div class="course-card">
+      {% if course.cover_image %}
+        <div class="course-image">
+          <img src="{{ course.cover_image | relative_url }}" alt="{{ course.title }} cover">
+        </div>
+      {% endif %}
       <h3><a href="{{ course.url | relative_url }}">{{ course.code }}: {{ course.title }}</a></h3>
       <p class="course-semester">{{ course.semester }}</p>
       <p class="course-description">{{ course.description }}</p>

@@ -4,6 +4,7 @@ code: CSCI 3360
 title: Data Science I
 semester: Spring 2025
 instructor: Prof. Jin Sun
+cover_image: /teaching/Spring2025/cover.png
 time: "Monday 3:00 PM - 3:50 PM, Tuesday/Thursday 2:20 PM - 3:35 PM"
 location: "Miller Plant Science 2102"
 office_hours: "Thursdays 4:00 PM - 5:00 PM or by appointment"
