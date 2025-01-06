@@ -30,73 +30,98 @@ learning_outcomes:
 schedule:
   - divider: "Introduction and basics"
   - week: 1
+    dates: "Jan 6,7,9"
     topic: "Introduction and overview"
     readings:
       
   - week: 2
     topic: "Python and data science basics"
+    dates: "Jan 13,14,16"
     readings:
       - "Whirlwind Tour of Python"
       - "Python Data Science Handbook, Chapter 2"
-       
+
+  - special: "Martin Luther King Jr. Day"
+    dates: "Jan 20"
+    description: "No class"
+
   - divider: "Data"
   - week: 3
+    dates: "Jan 21,23"
     topic: "Data collection and processing"
     readings:
       - "Python Data Science Handbook, Chapter 3"
         
   - week: 4
+    dates: "Jan 27,28,30"
     topic: "Data visualization"
     readings:
       - "Python Data Science Handbook, Chapter 4"
          
   - divider: "Learning"
   - week: 5
+    dates: "Feb 3,4,6"
     topic: "Probabilistic learning foundation"
     readings:
       - "Introduction to Statistical Learning, Chapter 2"
                                
   - week: 6
+    dates: "Feb 10,11,13"
     topic: "Regression"
     readings:
       - "Introduction to Statistical Learning, Chapter 3"
             
   - week: 7
+    dates: "Feb 17,18,20"
     topic: "Classification"
     readings:
       - "Introduction to Statistical Learning, Chapter 4"
             
   - week: 8
+    dates: "Feb 24,25,27"
     topic: "Unsupervised learning"
     readings:
       - "Introduction to Statistical Learning, Chapter 12"
-            
+
+  - special: "Spring Break"
+    dates: "Mar 3-7"
+    description: "No class"
+
   - week: 9
+    dates: "Mar 10,11,13"
     topic: "Trees and boosting"
     readings:
       - "Introduction to Statistical Learning, Chapter 8"
             
   - week: 10
+    dates: "Mar 17,18,20"
     topic: "Validation"
     readings:
       - "Introduction to Statistical Learning, Chapter 5"
-            
+
   - divider: "Applications"
   - week: 11
+    dates: "Mar 24,25,27"
     topic: "Vision"
             
   - week: 12
+    dates: "Mar 31, Apr 1,3"
     topic: "Language"
             
   - week: 13
+    dates: "Apr 7,8,10"
     topic: "Recommendation systems"
-            
+
   - week: 14
+    dates: "Apr 14,15,17"
     topic: "Real world-ready development"
             
   - week: 15
+    dates: "Apr 21,22,24"
     topic: "Project presentation"
       
+  - special: "Final exam"
+    dates: "TBD (Apr 30-May 6)"
 ---
 
 ## Course Overview

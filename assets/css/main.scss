@@ -579,7 +579,8 @@ footer {
   transition: background-color 0.3s ease;
   
   &:hover {
-    background: #034c6a;
+    background: #29b2e9;
+    color: rgb(30, 20, 1);
   }
 }
 
@@ -719,11 +720,12 @@ margin-bottom: 0.5rem;
     font-size: 1.2rem;
     margin: 0;
     padding-bottom: 0.25rem;
-    border-bottom: 2px solid #8ecae6;
-    border-top: 2px solid #8ecae6;
+    // border-bottom: 2px solid #41afe2;
+    // border-top: 2px solid #8ecae6;
     color: #023047;
     text-align: center;
   }
+  border: 2px solid #a4d8f0;
 }
 
 // Responsive design
@@ -797,3 +799,26 @@ margin-bottom: 0.5rem;
     width: 100%;
     grid-column: 1 / -1;  /* Makes the card span all columns */
 }
+
+.special-event {
+  background-color: #fff3e0;  /* or any other distinguishing style */
+  border-left: 4px solid #ff9800;
+
+  .event-description {
+    margin: 0;
+  }
+}
+
+.week-dates {
+  float: right;
+  color: #666;
+  font-weight: normal;  /* Since it's now inside the h3 */
+}
+
+/* Clear the float if needed */
+h3::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+

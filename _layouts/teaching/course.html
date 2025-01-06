@@ -98,9 +98,19 @@ layout: default
             <div class="topic-divider" id="section-{{ week.divider | slugify }}">
               <h3>{{ week.divider }}</h3>
             </div>
+          {% elsif week.special %}
+            <div class="week-card special-event">
+              <h3>{{ week.special }}
+                {% if week.dates %}<span class="week-dates">{{ week.dates }}</span>{% endif %}
+              </h3>
+              {% if week.description %}<p class="event-description">{{ week.description }}</p>{% endif %}
+            </div>
           {% else %}
             <div class="week-card">
-              <h3>Week {{ week.week }}</h3>
+              <h3>
+                Week {{ week.week }}
+                {% if week.dates %}<span class="week-dates">{{ week.dates }}</span>{% endif %}
+              </h3>
               <p class="week-topic"><strong>Topic:</strong> {{ week.topic }}</p>
               {% if week.readings %}
                 <div class="week-readings">
