@@ -9,13 +9,13 @@
   <div class="news-item">
     <span class="news-date">Sep, 2024</span>
     <span class="news-content">National Institutes of Health (NIH) R21 grant awarded.</span>
-    <span class="news-icon"><i class="fa-solid fa-landmark" title="Grant"></i></span>
+    <span class="news-icon"><img src="/assets/images/grant_icon.png" alt="Grant" title="Grant" class="news-icon-img"></span>
   </div>
 
   <div class="news-item">
     <span class="news-date">Sep, 2024</span>
     <span class="news-content">University of Georgia, College of Engineering, Engineering and Computing Convergence Collaboration innovations (EC3) grant awarded.</span>
-    <span class="news-icon"><i class="fa-solid fa-landmark" title="Grant"></i></span>
+    <span class="news-icon"><img src="/assets/images/grant_icon.png" alt="Grant" title="Grant" class="news-icon-img"></span>
   </div>
  
   <div class="news-item">
@@ -39,7 +39,7 @@
   <div class="news-item">
     <span class="news-date">Jan, 2024</span>
     <span class="news-content">University of Georgia, Presidential Interdisciplinary Seed Grant awarded.</span>
-    <span class="news-icon"><i class="fa-solid fa-landmark" title="Grant"></i></span>
+    <span class="news-icon"><img src="/assets/images/grant_icon.png" alt="Grant" title="Grant" class="news-icon-img"></span>
   </div>
 </div> 
 
