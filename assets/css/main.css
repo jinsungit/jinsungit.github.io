@@ -1,12 +1,19 @@
 @charset "UTF-8";
+:root {
+  --primary-background-color: #fefae0;
+  --accent-element-color: #f4f9ff;
+  --primary-text-color: #023047;
+  --text-hover-color: #06212e;
+}
+
 body {
   font-family: "Crimson Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
   padding: 0.5rem;
-  color: #023047;
-  background-color: #fefae0;
+  color: var(--primary-text-color);
+  background-color: var(--primary-background-color);
   font-size: 1.2rem;
   margin-bottom: 0rem;
 }
@@ -34,7 +41,7 @@ main a {
 }
 main a:hover {
   text-decoration: none;
-  color: #06212e;
+  color: var(--text-hover-color);
 }
 
 footer {
@@ -61,14 +68,14 @@ footer p:nth-child(2) {
 .bibliography {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 0.5rem;
 }
 
 .paper-card {
   display: flex;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: white;
+  background: var(--accent-element-color);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
@@ -242,7 +249,7 @@ footer p:nth-child(2) {
 .news-date {
   flex: 0 0 auto;
   font-weight: bold;
-  color: #023047;
+  color: var(--primary-text-color);
   margin-right: 1rem;
   min-width: 120px;
 }
@@ -282,31 +289,28 @@ footer p:nth-child(2) {
 }
 
 .project-category {
-  background: white;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d6d9;
 }
 .project-category h2 {
   margin: 0;
   padding: 1.5rem;
   color: #023047;
-  background-color: #f8f9fa;
+  background-color: #ffeac7;
 }
 
 .project-description {
   padding: 1.5rem;
   border-bottom: 1px solid #e0e0e0;
+  background-color: var(--accent-element-color);
 }
 .project-description p {
   margin: 0;
   line-height: 1.6;
-  color: #4a4a4a;
 }
 
-.project-group {
-  background: white;
-}
 .project-group[open] .project-summary {
   background-color: #023047;
   color: white;
@@ -316,9 +320,9 @@ footer p:nth-child(2) {
 }
 
 .project-summary {
+  background-color: rgb(226, 225, 225);
   padding: 1rem 1.5rem;
   cursor: pointer;
-  background-color: #f8f9fa;
   transition: all 0.3s ease;
   position: relative;
   list-style: none;
@@ -339,11 +343,6 @@ footer p:nth-child(2) {
 .project-summary:hover {
   background-color: #023047;
   color: white;
-}
-
-.publications {
-  padding: 1.5rem;
-  background-color: white;
 }
 
 .bio-section {
@@ -473,31 +472,6 @@ footer p:nth-child(2) {
     margin-bottom: 20px;
   }
 }
-.course-grid {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-
-.course-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  align-items: start;
-}
-.course-card .course-image {
-  min-width: 200px;
-  margin-bottom: 0;
-  overflow: hidden;
-  border-radius: 4px;
-}
-.course-card .course-image img {
-  width: 100%;
-  object-fit: cover;
-}
-.course-card .course-info {
-  flex: 1;
-}
-
 .course-semester {
   color: #666;
   font-size: 0.9rem;
@@ -508,10 +482,6 @@ footer p:nth-child(2) {
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #8ecae6;
-}
-
-.course-info {
-  margin-left: 1rem;
 }
 
 .schedule-grid {
@@ -607,14 +577,14 @@ footer p:nth-child(2) {
 }
 
 .toc-content {
-  background: white;
+  background: var(--accent-element-color);
   padding: 0.75rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .toc-content h3 {
   margin-top: 0;
-  color: #023047;
+  color: var(--primary-text-color);
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
@@ -635,7 +605,7 @@ footer p:nth-child(2) {
   font-size: 0.95rem;
 }
 .toc-content li a:hover {
-  color: #023047;
+  color: var(--text-hover-color);
   text-decoration: underline;
 }
 
@@ -646,7 +616,7 @@ footer p:nth-child(2) {
 }
 
 .week-card {
-  background: white;
+  background: var(--accent-element-color);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -654,7 +624,7 @@ footer p:nth-child(2) {
 .week-card h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
-  color: #023047;
+  color: var(--primary-text-color);
 }
 .week-card .week-topic {
   margin: 0.3rem 0;
@@ -696,9 +666,12 @@ footer p:nth-child(2) {
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex; /* Added to enable side-by-side layout */
+  gap: 20px; /* Added spacing between image and info */
+  background-color: var(--accent-element-color);
 }
 .course-card .course-image {
-  width: 50%;
+  width: 30%; /* Adjusted to be less than 1/3 */
   margin-bottom: 15px;
   overflow: hidden;
   border-radius: 4px;
@@ -707,6 +680,10 @@ footer p:nth-child(2) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.course-card .course-info {
+  flex: 1; /* Takes up remaining space */
+  min-width: 0; /* Prevents flex item from overflowing */
 }
 
 .course-grid {
