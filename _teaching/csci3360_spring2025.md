@@ -79,9 +79,7 @@ schedule:
             
   - week: 8
     dates: "Feb 24,25,27"
-    topic: "Unsupervised learning"
-    readings:
-      - "Introduction to Statistical Learning, Chapter 12"
+    topic: "Midterm review and notebook discussion"
 
   - special: "Spring Break"
     dates: "Mar 3-7"
@@ -89,31 +87,41 @@ schedule:
 
   - week: 9
     dates: "Mar 10,11,13"
+    topic: "Notebook discussion on regression and classification"
+
+  - week: 10
+    dates: "Mar 17,18,20"
+    topic: "Unsupervised learning"
+    readings:
+      - "Introduction to Statistical Learning, Chapter 12"
+
+  - week: 11
+    dates: "Mar 24,25,27"
     topic: "Trees and boosting"
     readings:
       - "Introduction to Statistical Learning, Chapter 8"
             
-  - week: 10
-    dates: "Mar 17,18,20"
-    topic: "Validation"
-    readings:
-      - "Introduction to Statistical Learning, Chapter 5"
-
-  - divider: "Applications"
-  - week: 11
-    dates: "Mar 24,25,27"
-    topic: "Vision"
-            
   - week: 12
     dates: "Mar 31, Apr 1,3"
-    topic: "Language"
-            
+    topic: "Validation"
+    readings:
+    - "Introduction to Statistical Learning, Chapter 5"
+           
+  - divider: "Applications"
   - week: 13
-    dates: "Apr 7,8,10"
+    dates: "Apr 7,8"
     topic: "Recommendation systems"
 
+  - week: 13
+    dates: "Apr 10"
+    topic: "Vision"
+
   - week: 14
-    dates: "Apr 14,15,17"
+    dates: "Apr 14,15"
+    topic: "Language"
+
+  - week: 14
+    dates: "Apr 17"
     topic: "Real world-ready development"
             
   - week: 15

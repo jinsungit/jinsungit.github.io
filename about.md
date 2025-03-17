@@ -3,23 +3,23 @@ layout: default
 title: About
 ---
 
-<div class="bio-section">
   I'm currently an Assistant Professor in the <a href="https://computing.uga.edu/" target="_blank">School of Computing</a> and a faculty fellow at the <a href="https://www.ai.uga.edu/">Institute for Artificial Intelligence</a> at the University of Georgia.
-  <br>
-  <!-- I have spent wonderful years at following places in my academic journey: -->
-  <br>
+
+<div class="bio-section">
+  I have spent wonderful years at following places in my academic journey:
+  <!-- <br>
   Previously, I was a Postdoctoral Associate at <a href="https://tech.cornell.edu/" target="_blank">Cornell Tech</a>, working with <a href="http://www.cs.cornell.edu/~snavely/">Prof. Noah Snavely</a>. I received my PhD degree in Computer Science from the University of Maryland. My PhD advisor is <a href="http://www.cs.umd.edu/~djacobs/" target="_blank">Prof. David Jacobs</a>.
-I was in a 3+2 program where I received a Master's degree in Computer and Information Science from Temple University and my Bachelor's degree in Automation from the University of Science and Technology of China (USTC). My advisor in Temple was <a href="https://www3.cs.stonybrook.edu/~hling/" target="_blank">Prof. Haibin Ling</a>.
+I was in a 3+2 program where I received a Master's degree in Computer and Information Science from Temple University and my Bachelor's degree in Automation from the University of Science and Technology of China (USTC). My advisor in Temple was <a href="https://www3.cs.stonybrook.edu/~hling/" target="_blank">Prof. Haibin Ling</a>. -->
 </div>
 
-<!-- <div class="timeline">
+<div class="timeline">
   <div class="timeline-item right">
-    <div class="timeline-date">2023 - Present</div>
-    <div class="timeline-content">
-      <div class="timeline-media">
-        <img src="/assets/images/uga.jpg" alt="UGA Campus">
+      <div class="timeline-media left">
+        <img src="/assets/images/UGA.jpg" alt="UGA Campus">
       </div>
+    <div class="timeline-content">
       <div class="timeline-text">
+        <div class="timeline-date">2022 - Present</div>
         <h3>Assistant Professor</h3>
         <p>School of Computing, University of Georgia</p>
         <ul>
@@ -34,12 +34,12 @@ I was in a 3+2 program where I received a Master's degree in Computer and Inform
   </div>
 
   <div class="timeline-item left">
-    <div class="timeline-date">2020 - 2023</div>
     <div class="timeline-content">
       <div class="timeline-media">
-        <img src="/assets/images/cornell-tech.jpg" alt="Cornell Tech Campus">
+        <img src="/assets/images/CornellTech.jpg" alt="Cornell Tech Campus">
       </div>
       <div class="timeline-text">
+      <div class="timeline-date">2018 - 2021</div>
         <h3>Postdoctoral Associate</h3>
         <p>Cornell Tech</p>
         <ul>
@@ -52,5 +52,5 @@ I was in a 3+2 program where I received a Master's degree in Computer and Inform
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
