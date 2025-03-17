@@ -5,14 +5,14 @@ title: About
 
   I'm currently an Assistant Professor in the <a href="https://computing.uga.edu/" target="_blank">School of Computing</a> and a faculty fellow at the <a href="https://www.ai.uga.edu/">Institute for Artificial Intelligence</a> at the University of Georgia.
 
-<div class="bio-section">
+<!-- <div class="bio-section"> -->
   I have spent wonderful years at following places in my academic journey:
-  <!-- <br>
+  <br><br>
   Previously, I was a Postdoctoral Associate at <a href="https://tech.cornell.edu/" target="_blank">Cornell Tech</a>, working with <a href="http://www.cs.cornell.edu/~snavely/">Prof. Noah Snavely</a>. I received my PhD degree in Computer Science from the University of Maryland. My PhD advisor is <a href="http://www.cs.umd.edu/~djacobs/" target="_blank">Prof. David Jacobs</a>.
-I was in a 3+2 program where I received a Master's degree in Computer and Information Science from Temple University and my Bachelor's degree in Automation from the University of Science and Technology of China (USTC). My advisor in Temple was <a href="https://www3.cs.stonybrook.edu/~hling/" target="_blank">Prof. Haibin Ling</a>. -->
-</div>
+I was in a 3+2 program where I received a Master's degree in Computer and Information Science from Temple University and my Bachelor's degree in Automation from the University of Science and Technology of China (USTC). My advisor in Temple was <a href="https://www3.cs.stonybrook.edu/~hling/" target="_blank">Prof. Haibin Ling</a>.
+<!-- </div> -->
 
-<div class="timeline">
+<!-- <div class="timeline">
   <div class="timeline-item right">
       <div class="timeline-media left">
         <img src="/assets/images/UGA.jpg" alt="UGA Campus">
@@ -52,5 +52,5 @@ I was in a 3+2 program where I received a Master's degree in Computer and Inform
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
