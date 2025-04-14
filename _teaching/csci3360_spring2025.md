@@ -102,22 +102,22 @@ schedule:
       - "Introduction to Statistical Learning, Chapter 8"
             
   - week: 12
-    dates: "Mar 31, Apr 1,3"
+    dates: "Apr 1,3,7"
     topic: "Validation"
     readings:
     - "Introduction to Statistical Learning, Chapter 5"
            
   - divider: "Applications"
   - week: 13
-    dates: "Apr 7,8"
+    dates: "Apr 8,10"
     topic: "Recommendation systems"
-
-  - week: 13
-    dates: "Apr 10"
-    topic: "Vision"
 
   - week: 14
     dates: "Apr 14,15"
+    topic: "Vision"
+
+  - week: 14
+    dates: "Apr 15,17"
     topic: "Language"
 
   - week: 14
@@ -129,7 +129,7 @@ schedule:
     topic: "Project presentation"
       
   - special: "Final exam"
-    dates: "TBD (Apr 30-May 6)"
+    dates: "May 5 (Monday), Time: 3:30-6:30pm, Location: Miller Plant Science 2102 (same classroom)"
 ---
 
 ## Course Overview
