@@ -1,6 +1,18 @@
 <div class="news-list">
 
   <div class="news-item">
+    <span class="news-date">May, 2025</span>
+    <span class="news-content">New conference paper accepted at KDD 2025.</span>
+    <span class="news-icon"><i class="fas fa-scroll" title="Journal Paper"></i></span>
+  </div>
+
+  <div class="news-item">
+    <span class="news-date">May, 2025</span>
+    <span class="news-content">New conference paper accepted at ICML 2025.</span>
+    <span class="news-icon"><i class="fas fa-scroll" title="Journal Paper"></i></span>
+  </div>
+
+  <div class="news-item">
     <span class="news-date">Feb, 2025</span>
     <span class="news-content">New conference paper accepted at ICLR 2025.</span>
     <span class="news-icon"><i class="fas fa-scroll" title="Journal Paper"></i></span>
