@@ -9,7 +9,7 @@ permalink: /teaching/
 ## Current Course
 
 <div class="course-grid">
-  {% assign current_courses = site.teaching | where: "semester", "Spring 2025" %}
+  {% assign current_courses = site.teaching | where: "offering", "current" %}
   {% for course in current_courses %}
     <div class="course-card full-width">
       {% if course.cover_image %}
@@ -27,6 +27,24 @@ permalink: /teaching/
 </div>
 
 ## Previous Courses
+
+<div class="course-grid">
+  {% assign current_courses = site.teaching | where: "offering", "old" %}
+  {% for course in current_courses %}
+    <div class="course-card full-width">
+      {% if course.cover_image %}
+        <div class="course-image">
+          <img src="{{ course.cover_image | relative_url }}" alt="{{ course.title }} cover">
+        </div>
+      {% endif %}
+      <div class="course-info">
+        <h3><a href="{{ course.url | relative_url }}">{{ course.code }}: {{ course.title }}</a></h3>
+        <p class="course-semester">{{ course.semester }}</p>
+        <p class="course-description">{{ course.description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 
 <div>
 <ul>

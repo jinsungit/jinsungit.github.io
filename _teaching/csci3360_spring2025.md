@@ -26,6 +26,8 @@ learning_outcomes:
  - Ability to formulate a learning problem from data.
  - Ability to evaluate a learning model.
  - Gain experience deploying learning models in computer vision, natural language processing, and other application domains.
+offering: old
+
 
 schedule:
   - divider: "Introduction and basics"
