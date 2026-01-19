@@ -9,7 +9,7 @@ permalink: /teaching/
 ## Current Course
 
 <div class="course-grid">
-  {% assign current_courses = site.teaching | where: "offering", "current" %}
+  <!-- {% assign current_courses = site.teaching | where: "offering", "current" %}
   {% for course in current_courses %}
     <div class="course-card full-width">
       {% if course.cover_image %}
@@ -23,7 +23,12 @@ permalink: /teaching/
         <p class="course-description">{{ course.description }}</p>
       </div>
     </div>
-  {% endfor %}
+  {% endfor %} -->
+  <div class="course-card full-width">
+    <h3><a href="/teaching/Spring2026/index.html">CSCI 4900/6900: Computer Vision - The Deep Learning Approach</a></h3>
+    <p class="course-semester">Spring 2026</p>
+    <p class="course-description">Students will learn the modern deep learning techniques for computer vision.</p>
+  </div>
 </div>
 
 ## Previous Courses
