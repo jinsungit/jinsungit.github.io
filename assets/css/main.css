@@ -662,7 +662,6 @@ footer p:nth-child(2) {
 
 .topic-divider {
   margin: 1rem 0 0.25rem;
-  border: 2px solid #a4d8f0;
 }
 .topic-divider h3 {
   color: #023047;
@@ -671,6 +670,9 @@ footer p:nth-child(2) {
   padding-bottom: 0.25rem;
   color: #023047;
   text-align: center;
+}
+.topic-divider {
+  border: 2px solid #a4d8f0;
 }
 
 @media (max-width: 768px) {
