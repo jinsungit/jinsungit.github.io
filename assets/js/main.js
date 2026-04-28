@@ -1,4 +1,25 @@
 (() => {
+  const GA_MEASUREMENT_ID = "G-58L4TFZB72";
+
+  // Load Google Analytics once and apply to every page that includes main.js.
+  if (GA_MEASUREMENT_ID && !window.__gaInitialized) {
+    const gaScript = document.createElement("script");
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(gaScript);
+
+    const gaConfigScript = document.createElement("script");
+    gaConfigScript.textContent = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA_MEASUREMENT_ID}');
+    `;
+    document.head.appendChild(gaConfigScript);
+
+    window.__gaInitialized = true;
+  }
+
   const sharedFooter = `
     <div class="container footer-inner">
       <p>&copy; <span id="year"></span> Jin Sun. All rights reserved.</p>
