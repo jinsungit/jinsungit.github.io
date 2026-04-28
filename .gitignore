@@ -9,3 +9,17 @@ _site
 Gemfile.lock
 vendor
 
+
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,155 @@
+.section-intro {
+  padding-top: 2.2rem;
+  padding-bottom: 1.5rem;
+}
+
+.intro-lead {
+  max-width: 40rem;
+}
+
+.section-bio {
+  padding-top: 0;
+  padding-bottom: 2.1rem;
+}
+
+.bio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+  gap: 1.35rem;
+  align-items: flex-start;
+}
+
+.bio-sidebar {
+  background-color: color-mix(in srgb, var(--color-surface) 94%, var(--color-surface-muted));
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 0.85rem 1rem;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0.45rem 0 0;
+  padding: 0;
+}
+
+.timeline li {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  gap: 0.55rem;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 28px;
+  top: 0.2rem;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(148, 163, 184, 0.6);
+}
+
+.timeline li:last-child::before {
+  bottom: 0.9rem;
+}
+
+.timeline-year {
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.timeline-body {
+  font-size: 0.9rem;
+}
+
+.timeline-title {
+  font-weight: 500;
+}
+
+.timeline-meta {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.section-journey {
+  padding-top: 0;
+  padding-bottom: 2.2rem;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.journey-card {
+  margin: 0;
+  background-color: var(--color-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.journey-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.journey-card figcaption {
+  padding: 0.65rem 0.85rem 0.85rem;
+}
+
+.journey-title {
+  font-size: 0.96rem;
+  font-weight: 500;
+}
+
+.journey-meta {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 0.1rem;
+}
+
+.journey-text {
+  font-size: 0.88rem;
+  color: var(--color-text);
+  margin-top: 0.4rem;
+}
+
+.section-personal {
+  padding-top: 0;
+  padding-bottom: 2.35rem;
+}
+
+.personal-body {
+  max-width: 40rem;
+  color: var(--color-text);
+}
+
+@media (max-width: 900px) {
+  .bio-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .timeline li {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .journey-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

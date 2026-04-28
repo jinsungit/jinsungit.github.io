@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Research – Jin Sun</title>
+    <meta
+      name="description"
+      content="Jin Sun – Research in computer vision and deep learning; understanding people in diverse environments; AI for scientific discovery and healthcare."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/research.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-title">Jin Sun</span>
+          <span class="brand-subtitle">Assistant Professor of Computer Science</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="research.html" aria-current="page">Research</a></li>
+            <li><a href="teaching.html">Teaching</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section section-intro">
+        <div class="container">
+          <p class="eyebrow">Research</p>
+          <h1>Deep learning, Vision, AI for Science and Society</h1>
+          <p class="intro-lead">
+            My main research area is computer vision—understanding our world using visual data with the help of state-of-the-art deep learning models. I am particularly passionate about understanding objects in diverse and complex environments using images and videos.
+          </p>
+          <p class="intro-lead">
+            I believe A.I. can and should be developed to improve people's quality of life. I am actively collaborating with researchers across disciplines to apply A.I. in scientific discovery, healthcare advancement, and societal challenges, aiming to create meaningful impact beyond traditional computer vision applications.
+          </p>
+        </div>
+      </section>
+<!-- 
+      <section class="section section-projects">
+        <div class="container">
+          <header class="section-header">
+            <h2>Selected projects</h2>
+            <p class="section-subtitle">
+              A few ongoing and recent projects; please see individual papers for
+              details.
+            </p>
+          </header>
+          <div class="project-grid">
+            <article class="card project-card">
+              <h3>Robust visual representations under shift</h3>
+              <p>
+                Learning vision models that maintain performance when deployed in
+                environments that differ from curated training distributions.
+              </p>
+              <div class="project-tags">
+                <span class="pill">Distribution shift</span>
+                <span class="pill">Robustness</span>
+              </div>
+            </article>
+            <article class="card project-card">
+              <h3>Self-supervised learning for scientific imaging</h3>
+              <p>
+                Designing pretraining objectives tailored to microscopy, medical,
+                and other scientific imaging modalities.
+              </p>
+              <div class="project-tags">
+                <span class="pill">Self-supervision</span>
+                <span class="pill">Scientific imaging</span>
+              </div>
+            </article>
+            <article class="card project-card">
+              <h3>Interpretable vision models</h3>
+              <p>
+                Understanding and exposing the internal structure of deep vision
+                models to support transparency and scientific insight.
+              </p>
+              <div class="project-tags">
+                <span class="pill">Interpretability</span>
+                <span class="pill">Representation learning</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section> -->
+
+      <section class="section section-publications">
+        <div class="container">
+          <header class="section-header">
+            <h2>Publication highlights</h2>
+            <p class="section-subtitle">
+              A selection of recent and representative publications. For a full,
+              up-to-date list, please see my <a href="https://scholar.google.com/citations?hl=en&user=Gw10rFEAAAAJ">Google Scholar</a> profile.
+            </p>
+          </header>
+
+          <div class="pub-controls" aria-label="Filter publications">
+            <div class="pub-filters">
+              <button class="pub-filter-button is-active" data-kind="all" type="button">
+                All
+              </button>
+              <button class="pub-filter-button" data-kind="conference" type="button">
+                Conference
+              </button>
+              <button class="pub-filter-button" data-kind="journal" type="button">
+                Journal
+              </button>
+              <button class="pub-filter-button" data-kind="workshop" type="button">
+                Workshop
+              </button>
+            </div>
+            <label class="pub-search">
+              <span class="visually-hidden">Search publications</span>
+              <input
+                id="pub-search-input"
+                type="search"
+                placeholder="Search by title, venue, or keyword"
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div id="publications-list" class="publications-list" aria-live="polite">
+            <!-- Populated by publications.js -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> Jin Sun. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/publications.js" defer></script>
+  </body>
+</html>

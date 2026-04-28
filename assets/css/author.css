@@ -1,0 +1,612 @@
+/* Author-style landing: scientist as “published author,” papers as volumes. */
+
+body.author-site {
+  --author-paper: #faf7f2;
+  --author-paper-2: #f0ebe3;
+  --author-ink: #1a1714;
+  --author-muted: #5e5850;
+  --author-accent: #6b3a2c;
+  --author-accent-soft: rgba(107, 58, 44, 0.12);
+  --author-rule: rgba(26, 23, 20, 0.1);
+  --author-cover-shadow: 0 22px 48px rgba(26, 23, 20, 0.14);
+  --font-author-display: "Libre Baskerville", "Source Serif 4", Georgia, serif;
+}
+
+body.author-site {
+  --color-bg: #ebe4d9;
+  --color-surface: var(--author-paper);
+  --color-surface-muted: var(--author-paper-2);
+  --color-text: var(--author-ink);
+  --color-muted: var(--author-muted);
+  --color-border: var(--author-rule);
+  --color-accent: var(--author-accent);
+  --color-accent-strong: #4f2a20;
+  --color-accent-soft: var(--author-accent-soft);
+  --shadow-soft: var(--author-cover-shadow);
+
+  --header-footer-bg: #2c2621;
+  --header-footer-text: #faf7f2;
+  --header-footer-muted: rgba(250, 247, 242, 0.75);
+  --header-footer-border: rgba(255, 250, 242, 0.1);
+  --header-footer-accent: #e8d4c8;
+  --header-footer-pattern: url("../img/pattern-neural.svg");
+}
+
+body.author-site {
+  background: #edeae4;
+}
+
+/* ============================================================
+   SECTION BLOCKS — alternating cream / warm grey
+   ============================================================ */
+
+/* 1. Welcome — original creamy paper */
+.author-welcome {
+  --author-welcome-pad-top: 2.25rem;
+  --author-welcome-pad-bottom: 2.5rem;
+  padding: var(--author-welcome-pad-top) 0 var(--author-welcome-pad-bottom);
+  background-color: #faf7f2;
+}
+
+/* 2. Research themes (three panels) — warm grey */
+.author-focus {
+  padding-top: 1.75rem;
+  padding-bottom: 2.25rem;
+  background-color: #edeae4;
+}
+
+/* 3. Backlist shelf — back to cream */
+.author-shelf {
+  padding: 1.75rem 0 2.75rem;
+  background-color: #faf7f2;
+}
+
+/* 4. News — warm grey */
+.author-news-section {
+  padding-top: 1.75rem;
+  padding-bottom: 2.35rem;
+  background-color: #edeae4;
+}
+
+/* 5. Quotes — cream */
+.author-quotes {
+  padding-top: 1.75rem;
+  padding-bottom: 2.75rem;
+  background-color: #faf7f2;
+}
+
+body.author-site h1,
+body.author-site h2,
+body.author-site h3 {
+  font-family: var(--font-author-display);
+  color: var(--author-ink);
+}
+
+body.author-site a {
+  color: var(--color-accent-strong);
+}
+
+/* --- Welcome (intro only; highlighted papers live in the backlist) --- */
+
+.author-welcome-grid {
+  max-width: 56rem;
+}
+
+.author-ident {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, clamp(220px, 34vw, 380px));
+  gap: clamp(1.25rem, 4vw, 2.25rem);
+  align-items: stretch;
+}
+
+.author-ident-copy {
+  min-width: 0;
+}
+
+/* Portrait: span full welcome section height (into vertical padding), rounded rectangle */
+.author-headshot-wrap {
+  margin: 0;
+  align-self: stretch;
+  justify-self: end;
+  width: 100%;
+  max-width: clamp(220px, 34vw, 380px);
+  display: flex;
+  margin-top: calc(-1 * var(--author-welcome-pad-top));
+  margin-bottom: calc(-1 * var(--author-welcome-pad-bottom));
+  height: calc(100% + var(--author-welcome-pad-top) + var(--author-welcome-pad-bottom));
+}
+
+.author-headshot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  object-fit: cover;
+
+  /*
+   * Intrinsic crop (same idea as xywh on the source bitmap). All are unitless 0–1
+   * fractions of the original image width / height:
+   *   --crop-min-x  left edge of the visible window
+   *   --crop-min-y  top edge
+   *   --crop-w      window width
+   *   --crop-h      window height
+   * Example tighter face crop: --crop-min-x: 0.15; --crop-min-y: 0; --crop-w: 0.7; --crop-h: 0.55;
+   */
+  --crop-min-x: 0;
+  --crop-min-y: 0;
+  --crop-w: 1;
+  --crop-h: 1;
+
+  /* Browsers without object-view-box: approximate by centering on the crop rect */
+  object-position: calc((var(--crop-min-x) + var(--crop-w) / 2) * 100%)
+    calc((var(--crop-min-y) + var(--crop-h) / 2) * 100%);
+
+  border-radius: 18px;
+  border: 3px solid #fff;
+  box-shadow: var(--author-cover-shadow);
+}
+
+/* Exact crop / zoom when supported (Chrome 104+, etc.) — see MDN object-view-box */
+@supports (object-view-box: xywh(0% 0% 100% 100%)) {
+  .author-headshot {
+    object-view-box: xywh(
+      calc(var(--crop-min-x) * 100%)
+      calc(var(--crop-min-y) * 100%)
+      calc(var(--crop-w) * 100%)
+      calc(var(--crop-h) * 100%)
+    );
+    object-position: center center;
+  }
+}
+
+.author-byline {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--author-muted);
+  margin: 0 0 0.45rem;
+}
+
+.author-name {
+  font-family: var(--font-author-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.author-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--author-muted);
+  margin: 0 0 0.85rem;
+  max-width: 32rem;
+}
+
+.author-bio-short {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--author-ink);
+  margin: 0 0 1rem;
+  max-width: 32rem;
+}
+
+.author-ident-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+body.author-site .author-ident-actions .link-button {
+  border-color: color-mix(in srgb, var(--color-accent-strong) 45%, transparent);
+  background: linear-gradient(145deg, var(--color-accent-strong), var(--author-accent));
+  color: #fffaf5;
+}
+
+.author-text-link {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.author-text-link::after {
+  bottom: 0;
+}
+
+/* Placeholder “cover” art inside book cards (needs position: relative parent) */
+
+.author-book-cover .author-cover-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.85rem;
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--author-accent) 35%, #1a1714) 0%,
+    #1a1714 100%
+  );
+}
+
+.author-cover-placeholder-year {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(250, 247, 242, 0.55);
+  margin-bottom: 0.2rem;
+}
+
+.author-cover-placeholder-venue {
+  font-family: var(--font-author-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #faf7f2;
+  line-height: 1.25;
+}
+
+.author-cover-placeholder-title {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: rgba(250, 247, 242, 0.82);
+  margin-top: 0.45rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.author-shelf-grid > .author-error {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #9a3b2e;
+  margin: 0;
+  grid-column: 1 / -1;
+  text-align: center;
+  max-width: 36rem;
+  justify-self: center;
+}
+
+/* --- Shelf --- */
+
+.author-shelf-header {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto 1.75rem;
+}
+
+.author-shelf-header h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  margin: 0 0 0.45rem;
+}
+
+.author-shelf-sub {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--author-muted);
+  margin: 0;
+}
+
+.author-shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.35rem 1.15rem;
+  justify-items: center;
+}
+
+.author-book {
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
+}
+
+.author-book-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.author-book-link::after {
+  display: none;
+}
+
+.author-book-link:hover .author-book-title {
+  color: var(--author-accent);
+}
+
+.author-book-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.author-book-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.55rem;
+  background: #2a2420;
+  box-shadow: 0 14px 32px rgba(26, 23, 20, 0.18);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.author-book-link:hover .author-book-cover,
+.author-book-link:focus-visible .author-book-cover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(26, 23, 20, 0.22);
+}
+
+.author-book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.author-book-title {
+  font-family: var(--font-author-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 0.2rem;
+  transition: color 0.15s ease;
+}
+
+.author-book-meta {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: var(--author-muted);
+}
+
+.author-book-blurb {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--author-muted);
+  text-align: left;
+  margin: 0.55rem 0 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--author-rule);
+}
+
+.author-shelf-empty {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--author-muted);
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.author-more {
+  text-align: center;
+  padding: 0 0 2.5rem;
+}
+
+/* --- Research themes (three panels) --- */
+
+.author-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem 1.25rem;
+  align-items: stretch;
+}
+
+.author-focus-foot {
+  margin: 1.1rem 0 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+}
+
+.author-panel {
+  margin: 0;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border-radius: 16px;
+  border: 1px solid var(--author-rule);
+  background: linear-gradient(165deg, var(--author-paper) 0%, color-mix(in srgb, var(--author-paper-2) 55%, var(--author-paper)) 100%);
+  box-shadow: 0 12px 32px rgba(26, 23, 20, 0.06);
+}
+
+.author-panel h2 {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  margin: 0 0 0.65rem;
+}
+
+.author-panel-text {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--author-muted);
+  margin: 0 0 0.75rem;
+}
+
+.author-panel-text:last-child {
+  margin-bottom: 0;
+}
+
+.author-panel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.author-panel-list li {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--author-muted);
+  padding-left: 0.75rem;
+  border-left: 3px solid color-mix(in srgb, var(--author-accent) 45%, var(--author-rule));
+}
+
+.author-panel-text:has(+ .author-panel-list) {
+  margin-bottom: 0.5rem;
+}
+
+.author-panel-text + .author-panel-list {
+  margin-top: 0;
+}
+
+.author-panel-text strong {
+  color: var(--author-ink);
+  font-weight: 600;
+}
+
+.author-panel-foot {
+  margin: 0.85rem 0 0;
+}
+
+/* --- News --- */
+
+.author-news-head {
+  margin-bottom: 1.05rem;
+}
+
+/* Bright card surfaces so items pop against the mid-tone band */
+body.author-site .author-news-section .news-item {
+  background-color: #faf7f2;
+  border-color: rgba(107, 58, 44, 0.12);
+}
+
+body.author-site .author-news-section .news-item:hover {
+  background-color: #fff;
+  box-shadow: 0 12px 28px rgba(26, 23, 20, 0.09);
+  border-color: rgba(107, 58, 44, 0.22);
+}
+
+body.author-site .news-expand-btn {
+  color: var(--color-accent-strong);
+}
+
+body.author-site .author-news-section .news-expand-btn {
+  color: var(--color-accent-strong);
+  border-color: rgba(107, 58, 44, 0.25);
+}
+
+body.author-site .author-news-section .news-expand-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(107, 58, 44, 0.38);
+}
+
+/* --- Favorite quotes --- */
+
+.author-quotes-head {
+  text-align: center;
+  max-width: 34rem;
+  margin-inline: auto;
+  margin-bottom: 1.35rem;
+}
+
+.author-quotes-head h2 {
+  margin-bottom: 0.35rem;
+}
+
+.author-quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* Quote cards pop against the deepest band */
+.author-quote {
+  margin: 0;
+  padding: 1rem 1.05rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid var(--author-rule);
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(26, 23, 20, 0.07);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.author-quote blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.author-quote blockquote p {
+  font-family: var(--font-author-display);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--author-ink);
+  margin: 0;
+}
+
+.author-quote figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--author-muted);
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--author-rule);
+}
+
+@media (max-width: 900px) {
+  .author-focus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .author-quotes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .author-ident {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .author-ident-copy {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .author-headshot-wrap {
+    order: 1;
+    justify-self: center;
+    max-width: min(320px, 88vw);
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    height: auto;
+  }
+
+  .author-tagline,
+  .author-bio-short {
+    max-width: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .author-book-cover,
+  .author-book-link:hover .author-book-cover,
+  .author-book-link:focus-visible .author-book-cover {
+    transition: none;
+    transform: none;
+  }
+}

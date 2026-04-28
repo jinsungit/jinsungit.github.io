@@ -1,0 +1,409 @@
+[  
+  {
+    "year": 2026,
+    "title": "OUSAC: Optimized Guidance Scheduling with Adaptive Caching for DiT Acceleration",
+    "authors": "Ruitong Sun, Tianze Yang, Wei Niu, Jin Sun",
+    "venue": "Arxiv",
+    "kind": "arxiv",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["diffusion", "optimization"],
+    "highlight": true
+  }, 
+  {
+    "year": 2026,
+    "title": "Common Inpainted Objects In-N-Out of Context",
+    "authors": "Tianze Yang*, Tyson Jordan*, Ruitong Sun*, Ninghao Liu, Jin Sun",
+    "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    "kind": "conference",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["context", "VLM", "diffusion"],
+    "highlight": true
+  },  
+  {
+    "year": 2026,
+    "title": "Dense cotton boll counting with transformer-based video tracking and a customized phenotyping robot for data collection",
+    "authors": "Chenjiao Tan, Changying Li, Jin Sun",
+    "venue": "Computers and Electronics in Agriculture",
+    "kind": "journal",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["agriculture", "counting", "tracking"],
+    "highlight": false
+  }, 
+  {
+    "year": 2026,
+    "title": "When AI Watches the Does: Can Vision-Language Models Perform TB Medication Adherence Assessments Like Clinicians?",
+    "authors": "Yanqiao Wang, Patrick Kaggwa, Heeya Jolly, Suchendra Bhandarkar, Juliet Sekandi, Jin Sun",
+    "venue": "IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshop on Large Foundation Models in Biology and Biomedicine",
+    "kind": "workshop",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["health", "VLM"],
+    "highlight": false
+  }, 
+  {
+    "year": 2025,
+    "title": "Cotton3DGaussians: Multiview 3D Gaussian Splatting for boll mapping and plant architecture analysis",
+    "authors": "Lizhi Jiang, Jin Sun, Peng W Chee, Changying Li, Longsheng Fu",
+    "venue": "Computers and Electronics in Agriculture",
+    "kind": "journal",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["agriculture", "3D"],
+    "highlight": false
+  },
+  {
+    "year": 2025,
+    "title": "A customized density map model and segment anything model for cotton boll number, size, and yield prediction in aerial images",
+    "authors": "Chenjiao Tan, Jin Sun, Huaibo Song, Changying Li",
+    "venue": "Computers and Electronics in Agriculture",
+    "kind": "journal",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["agriculture", "segmentation"],
+    "highlight": false
+  },
+  {
+    "year": 2025,
+    "title": "ZooplanktonBench: A Geo-Aware Zooplankton Recognition and Classification Dataset from Marine Observations",
+    "authors": "Fukun Liu, Adam T Greer, Gengchen Mai, Jin Sun",
+    "venue": "KDD Datasets and Benchmarks",
+    "kind": "conference",
+    "blurb": "Marine imagery meets geography: a benchmark for zooplankton recognition in the wild.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/zooplanktonBench.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/liu2025zooplanktonbench.html",
+      "arxiv": "https://arxiv.org/abs/2505.18477",
+      "code": "https://lfk118.github.io/ZooplanktonBench_Webpage/",
+      "project": ""
+    },
+    "tags": ["datasets", "marine", "ecology"],
+    "highlight": true
+  },
+  {
+    "year": 2025,
+    "title": "Concept-Centric Token Interpretation for Vector-Quantized Generative Models",
+    "authors": "Tianze Yang, Yucheng Shi, Mengnan Du, Xuansheng Wu, Qiaoyu Tan, Jin Sun, Ninghao Liu",
+    "venue": "ICML",
+    "kind": "conference",
+    "blurb": "What do VQ tokens mean? Concept-centric views for interpretable generative modeling.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/tokensICML.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/tianze2025.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["interpretability", "generative models", "VQ"],
+    "highlight": true
+  },
+  {
+    "year": 2025,
+    "title": "Enhancing Cognition and Explainability of Multimodal Foundation Models with Self-Synthesized Data",
+    "authors": "Yucheng Shi, Quanzheng Li, Jin Sun, Xiang Li, Ninghao Liu",
+    "venue": "ICLR",
+    "kind": "conference",
+    "blurb": "Self-synthesized data to probe and explain multimodal foundation models.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/SelfSynthX.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/shi2025enhancing.html",
+      "arxiv": "https://arxiv.org/abs/2502.14044",
+      "code": "https://github.com/sycny/SelfSynthX",
+      "project": ""
+    },
+    "tags": ["multimodal", "foundation models", "explainability"],
+    "highlight": true
+  },
+  {
+    "year": 2024,
+    "title": "Neural Gaffer: Relighting Any Object via Diffusion",
+    "authors": "Haian Jin, Yuan Li, Fujun Luan, Yuanbo Xiangli, Sai Bi, Kai Zhang, Zexiang Xu, Jin Sun, Noah Snavely",
+    "venue": "NeurIPS",
+    "kind": "conference",
+    "blurb": "Diffusion-based relighting: change illumination on objects without a bespoke capture rig.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/neuralGaffer.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/jin2024neural.html",
+      "arxiv": "https://arxiv.org/abs/2406.07520",
+      "code": "",
+      "project": "https://neural-gaffer.github.io/"
+    },
+    "tags": ["diffusion", "relighting", "3D"],
+    "highlight": true
+  },
+  {
+    "year": 2024,
+    "title": "On the opportunities and challenges of foundation models for geospatial artificial intelligence",
+    "authors": "Gengchen Mai, Weiming Huang, Jin Sun, Suhang Song, Deepak Mishra, Ninghao Liu, Song Gao, Tianming Liu, Gao Cong, Yingjie Hu, others",
+    "venue": "ACM Transactions on Spatial Algorithms and Systems",
+    "kind": "journal",
+    "blurb": "A survey-style look at foundation models for maps, place, and spatial reasoning.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/geoAI.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/mai2023opportunities.html",
+      "arxiv": "https://arxiv.org/abs/2304.06798",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["survey", "geospatial AI", "foundation models"],
+    "highlight": false
+  },
+  {
+    "year": 2023,
+    "title": "Black-box Backdoor Defense via Zero-shot Image Purification",
+    "authors": "Yucheng Shi, Mengnan Du, Xuansheng Wu, Zihan Guan, Jin Sun, Ninghao Liu",
+    "venue": "NeurIPS",
+    "kind": "conference",
+    "blurb": "ZIP: purify inputs at test time to blunt backdoors without white-box access.",
+    "cover": "https://jinsungit.github.io/assets/images/publication_preview/ZIP.png",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/shi2023black.html",
+      "arxiv": "https://arxiv.org/abs/2303.12175",
+      "code": "https://github.com/sycny/ZIP",
+      "project": ""
+    },
+    "tags": ["security", "backdoor", "robustness"],
+    "highlight": false
+  },
+  {
+    "year": 2023,
+    "title": "What's in a Decade? Transforming Faces Through Time",
+    "authors": "Eric Ming Chen, Jin Sun, Apoorv Khandelwal, Dani Lischinski, Noah Snavely, Hadar Averbuch-Elor",
+    "venue": "Eurographics",
+    "kind": "conference",
+    "blurb": "Face aging and de-aging with a decade-aware transformation model.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/chen2023s.html",
+      "arxiv": "https://arxiv.org/abs/2210.06642",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["faces", "image synthesis"],
+    "highlight": false
+  },
+  {
+    "year": 2023,
+    "title": "PeanutNeRF: 3D Radiance Field for Peanuts",
+    "authors": "Farah Saeed, Jin Sun, Peggy Ozias-Akins, Ye Juliet Chu, Changying Charlie Li",
+    "venue": "CVPR Workshops",
+    "kind": "workshop",
+    "blurb": "NeRF meets agriculture: 3D reconstruction for peanut breeding and phenotyping.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/saeed2023peanutnerf.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["NeRF", "agriculture", "3D"],
+    "highlight": false
+  },
+  {
+    "year": 2021,
+    "title": "Towers of babel: Combining images, language, and 3d geometry for learning multimodal vision",
+    "authors": "Xiaoshi Wu, Hadar Averbuch-Elor, Jin Sun, Noah Snavely",
+    "venue": "ICCV",
+    "kind": "conference",
+    "blurb": "Multimodal signals—images, text, geometry—for stronger scene understanding.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/wu2021towers.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["multimodal", "3D", "language"],
+    "highlight": false
+  },
+  {
+    "year": 2020,
+    "title": "Visual chirality",
+    "authors": "Zhiqiu Lin, Jin Sun, Abe Davis, Noah Snavely",
+    "venue": "CVPR",
+    "kind": "conference",
+    "blurb": "Handedness and symmetry in natural images—when chirality is a learnable cue.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/lin2020visual.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["symmetry", "representation"],
+    "highlight": false
+  },
+  {
+    "year": 2020,
+    "title": "Hidden footprints: Learning contextual walkability from 3d human trails",
+    "authors": "Jin Sun, Hadar Averbuch-Elor, Qianqian Wang, Noah Snavely",
+    "venue": "ECCV",
+    "kind": "conference",
+    "blurb": "Where do people walk? Contextual walkability from trails in 3D.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/sun2020hidden.html",
+      "arxiv": "",
+      "code": "",
+      "project": "https://jinsungit.github.io/projects/hidden_footprints.html"
+    },
+    "tags": ["3D", "urban", "behavior"],
+    "highlight": false
+  },
+  {
+    "year": 2019,
+    "title": "Leveraging vision reconstruction pipelines for satellite imagery",
+    "authors": "Kai Zhang, Noah Snavely, Jin Sun",
+    "venue": "ICCV Workshops",
+    "kind": "workshop",
+    "blurb": "Bringing classical reconstruction ideas to overhead and satellite views.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/zhang2019leveraging.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["satellite", "reconstruction"],
+    "highlight": false
+  },
+  {
+    "year": 2018,
+    "title": "Label denoising adversarial network (LDAN) for inverse lighting of faces",
+    "authors": "Hao Zhou, Jin Sun, Yaser Yacoob, David W Jacobs",
+    "venue": "CVPR",
+    "kind": "conference",
+    "blurb": "Adversarial training to denoise labels for face inverse lighting.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/zhou2018label.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["faces", "lighting", "GANs"],
+    "highlight": false
+  },
+  {
+    "year": 2017,
+    "title": "Seeing what is not there: Learning context to determine where objects are missing",
+    "authors": "Jin Sun, David W Jacobs",
+    "venue": "CVPR",
+    "kind": "conference",
+    "blurb": "Context cues for detecting absent objects—what the scene implies should be there.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/sun2017seeing.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["context", "detection"],
+    "highlight": false
+  },
+  {
+    "year": 2017,
+    "title": "Generating holistic 3d scene abstractions for text-based image retrieval",
+    "authors": "Ang Li, Jin Sun, Joe Yue-Hei Ng, Ruichi Yu, Vlad I Morariu, Larry S Davis",
+    "venue": "CVPR",
+    "kind": "conference",
+    "blurb": "3D scene abstractions as a bridge between images and text queries.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/li2017generating.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["3D", "retrieval", "language"],
+    "highlight": false
+  },
+  {
+    "year": 2017,
+    "title": "Semi-supervised conditional gans",
+    "authors": "Kumar Sricharan, Raja Bala, Matthew Shreve, Hui Ding, Kumar Saketh, Jin Sun",
+    "venue": "arXiv",
+    "kind": "arxiv",
+    "blurb": "Conditional GANs with a semi-supervised learning angle.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/sricharan2017semi.html",
+      "arxiv": "https://arxiv.org/abs/1708.05789",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["GANs", "semi-supervised"],
+    "highlight": false
+  },
+  {
+    "year": 2014,
+    "title": "Tohme: detecting curb ramps in google street view using crowdsourcing, computer vision, and machine learning",
+    "authors": "Kotaro Hara, Jin Sun, Robert Moore, David Jacobs, Jon Froehlich",
+    "venue": "UIST",
+    "kind": "conference",
+    "blurb": "Street-view imagery + crowdsourcing to find curb ramps for accessibility.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/hara2014tohme.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["accessibility", "Street View", "HCI"],
+    "highlight": false
+  },
+  {
+    "year": 2013,
+    "title": "Scale and object aware image thumbnailing",
+    "authors": "Jin Sun, Haibin Ling",
+    "venue": "International Journal of Computer Vision",
+    "kind": "journal",
+    "blurb": "Thumbnails that preserve salient scale and objects—not just uniform resize.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/sun2013scale.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["thumbnails", "salience"],
+    "highlight": false
+  },
+  {
+    "year": 2011,
+    "title": "Scale and object aware image retargeting for thumbnail browsing",
+    "authors": "Jin Sun, Haibin Ling",
+    "venue": "ICCV",
+    "kind": "conference",
+    "blurb": "Retargeting with object and scale awareness for browsing interfaces.",
+    "cover": "",
+    "links": {
+      "paper": "https://jinsungit.github.io/bibliography/sun2011scale.html",
+      "arxiv": "",
+      "code": "",
+      "project": ""
+    },
+    "tags": ["retargeting", "thumbnails"],
+    "highlight": false
+  }
+]

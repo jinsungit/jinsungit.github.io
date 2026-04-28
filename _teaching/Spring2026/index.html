@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision: The Deep Learning Approach | Spring 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f7ff',
+                            100: '#e0efff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="#home" class="text-xl font-bold text-gray-900 hover:text-primary-600 transition-colors">
+                        CSCI 4900/6900 Computer Vision: The Deep Learning Approach
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-gray-700 hover:text-primary-600 transition-colors">Overview</a>
+                    <a href="#schedule" class="text-gray-700 hover:text-primary-600 transition-colors">Schedule</a>
+                    <a href="#info" class="text-gray-700 hover:text-primary-600 transition-colors">Info</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-20 bg-gradient-to-br from-primary-600 via-primary-700 to-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Computer Vision
+                </h1>
+                <p class="text-2xl md:text-3xl font-light mb-4 text-primary-100">
+                    The Deep Learning Approach
+                </p>
+                <p class="text-lg md:text-xl text-primary-200 max-w-3xl mx-auto mt-6">
+                    This course focuses on modern computer vision as representation learning, emphasizing foundation models and unified architectures that work across diverse visual tasks.
+                </p>
+                <div class="mt-10">
+                    <a href="#schedule" class="inline-block bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-all transform hover:scale-105 shadow-lg">
+                        View Schedule
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Course Overview</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    This course focuses on modern computer vision as <strong class="text-primary-700">representation learning</strong>, 
+                    emphasizing <strong class="text-primary-700">foundation models</strong> and 
+                    <strong class="text-primary-700">unified architectures</strong> that work across diverse visual tasks. 
+                    We prioritize understanding how visual representations are learned, why certain architectures work, 
+                    and how to effectively use and adapt state-of-the-art pretrained models.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-12">
+                    <div class="bg-gradient-to-br from-primary-50 to-blue-50 p-6 rounded-xl border border-primary-100">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Learning Goals</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✓</span>
+                                <span>Understand how modern vision representations are learned</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✓</span>
+                                <span>Use and adapt state-of-the-art pretrained models</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✓</span>
+                                <span>Understand vision across 2D, 3D, time, and generation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50 to-orange-50 p-6 rounded-xl border border-purple-100">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Course Themes</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>Foundations of Neural Visual Representation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>Self-Supervised & Foundation Vision Models</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>Vision + Language, 3D & Geometry, Generation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Time and place" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Time and Location</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+                <div class="max-w-4xl mx-auto">
+
+                <div class="grid md:grid-cols-2 gap-6 mt-12">
+                    
+
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-50 p-6 rounded-xl border border-purple-100">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Tuesday and Thursday</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>4:35 PM - 5:55 PM: Lectures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>Forestry Resources Building 1, Room 304</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-50 p-6 rounded-xl border border-purple-100">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Wednesday</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>4:35 PM - 5:30 PM: Discussion and Practices</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-purple-600 mr-2">•</span>
+                                <span>Forestry Resources Building 4, Room 517</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Course Schedule</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">0: Introduction</h3>
+                            <p class="text-gray-600 mt-1">Class introduction, overview</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">1: Foundations and basics</h3>
+                            <p class="text-gray-600 mt-1">Math, coding, ML, and DL basics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">2: Neural nets</h3>
+                            <p class="text-gray-600 mt-1">CNN, UNet, Vision Transformers, etc</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">3: Unsupervised & Self-supervised learning</h3>
+                            <p class="text-gray-600 mt-1">How to learn representations with visual signals alone?</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">4: Supervised learning with semantics</h3>
+                            <p class="text-gray-600 mt-1">How to learn representations with semantic labels?</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">5: Supervised learning with geometry</h3>
+                            <p class="text-gray-600 mt-1">Neural network approach for learning geometric representations</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">6: Generation</h3>
+                            <p class="text-gray-600 mt-1">Diffusion models, token-based, video generation</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">7: Visual reasoning</h3>
+                            <p class="text-gray-600 mt-1">VQA, GUI agent</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">8: Vision foundation models</h3>
+                            <p class="text-gray-600 mt-1">How to design one model that rules them all?</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">9: Evaluation and benchmarks</h3>
+                            <p class="text-gray-600 mt-1">Metrics, benchmarks, and how to tell if a model is good?</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-lg border-l-4 border-primary-600">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">10: Bias and ethics</h3>
+                            <p class="text-gray-600 mt-1">How to make sure our models are fair and ethical?</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Info Section -->
+    <section id="info" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Course Information</h2>
+                <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="text-3xl mb-4">📚</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Prerequisites</h3>
+                    <p class="text-sm text-gray-600">Basic knowledge of linear algebra, calculus, Python</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="text-3xl mb-4">📝</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Grading</h3>
+                    <p class="text-sm text-gray-600">Individual Exam (40%), Group Project (60%)</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="text-3xl mb-4">👨‍🏫</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Instructor</h3>
+                    <p class="text-sm text-gray-600">Jin Sun, PhD<br>School of Computing, UGA</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="text-3xl mb-4">📅</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Semester</h3>
+                    <p class="text-sm text-gray-600">Spring 2026</p>
+                </div>
+            </div>
+
+            <div class="mt-16 max-w-3xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center">Course Philosophy</h3>
+                    <p class="text-lg text-gray-700 italic text-center leading-relaxed">
+                        We view neural networks as the native solution to vision problems. We fully embrace the neural network approach, taking a fundamental view of learning representations in the computer vision domain.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">CSCI 4900/6900</h3>
+                <p class="text-gray-400 mb-2">Computer Vision: The Deep Learning Approach</p>
+                <p class="text-gray-500 text-sm">Jin Sun | School of Computing | University of Georgia | Spring 2026</p>
+                <div class="mt-8 pt-8 border-t border-gray-800">
+                    <p class="text-gray-500 text-sm">&copy; Jin Sun, 2026. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
