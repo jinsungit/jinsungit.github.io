@@ -1,4 +1,15 @@
 (() => {
+  const sharedFooter = `
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Jin Sun. All rights reserved.</p>
+    </div>
+  `;
+
+  const footerMount = document.querySelector("[data-shared-footer]");
+  if (footerMount) {
+    footerMount.innerHTML = sharedFooter.trim();
+  }
+
   const yearSpan = document.getElementById("year");
 
   if (yearSpan) {
