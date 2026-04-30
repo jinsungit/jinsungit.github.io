@@ -1,10 +1,10 @@
 [  
   {
     "year": 2026,
-    "title": "OUSAC: Optimized Guidance Scheduling with Adaptive Caching for DiT Acceleration",
+    "title": "RSTR: Reducing SpatioTemporal Redundancy in Diffusion Transformers",
     "authors": "Ruitong Sun, Tianze Yang, Wei Niu, Jin Sun",
-    "venue": "Arxiv",
-    "kind": "arxiv",
+    "venue": "ICML",
+    "kind": "conference",
     "blurb": "",
     "cover": "",
     "links": {
