@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarineLens AI: From data to discovery with AI agents, ocean imaging, and humans-in-the-loop for a sustainable ecosystem</title>
+  <meta name="description" content="Research proposal visualization for AI-agent-enabled detection of ecosystem indicators relevant to marine fisheries." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ocean: {
+              50: "#eff8ff",
+              100: "#dbeefe",
+              200: "#bfdefd",
+              500: "#1d75d6",
+              700: "#14539c",
+              900: "#0b2f59"
+            }
+          },
+          boxShadow: {
+            soft: "0 8px 30px rgba(17, 24, 39, 0.08)"
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-slate-50 pt-16 text-slate-800 antialiased">
+  <nav id="top-nav" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
+    <div class="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 py-3 text-sm lg:px-8">
+      <a href="#summary" class="rounded-md bg-ocean-700 px-3 py-1.5 font-medium text-white transition-colors duration-200">Summary</a>
+      <a href="#background" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Background</a>
+      <a href="#platform-system" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Ship &amp; Water Robot</a>
+      <a href="#imaging" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Imaging System</a>
+      <a href="#workflow" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">AI Workflow</a>
+      <a href="#survey-map" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Survey Map</a>
+      <a href="#examples" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Example Images</a>
+      <a href="#pi-strengths" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">PI Strengths</a>
+      <a href="#impact" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">Impact &amp; Scaling</a>
+      <a href="#timeline" class="rounded-md border border-slate-300 px-3 py-1.5 font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-100">3-Year Timeline</a>
+    </div>
+  </nav>
+  <header
+    class="bg-gradient-to-br from-ocean-900 via-ocean-700 to-ocean-500 text-white relative"
+    style="background-image: url('pascal-van-de-vendel-aftKwTAJN_Q-unsplash.jpg'); background-size: cover; background-position: center;"
+  >
+    <!-- <div class="absolute inset-0 bg-gradient-to-br from-ocean-900 via-ocean-700 to-ocean-500 opacity-85 pointer-events-none"></div> -->
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24 relative z-10">
+      <p class="mb-4 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tracking-wide">
+        Grant Proposal Visualization
+      </p>
+      <h1 class="max-w-4xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+        MarineLens AI
+      </h1>
+      <p class="max-w-4xl mt-2 text-base text-ocean-100 sm:text-lg lg:text-xl">
+        From data to discovery with AI agents, ocean imaging, and humans-in-the-loop for a sustainable ecosystem
+      </p>
+      <p class="mt-5 max-w-4xl text-base text-ocean-50 sm:text-lg">
+        Principal Investigators: Adam Greer (Marine Science) and Jin Sun (Computer Science, Institute for AI)<br>University of Georgia, 2026
+        <!-- This page visualizes the proposed framework for image-based ecosystem indicator detection and adaptive ocean monitoring. -->
+      </p>
+      <!-- <p class="mt-8 max-w-2xl text-sm text-ocean-100">
+        Use the fixed navigation bar at the top to quickly move across sections during review.
+      </p> -->
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl space-y-8 px-6 py-10 lg:px-8 lg:py-14">
+    <section id="summary" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Summary</h2>
+      <div class="mt-4 space-y-4 leading-7 text-slate-700">
+        <p>
+          Wild-caught marine fisheries represent a multi-billion dollar industry and are the main source of protein for
+          billions of people worldwide. Yet abundance of many commercially important fishes remains difficult to predict because
+          survival of eggs and larvae is shaped by numerous environmental factors.
+        </p>
+        <p>
+          This proposal advances ecosystem-based fisheries science by using ocean indicators to infer fish population health.
+          Accurate prediction of ecosystem health relevant to fisheries would be a major breakthrough for food security and for
+          scientific understanding of the mechanisms influencing fish populations.
+        </p>
+      </div>
+    </section>
+
+    <section id="background" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Background and Motivation</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="text-lg font-semibold text-slate-900">Sampling Limitation</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-700">
+            Conventional net-based sampling can under-sample gelatinous zooplankton (jellyfish), key predators of fish eggs and larvae.
+          </p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="text-lg font-semibold text-slate-900">Ecological Complexity</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-700">
+            Predator-prey interactions and prey patchiness across meters to tens of meters are difficult to quantify with existing workflows.
+          </p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="text-lg font-semibold text-slate-900">Scientific Opportunity</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-700">
+            Measuring and interpreting these indicators could improve prediction of larval fish survival and fish population variability.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="platform-system" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Ship and Water Robot System</h2>
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Moored Imaging Device</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700">
+            <li>- Built with engineering partner Bellamare LLC</li>
+            <li>- Includes power supply and onboard computer</li>
+            <li>- Hosts the AI agent for local inference</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-6">
+          <h3 class="text-lg font-semibold text-slate-900">Tow-Body Imaging for Spatial Context</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700">
+            <li>- Tow an imaging system around the moored site</li>
+            <li>- Compare broader-area observations to moored detections</li>
+            <li>- Assess performance for larval fish and interaction detection</li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="mt-6 rounded-xl border border-dashed border-ocean-200 bg-ocean-50 p-6">
+        <p class="text-sm text-ocean-900">
+          Replace with a system figure showing the moored AI-imaging node, towing survey path, and data comparison workflow.
+        </p>
+      </div> -->
+      <!-- <img src="./device_1.jpg" alt="Ship and Water Robot System" class="w-full h-full object-cover"> -->
+      <img src="./20211211_171709.jpg" alt="Ship and Water Robot System" class="w-full h-full object-cover">
+    </section>
+
+    <section id="imaging" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Imaging System</h2>
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+        <article class="rounded-xl border border-slate-200 p-5">
+          <h3 class="font-semibold text-slate-900">In Situ Ocean Imaging</h3>
+          <p class="mt-2 text-sm text-slate-700">Camera systems quantify larval fishes, predators, prey, and marine snow at relevant spatial scales.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 p-5">
+          <h3 class="font-semibold text-slate-900">Human-Annotated Training Set</h3>
+          <p class="mt-2 text-sm text-slate-700">A curated benchmark dataset trains the agent to identify larval fishes and diverse zooplankton taxa.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 p-5">
+          <h3 class="font-semibold text-slate-900">Interaction-Centered Indicators</h3>
+          <p class="mt-2 text-sm text-slate-700">The system captures biologically relevant interactions and flags unfamiliar objects to improve training.</p>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <!-- Left: main tall image -->
+        <div class="row-span-2">
+          <img src="./sample.jpg" alt="Imaging System Sample" class="w-full h-full object-cover rounded-xl" />
+        </div>
+        <!-- Top right -->
+        <div>
+          <img src="./monitor_1.jpg" alt="Imaging System Monitor 1" class="w-full h-full object-cover rounded-xl" />
+        </div>
+        <!-- Bottom right -->
+        <div>
+          <img src="./monitor_2.jpeg" alt="Imaging System Monitor 2" class="w-full h-full object-cover rounded-xl" />
+        </div>
+      </div>
+    </section>
+
+    <section id="fish-species" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900 mb-3">Fish Species</h2>
+      <p class="text-slate-700 mb-4 text-sm">Examples of representative larval fish species from the Gulf of Mexico:</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="fish_Dataset3_20110724094712593.tif_34_1000_1433_393_226.jpg" alt="Clupeiform larva" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="fish_Plankton_20151030114323.493.tif_416_956_747_146_114.jpg" alt="Gadiform larva" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="Flatfish_curled.jpg" alt="Flatfish larva" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="Plankton_20151102095205.013.avi_156_290_252_430_103.jpg" alt="Planktonic larva" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="fish_Dataset3_20110723135733359.tif_11_96_0_110_108.jpg" alt="Larval fish" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="fish_Dataset3_20110723130434250.tif_192_162_610_143_117.jpg" alt="Larval fish closeup" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+        <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
+          <img src="Plankton_20151102095205.013.avi_156_290_252_430_103.jpg" alt="Planktonic larva repeat" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+        </figure>
+      </div>
+    </section>
+
+
+    <section id="workflow" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">AI Agent Workflow</h2>
+      <ol class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <li class="rounded-xl border border-slate-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ocean-700">Step 1</p>
+          <h3 class="mt-1 font-semibold text-slate-900">Train</h3>
+          <p class="mt-2 text-sm text-slate-700">Train the agent with benchmark images to identify zooplankton and larval fishes across environments.</p>
+        </li>
+        <li class="rounded-xl border border-slate-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ocean-700">Step 2</p>
+          <h3 class="mt-1 font-semibold text-slate-900">Deploy</h3>
+          <p class="mt-2 text-sm text-slate-700">Run the AI agent on the moored imaging system with onboard power and local compute.</p>
+        </li>
+        <li class="rounded-xl border border-slate-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ocean-700">Step 3</p>
+          <h3 class="mt-1 font-semibold text-slate-900">Field Trial</h3>
+          <p class="mt-2 text-sm text-slate-700">Tow an imaging system near the moored device for spatial context and performance benchmarking.</p>
+        </li>
+        <li class="rounded-xl border border-slate-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-ocean-700">Step 4</p>
+          <h3 class="mt-1 font-semibold text-slate-900">Share</h3>
+          <p class="mt-2 text-sm text-slate-700">Release the AI agent as open-source software for marine scientists worldwide.</p>
+        </li>
+      </ol>
+      <img src="./workflow.jpg" alt="AI Agent Workflow" class="w-full h-full object-cover">
+      <div class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <h3 class="font-semibold text-slate-900">General Objectives</h3>
+        <ul class="mt-3 space-y-2 text-sm text-slate-700">
+          <li>1) Train and validate the AI agent on benchmark datasets across varied environments.</li>
+          <li>2) Build a moored imaging system with power supply and onboard AI compute.</li>
+          <li>3) Conduct a field trial with a towed imaging system for broader spatial context.</li>
+          <li>4) Share the AI agent as open-source software to accelerate ecosystem indicator science.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="survey-map" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold text-slate-900">Ocean Map of Proposed Survey Sites</h2>
+      </div>
+      <div class="mt-6 aspect-[16/9] overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+        <div class="relative h-full w-full">
+          <img src="./Geo_map_with_3D_bigger.png" alt="Ocean Map of Proposed Survey Sites" class="absolute inset-0 w-full h-full object-cover rounded-xl">
+        </div>
+  
+        </div>
+      </div>
+    </section>
+
+    <section id="examples" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Example Images and Preliminary Results</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+          <div class="aspect-[4/3]"><img src="./raw_2_10.jpg" alt="Larval fishes and zooplankton in situ imaging example (10m)"></div>
+          <figcaption class="border-t border-slate-200 bg-white p-3 text-xs text-slate-600">Larval fishes and zooplankton in situ imaging example (10m)</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+          <div class="aspect-[4/3]"><img src="./raw_6_35.jpg" alt="Larval fishes and zooplankton in situ imaging example (35m)"></div>
+          <figcaption class="border-t border-slate-200 bg-white p-3 text-xs text-slate-600">Larval fishes and zooplankton in situ imaging example (35m)</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+          <div class="aspect-[4/3]"><img src="./YOLO_Classification_example.jpg" alt="YOLO results"></div>
+          <figcaption class="border-t border-slate-200 bg-white p-3 text-xs text-slate-600">AI-classified interactions and unfamiliar object alerts</figcaption>
+        </figure>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/2E7kgObeZfQ?si=z3dNHMLqy1KJ822n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="pi-strengths" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">PI Strengths</h2>
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <article class="rounded-xl border border-slate-200 p-6 flex items-start gap-5">
+          <img src="adam.png" alt="Adam Greer profile photo" class="w-20 h-20 rounded-full object-cover border border-slate-300 flex-shrink-0">
+          <div>
+            <h3 class="text-lg font-semibold text-slate-900">Adam Greer - Marine Science Lead</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li>- Expertise in larval fish ecology, zooplankton interactions, and ecosystem indicators.</li>
+              <li>- Domain leadership in designing field strategies aligned with fisheries-relevant biological scales.</li>
+              <li>- Strong grounding in interpreting complex predator-prey dynamics for management-relevant inference.</li>
+              <li>- Guides ecological validation of AI outputs to ensure scientific rigor and practical utility.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-200 p-6 flex items-start gap-5">
+          <img src="../../assets/img/profile_posed.png" alt="Jin Sun profile photo" class="w-20 h-20 rounded-full object-cover border border-slate-300 flex-shrink-0">
+          <div>
+            <h3 class="text-lg font-semibold text-slate-900">Jin Sun - AI and Computing Lead</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li>- Expertise in AI-agent design, computer vision pipelines, and model reliability for real-world sensing.</li>
+              <li>- Leads benchmark dataset curation, training workflows, and robust cross-environment evaluation.</li>
+              <li>- Develops onboard and edge-deployable inference systems for near-real-time decision support.</li>
+              <li>- Drives open-source software release strategy for broad scientific adoption and community extension.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="impact" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Real-World Impact and Scaling Up</h2>
+      <div class="mt-4 space-y-4 leading-7 text-slate-700">
+        <p>
+          The proposed AI-agent imaging framework can provide near-real-time ecosystem health information that supports
+          local fisheries monitoring, adaptive sampling decisions, and earlier detection of ecological shifts.
+        </p>
+        <p>
+          By combining moored deployment with mobile tow-body context, the project demonstrates an operational template
+          that can be transferred to diverse marine environments beyond the initial Gulf of Mexico and coral reef test sites.
+        </p>
+      </div>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="font-semibold text-slate-900">Management Value</h3>
+          <p class="mt-2 text-sm text-slate-700">Improves ecosystem-aware fisheries assessments with higher-frequency biological indicators.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="font-semibold text-slate-900">Technical Scalability</h3>
+          <p class="mt-2 text-sm text-slate-700">Modular hardware plus onboard AI supports replication across regions and partner institutions.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <h3 class="font-semibold text-slate-900">Open Science Reach</h3>
+          <p class="mt-2 text-sm text-slate-700">Open-source release enables community improvement and creation of new ecosystem indicators.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="timeline" class="scroll-mt-24 rounded-2xl bg-white p-8 shadow-soft">
+      <h2 class="text-2xl font-bold text-slate-900">Three-Year Timeline and Milestones</h2>
+      <div class="mt-8">
+        <div class="relative h-16">
+          <div class="absolute top-6 h-1 w-full rounded-full bg-ocean-100"></div>
+          <div class="absolute left-[16.66%] top-3 -translate-x-1/2 text-xs font-semibold text-ocean-900">Year 1</div>
+          <div class="absolute left-1/2 top-3 -translate-x-1/2 text-xs font-semibold text-ocean-900">Year 2</div>
+          <div class="absolute left-[83.33%] top-3 -translate-x-1/2 text-xs font-semibold text-ocean-900">Year 3</div>
+          <div class="absolute left-[16.66%] top-5 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-ocean-700"></div>
+          <div class="absolute left-1/2 top-5 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-ocean-700"></div>
+          <div class="absolute left-[83.33%] top-5 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-white bg-ocean-700"></div>
+        </div>
+        <div class="mt-4 grid gap-4 md:grid-cols-3">
+          <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="font-semibold text-slate-900">Year 1: Build and Train</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-700">
+              <li>- Finalize benchmark annotation and training protocols.</li>
+              <li>- Train baseline AI agent for larval fish and zooplankton detection.</li>
+              <li>- Complete moored imaging system hardware integration.</li>
+            </ul>
+          </article>
+          <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="font-semibold text-slate-900">Year 2: Deploy and Validate</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-700">
+              <li>- Deploy system in Gulf of Mexico and coral reef edge sites.</li>
+              <li>- Conduct tow-body surveys for broader spatial context.</li>
+              <li>- Benchmark detection accuracy and interaction classification.</li>
+            </ul>
+          </article>
+          <article class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="font-semibold text-slate-900">Year 3: Refine and Scale</h3>
+            <ul class="mt-3 space-y-2 text-sm text-slate-700">
+              <li>- Improve model generalization using out-of-context observations.</li>
+              <li>- Package and release open-source AI agent toolkit.</li>
+              <li>- Publish guidelines for broader adoption across marine programs.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <p>AI Agent Marine Fisheries Proposal</p>
+      <p>Prepared for grant review visualization</p>
+    </div>
+  </footer>
+  <script>
+    const nav = document.getElementById("top-nav");
+    const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const sections = navLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const setActiveLink = (sectionId) => {
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${sectionId}`;
+        if (isActive) {
+          link.classList.remove("border", "border-slate-300", "text-slate-700", "hover:bg-slate-100");
+          link.classList.add("bg-ocean-700", "text-white", "hover:bg-ocean-900");
+        } else {
+          link.classList.remove("bg-ocean-700", "text-white", "hover:bg-ocean-900");
+          link.classList.add("border", "border-slate-300", "text-slate-700", "hover:bg-slate-100");
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveLink(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    setActiveLink("summary");
+  </script>
+</body>
+</html>
