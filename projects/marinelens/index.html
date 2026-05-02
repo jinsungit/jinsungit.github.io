@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MarineLens AI: From data to discovery with AI agents, ocean imaging, and humans-in-the-loop for a sustainable ecosystem</title>
+  <title>MarineLens AI: From data to discovery with ocean imaging, AI agents, and humans-in-the-loop for a sustainable ecosystem</title>
   <meta name="description" content="Research proposal visualization for AI-agent-enabled detection of ecosystem indicators relevant to marine fisheries." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -61,7 +61,7 @@
         MarineLens AI
       </h1>
       <p class="max-w-4xl mt-2 text-base text-ocean-100 sm:text-lg lg:text-xl">
-        From data to discovery with AI agents, ocean imaging, and humans-in-the-loop for a sustainable ecosystem
+        From data to discovery with ocean imaging, AI agents, and humans-in-the-loop for a sustainable ecosystem
       </p>
       <p class="mt-5 max-w-4xl text-base text-ocean-50 sm:text-lg">
         Principal Investigators: Adam Greer (Marine Science) and Jin Sun (Computer Science, Institute for AI)<br>University of Georgia, 2026
@@ -78,14 +78,11 @@
       <h2 class="text-2xl font-bold text-slate-900">Summary</h2>
       <div class="mt-4 space-y-4 leading-7 text-slate-700">
         <p>
-          Wild-caught marine fisheries represent a multi-billion dollar industry and are the main source of protein for
-          billions of people worldwide. Yet abundance of many commercially important fishes remains difficult to predict because
-          survival of eggs and larvae is shaped by numerous environmental factors.
+        Wild-caught marine fisheries represent a multi-billion dollar industry and are the main source of protein at least 1 billion people worldwide. Yet the abundance of commercially important fishes, many of which are unable to be farmed or cultured, remains difficult to predict because survival of eggs and larvae is shaped by numerous oceanographic factors. These factors are poorly understood because we typically measure the abundance of larvae, predators, and prey with less spatial detail compared to the ocean conditions (e.g., temperature, salinity, light) influencing larval fish ecology. Imaging represents one approach to match the scales of physical, chemical, and biological observations and make groundbreaking discoveries on how the ocean influences fish populations. The promise of imaging is hindered by the challenges associated with extracting meaningful ecological information from these large and complex datasets.
+
         </p>
         <p>
-          This proposal advances ecosystem-based fisheries science by using ocean indicators to infer fish population health.
-          Accurate prediction of ecosystem health relevant to fisheries would be a major breakthrough for food security and for
-          scientific understanding of the mechanisms influencing fish populations.
+        This proposal, in partnership with Google AI, provides a solution to this persistent problem in fisheries and ecosystem management. Can improved resolution of the environment that larval fishes experience lead to mechanistic understanding of population changes? This work aligns with ecosystem-based fisheries science by using ocean indicators to infer fish population status and discover factors relevant to their survival. Accurate monitoring of ecosystem health (by including more factors and different scales of observation) will lead to better predictions relevant to fisheries. This would be a major breakthrough for food security, ecosystem restoration, and scientific understanding of the mechanisms influencing fish populations.
         </p>
       </div>
     </section>
@@ -198,7 +195,7 @@
           <img src="fish_Dataset3_20110723130434250.tif_192_162_610_143_117.jpg" alt="Larval fish closeup" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
         </figure>
         <figure class="flex flex-col items-center w-[120px] sm:w-[130px] md:w-[140px] lg:w-[152px] aspect-square">
-          <img src="Plankton_20151102095205.013.avi_156_290_252_430_103.jpg" alt="Planktonic larva repeat" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
+          <img src="Plankton_20151031144030.831.tif_110_922_1346_376_604.jpg" alt="Planktonic larva repeat" class="rounded-lg border border-slate-200 object-contain aspect-square w-full mb-2" loading="lazy"/>
         </figure>
       </div>
     </section>
@@ -228,7 +225,10 @@
           <p class="mt-2 text-sm text-slate-700">Release the AI agent as open-source software for marine scientists worldwide.</p>
         </li>
       </ol>
-      <img src="./workflow.jpg" alt="AI Agent Workflow" class="w-full h-full object-cover">
+      <div class="w-4/5 mx-auto">
+        <img src="./workflow.jpg" alt="AI Agent Workflow" class="w-full h-full object-cover">
+      </div>
+      
       <div class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
         <h3 class="font-semibold text-slate-900">General Objectives</h3>
         <ul class="mt-3 space-y-2 text-sm text-slate-700">
@@ -248,8 +248,9 @@
         <div class="relative h-full w-full">
           <img src="./Geo_map_with_3D_bigger.png" alt="Ocean Map of Proposed Survey Sites" class="absolute inset-0 w-full h-full object-cover rounded-xl">
         </div>
-  
-        </div>
+      </div>
+      <div class="w-4/5 mx-auto">
+        <img src="./R-app.PNG" alt="survey depth" class="w-full h-full object-cover">
       </div>
     </section>
 
@@ -278,7 +279,7 @@
         <article class="rounded-xl border border-slate-200 p-6 flex items-start gap-5">
           <img src="adam.png" alt="Adam Greer profile photo" class="w-20 h-20 rounded-full object-cover border border-slate-300 flex-shrink-0">
           <div>
-            <h3 class="text-lg font-semibold text-slate-900">Adam Greer - Marine Science Lead</h3>
+            <h3 class="text-lg font-semibold text-slate-900"><a href="https://www.skio.uga.edu/people/faculty/adam-greer/" target="_blank" class="text-ocean-700 underline underline-offset-2 transition-colors hover:text-ocean-900 hover:decoration-ocean-500" style="cursor: pointer;">Adam Greer</a> - Marine Science Lead</h3>
             <ul class="mt-4 space-y-2 text-sm text-slate-700">
               <li>- Expertise in larval fish ecology, zooplankton interactions, and ecosystem indicators.</li>
               <li>- Domain leadership in designing field strategies aligned with fisheries-relevant biological scales.</li>
@@ -288,9 +289,10 @@
           </div>
         </article>
         <article class="rounded-xl border border-slate-200 p-6 flex items-start gap-5">
-          <img src="../../assets/img/profile_posed.png" alt="Jin Sun profile photo" class="w-20 h-20 rounded-full object-cover border border-slate-300 flex-shrink-0">
+          <img src="../../assets/img/profile_posed.png" alt="Jin Sun profile photo" class="w-20 h-20 rounded-full object-cover border border-slate-300 flex-shrink-0" style="object-position: center -10px;">
+    
           <div>
-            <h3 class="text-lg font-semibold text-slate-900">Jin Sun - AI and Computing Lead</h3>
+            <h3 class="text-lg font-semibold text-slate-900"><a href="https://jinsungit.github.io/" target="_blank" class="text-ocean-700 underline underline-offset-2 transition-colors hover:text-ocean-900 hover:decoration-ocean-500" style="cursor: pointer;">Jin Sun</a> - AI and Computing Lead</h3>
             <ul class="mt-4 space-y-2 text-sm text-slate-700">
               <li>- Expertise in AI-agent design, computer vision pipelines, and model reliability for real-world sensing.</li>
               <li>- Leads benchmark dataset curation, training workflows, and robust cross-environment evaluation.</li>
