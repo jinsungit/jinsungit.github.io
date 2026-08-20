@@ -1,328 +1,557 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home – Jin Sun</title>
-    <meta
-      name="description"
-      content="Jin Sun – Assistant Professor in the School of Computing and Institute for AI at the University of Georgia. Research in computer vision and deep learning."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/home.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="index.html" class="brand brand-hidden">
-          <span class="brand-title">Jin Sun</span>
-          <span class="brand-subtitle">Assistant Professor of Computer Science</span>
-        </a>
-        <nav class="site-nav" aria-label="Main">
-          <ul>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="teaching.html">Teaching</a></li>
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </nav>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="icon" type="image/x-icon" href="/assets/img/favicon.png"
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jin Sun — Assistant Professor of Computer Science, University of Georgia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { margin: 0; -webkit-font-smoothing: antialiased; }
+    a { color: #8a5a44; }
+    a:hover { text-decoration: underline; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .jsun-fade { animation: fadeUp 0.9s ease both; }
+  </style>
+</helmet>
+
+<div style="font-family: 'DM Sans', system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 1.6; color: #2a3140; background: radial-gradient(ellipse 1200px 700px at 50% -10%, #f7f5f0, transparent), #fbfaf7;">
+
+  <nav style="position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 247, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid #e6e2da;">
+    <div style="max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 48px;">
+      <a href="#top" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; letter-spacing: 0.02em; color: #2a3140; opacity: {{ navBrandOpacity }}; pointer-events: {{ navBrandPointer }}; transition: opacity 0.3s ease;">Jin Sun</a>
+      <nav aria-label="Main" style="display: flex; gap: 36px;">
+        <a href="#news" style="font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #535d6e; padding-bottom: 3px; border-bottom: 1px solid transparent;" style-hover="color: #8a5a44; border-color: #8a5a44; text-decoration: none;">News</a>
+        <a href="#research" style="font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #535d6e; padding-bottom: 3px; border-bottom: 1px solid transparent;" style-hover="color: #8a5a44; border-color: #8a5a44; text-decoration: none;">Research</a>
+        <a href="#teaching" style="font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #535d6e; padding-bottom: 3px; border-bottom: 1px solid transparent;" style-hover="color: #8a5a44; border-color: #8a5a44; text-decoration: none;">Teaching</a>
+        <a href="#about" style="font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #535d6e; padding-bottom: 3px; border-bottom: 1px solid transparent;" style-hover="color: #8a5a44; border-color: #8a5a44; text-decoration: none;">About</a>
+      </nav>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section id="top" ref="{{ setHeroRef }}" style="position: relative; max-width: 1180px; margin: 0 auto; padding: 36px 48px 28px; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 44px; align-items: center; overflow: hidden;">
+      <div style="position: absolute; left: -40px; top: -60px; font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 220px; line-height: 1; color: #8a5a44; opacity: 0.05; pointer-events: none; user-select: none;">J</div>
+      <div class="jsun-fade" style="position: relative;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 26px;">
+          <span style="width: 34px; height: 1px; background: #8a5a44; display: block;"></span>
+          <span style="font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 15px; letter-spacing: 0.04em; color: #8a5a44;">Computer Vision &amp; Deep Learning &amp; AI</span>
+        </div>
+        <h1 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(2.4rem, 4.5vw, 3.5rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: 0.005em;">Jin Sun</h1>
+        <p style="font-size: 15px; line-height: 1.6; color: #535d6e; max-width: 520px; margin: 0 0 16px;">
+          Assistant Professor in the <a href="https://computing.uga.edu/" target="_blank" rel="noopener noreferrer">School of Computing</a> and Faculty Fellow at the <a href="https://www.ai.uga.edu/" target="_blank" rel="noopener noreferrer">Institute for AI</a> at the <a href="https://uga.edu/" target="_blank" rel="noopener noreferrer">University of Georgia</a>.
+        </p>
+        <p style="font-size: 16px; line-height: 1.6; color: #535d6e; max-width: 520px; margin: 0 0 16px;">
+          I care deeply about solving fundamental questions in computer vision and general AI, and about building on these results to create models and tools that push the boundary of science and improve people's quality of life.
+        </p>
+        <div style="display: flex; gap: 28px; align-items: center; margin-top: 6px;">
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=Gw10rFEAAAAJ" target="_blank" rel="noopener noreferrer" style="font-size: 14px; letter-spacing: 0.04em; color: #8a5a44; border-bottom: 1px solid #8a5a44; padding-bottom: 3px;" style-hover="text-decoration: none;">Google Scholar</a>
+          <a href="https://www.linkedin.com/in/jin-sun-7bba4017a" target="_blank" rel="noopener noreferrer" style="font-size: 14px; letter-spacing: 0.04em; color: #8a5a44; border-bottom: 1px solid #8a5a44; padding-bottom: 3px;" style-hover="text-decoration: none;">LinkedIn</a>
+        </div>
       </div>
-    </header>
+      <div style="position: relative; animation: fadeUp 1.1s ease 0.15s both;">
+        <div style="position: absolute; inset: -14px; border: 1px solid #e6e2da; border-radius: 4px; pointer-events: none;"></div>
+        <div style="position: absolute; width: 22px; height: 22px; pointer-events: none; top: -8px; left: -8px; border-top: 1px solid #8a5a44; border-left: 1px solid #8a5a44;"></div>
+        <div style="position: absolute; width: 22px; height: 22px; pointer-events: none; bottom: -8px; right: -8px; border-bottom: 1px solid #8a5a44; border-right: 1px solid #8a5a44;"></div>
+        <img src="assets/img/profile-2026.png" alt="Portrait of Jin Sun" loading="lazy" style="width: 100%; height: 340px; object-fit: cover; border-radius: 4px; display: block;">
+        <div style="margin-top: 8px; text-align: center; font-size: 12px; letter-spacing: 0.03em; color: #807d78;">June 2026, Denver, Colorado</div>
+      </div>
+    </section>
 
-    <main id="main-content">
-      <section id="hero" class="section section-hero">
-        <div class="container hero-grid">
-          <div class="hero-text">
-            <p class="eyebrow">Computer Vision &amp; Deep Learning &amp; AI</p>
-            <h1>Jin Sun</h1>
-            <div class="hero-meta">
-              <p class="hero-title">
-                Assistant Professor<br />
-                <span class="hero-affiliation"><a href="https://computing.uga.edu/" target="_blank" rel="noopener noreferrer">School of Computing</a><br><a href="https://www.ai.uga.edu/" target="_blank" rel="noopener noreferrer">Institute for AI</a> <br> <a href="https://uga.edu/" target="_blank" rel="noopener noreferrer">University of Georgia</a></span>
-              </p>
-              <p class="hero-address">
-                <br>
-                804 Boyd Research Center<br />
-                Athens, Georgia 30602<br>
-                United States
-              </p>
-            </div>
-            <div
-              class="hero-summary"
-              role="region"
-              aria-label="Three research pillars"
-            >
-              <p class="hero-summary__lede">In my research, I care deeply about solving fundamental questions in computer vision and general AI, and about building on these results to create models and tools that push the boundary of science and improve people’s quality of life.</p>
-              <ol class="pillar-list">
-                <li class="pillar-card">
-                  <div class="pillar-card__head">
-                    <h3 class="pillar-card__title">Computer Vision</h3>
-                    <div class="pillar-card__icon" aria-hidden="true">
-                      <i class="fa-solid fa-images"></i>
-                    </div>
-                  </div>
-                  <div class="pillar-card__body">
-                    <p class="pillar-card__text">
-                      Core problems that shape how intelligent systems see,
-                      interpret, and generate the visual world, and how to build models that can do these things well.
-                    </p>
-                    <br>
-                    <p class="pillar-card__tags">Generation</p>
-                    <p class="pillar-card__tags">Editing</p>
-                    <p class="pillar-card__tags">Object Recognition</p>
-                    <p class="pillar-card__tags">3D Geometry</p>
-                    <p class="pillar-card__tags">Lighting</p>
-                    <p class="pillar-card__tags">Context Modeling</p>
-                    <p class="pillar-card__tags">Human Analysis</p>
-                    <p class="pillar-card__tags">Visual Reasoning</p>
-                  </div>
-                </li>
-                <li class="pillar-card">
-                  <div class="pillar-card__head">
-                    <h3 class="pillar-card__title">Fundamental AI</h3>
-                    <div class="pillar-card__icon" aria-hidden="true">
-                      <i class="fa-solid fa-brain"></i>
-                    </div>
-                  </div>
-                  <div class="pillar-card__body">
-                    <p class="pillar-card__text">
-                      How deep neural networks behave, learn, generalize, and
-                      build useful multimodal representations.
-                    </p>
-                    <br>
-                    <p class="pillar-card__tags">Neural Networks</p>
-                    <p class="pillar-card__tags">Multimodal</p>
-                    <p class="pillar-card__tags">LLM</p>
-                    <p class="pillar-card__tags">VLM</p>
-                    <p class="pillar-card__tags">LMM</p>
-                    <p class="pillar-card__tags">Generalization</p>
-                    <p class="pillar-card__tags">Interpretability</p>
-                    <p class="pillar-card__tags">Representation Learning</p>
-                    <p class="pillar-card__tags">Learning with limited data and labels</p>
-                  </div>
-                </li>
-                <li
-                  class="pillar-list__flow"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <div class="pillar-list__flow-track">
-                    <div class="pillar-list__flow-arrow">
-                      <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    </div>
-                    <div class="pillar-list__flow-arrow">
-                      <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </li>
-                <li class="pillar-card pillar-card--impact">
-                  <div class="pillar-card__head">
-                    <h3 class="pillar-card__title">AI for Science and Society</h3>
-                    <div class="pillar-card__icon" aria-hidden="true">
-                      <i class="fa fa-globe"></i>
-                    </div>
-                  </div>
-                  <div class="pillar-card__body">
-                    <p class="pillar-card__text">
-                      How to create meaningful impact through AI beyond traditional computer vision and machine learning applications.
-                    </p>
-                    <br>
-                    <p class="pillar-card__tags">Agriculture</p>
-                    <p class="pillar-card__tags">BioScience</p>
-                    <p class="pillar-card__tags">Geography</p>
-                    <p class="pillar-card__tags">Health</p>
-                    <p class="pillar-card__tags">Public Safety</p>
-                    <p class="pillar-card__tags">Transportation</p>
-                    <p class="pillar-card__tags">Education</p>
-                  </div>
-                </li>
-              </ol>
-            </div>
+    <div style="max-width: 1068px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 0 56px;">
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+      <div style="width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #8a5a44; flex-shrink: 0;"></div>
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+    </div>
 
-          </div>
-          <div class="hero-photo">
-            <figure class="portrait-frame">
-              <img
-                src="assets/img/profile_posed.png"
-                alt="Portrait of Jin Sun"
-                loading="lazy"
-              />
-            </figure>
-            <div class="hero-links" aria-label="Contact and profiles">
-              <button
-                type="button"
-                class="link-button link-button--icon"
-                data-copy-email="jinsun@uga.edu"
-                data-tooltip="Copy email address"
-                aria-label="Copy email address"
-              >
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-              </button>
-              <a
-                href="https://scholar.google.com/citations?hl=en&user=Gw10rFEAAAAJ#"
-                class="link-button link-button--icon"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-tooltip="Google Scholar"
-                aria-label="Google Scholar (opens in a new tab)"
-              >
-                <i class="fa-brands fa-google-scholar" aria-hidden="true"></i>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/jin-sun-7bba4017a"
-                class="link-button link-button--icon"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-tooltip="LinkedIn"
-                aria-label="LinkedIn (opens in a new tab)"
-              >
-                <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-              </a>
-            </div>
+    <!-- NEWS -->
+    <section id="news" style="max-width: 1180px; margin: 0 auto; padding: 32px 48px; position: relative;">
+      <div style="position: relative; margin-bottom: 2px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="position: absolute; left: -14px; top: -26px; font-family: 'Source Serif 4', Georgia, serif; font-size: 72px; color: #8a5a44; opacity: 0.08; line-height: 1; user-select: none;">新闻</div>
+        <div style="display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0;">
+          <span style="width: 22px; height: 1px; background: #8a5a44; display: block;"></span>
+          <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a5a44;">News</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 24px;">
+        <div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #807d78;">Highlights</div>
+        <div>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ newsRecent }}" as="item" hint-placeholder-count="10">
+              <article style="display: grid; grid-template-columns: 76px 1fr auto; align-items: center; gap: 20px; padding: 10px 0; border-top: 1px solid #e6e2da;">
+                <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: #8a5a44;">{{ item.dateLabel }}</div>
+                <div>
+                  <div style="font-size: 15px; line-height: 1.5; color: #535d6e;">
+                    <sc-if value="{{ item.link }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" style="color: #535d6e;" style-hover="color: #8a5a44;">{{ item.title }}</a>
+                    </sc-if>
+                    <sc-if value="{{ item.noLink }}" hint-placeholder-val="{{ true }}">{{ item.title }}</sc-if>
+                  </div>
+                  <sc-if value="{{ item.description }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size: 13px; color: #807d78; line-height: 1.45; margin-top: 2px;">{{ item.description }}</div>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ item.hasIcon }}" hint-placeholder-val="{{ false }}">
+                  <div title="{{ item.iconLabel }}" aria-label="{{ item.iconLabel }}" style="width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #e4ecf2; color: #8a5a44; font-size: 0.7rem;">
+                    <i class="{{ item.iconClass }}" aria-hidden="true"></i>
+                  </div>
+                </sc-if>
+              </article>
+            </sc-for>
+            <sc-if value="{{ hasPast }}" hint-placeholder-val="{{ false }}">
+              <div style="display: {{ pastDisplay }}; flex-direction: column;">
+                <sc-for list="{{ newsPast }}" as="item" hint-placeholder-count="10">
+                  <article style="display: grid; grid-template-columns: 76px 1fr auto; align-items: center; gap: 20px; padding: 10px 0; border-top: 1px solid #e6e2da;">
+                    <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: #8a5a44;">{{ item.dateLabel }}</div>
+                    <div>
+                      <div style="font-size: 15px; line-height: 1.5; color: #535d6e;">
+                        <sc-if value="{{ item.link }}" hint-placeholder-val="{{ false }}">
+                          <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" style="color: #535d6e;" style-hover="color: #8a5a44;">{{ item.title }}</a>
+                        </sc-if>
+                        <sc-if value="{{ item.noLink }}" hint-placeholder-val="{{ true }}">{{ item.title }}</sc-if>
+                      </div>
+                      <sc-if value="{{ item.description }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 13px; color: #807d78; line-height: 1.45; margin-top: 2px;">{{ item.description }}</div>
+                      </sc-if>
+                    </div>
+                    <sc-if value="{{ item.hasIcon }}" hint-placeholder-val="{{ false }}">
+                      <div title="{{ item.iconLabel }}" aria-label="{{ item.iconLabel }}" style="width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #e4ecf2; color: #8a5a44; font-size: 0.7rem;">
+                        <i class="{{ item.iconClass }}" aria-hidden="true"></i>
+                      </div>
+                    </sc-if>
+                  </article>
+                </sc-for>
+              </div>
+              <button type="button" onClick="{{ toggleNews }}" style="margin-top: 14px; background: none; border: none; padding: 0; font-family: 'DM Sans', sans-serif; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a44; cursor: pointer;" style-hover="text-decoration: underline;">{{ newsToggleLabel }}</button>
+            </sc-if>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="news" class="section section-news">
-        <div class="container">
-          <header class="section-header">
-            <h2>Recent news</h2>
-            <p class="section-subtitle">
-              Selected highlights from recent research, teaching, and professional service activities.
-            </p>
-          </header>
-          <div id="news-list" class="news-list" aria-live="polite">
-            <!-- Populated by news.js -->
+    <div style="max-width: 1068px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 0 56px;">
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+      <div style="width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #8a5a44; flex-shrink: 0;"></div>
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+    </div>
+
+    <!-- RESEARCH -->
+    <section id="research" style="max-width: 1180px; margin: 0 auto; padding: 32px 48px; position: relative;">
+      <div style="position: relative; margin-bottom: 16px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="position: absolute; left: -14px; top: -26px; font-family: 'Source Serif 4', Georgia, serif; font-size: 72px; color: #8a5a44; opacity: 0.08; line-height: 1; user-select: none;">研究</div>
+        <div style="display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0;">
+          <span style="width: 22px; height: 1px; background: #8a5a44; display: block;"></span>
+          <span style="font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a5a44">Research</span>
+        </div>
+        <p style="font-size: 16px; color: #535d6e; line-height: 1.65; margin: 0; flex: 1; min-width: 280px;">
+          Understanding our world using visual data with state-of-the-art deep learning — and applying it to create meaningful impact across science and society.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 4px;">
+        <div style="padding: 22px 20px; border: 1px solid #e6e2da; border-radius: 3px; background: #f2f4f2; box-shadow: 0 18px 36px -22px rgba(20, 28, 44, 0.35);">
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 20px; margin: 0 0 8px;">Computer Vision</h3>
+          <p style="font-size: 13.5px; line-height: 1.55; color: #535d6e; margin: 0 0 12px;">Core problems that shape how intelligent systems see, interpret, and generate the visual world, and how to build models that do these things well.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Generation</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Editing</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Object Recognition</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">3D Geometry</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Lighting</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Context Modeling</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Human Analysis</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Visual Reasoning</span>
           </div>
         </div>
-      </section>
-
-      <section id="highlights" class="section section-highlights">
-        <div class="container">
-          <header class="section-header">
-            <h2>Explore</h2>
-          </header>
-          <div class="card-grid">
-            <article class="card">
-              <h3>Research</h3>
-              <p>
-                Learn more about my research projects and publications.
-              </p>
-              <a href="research.html" class="card-link">View research</a>
-            </article>
-            <article class="card">
-              <h3>Teaching</h3>
-              <p>
-                Courses I teach, materials, and notes.
-              </p>
-              <a href="teaching.html" class="card-link">View teaching</a>
-            </article>
-            <article class="card">
-              <h3>About</h3>
-              <p>
-                A brief academic bio and snapshots from my academic journey.
-              </p>
-              <a href="about.html" class="card-link">Learn more</a>
-            </article>
+        <div style="padding: 22px 20px; border: 1px solid #e6e2da; border-radius: 3px; background: #f2f4f2; box-shadow: 0 18px 36px -22px rgba(20, 28, 44, 0.35);">
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 20px; margin: 0 0 8px;">Fundamental AI</h3>
+          <p style="font-size: 13.5px; line-height: 1.55; color: #535d6e; margin: 0 0 12px;">How deep neural networks behave, learn, generalize, and build useful multimodal representations.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Neural Networks</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Multimodal</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">LLM</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">VLM</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">LMM</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Generalization</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Interpretability</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Representation Learning</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Learning with limited data and labels</span>
           </div>
         </div>
-      </section>
+        <div style="padding: 22px 20px; border: 1px solid #e6e2da; border-radius: 3px; background: #f2f4f2; box-shadow: 0 18px 36px -22px rgba(20, 28, 44, 0.35);">
+          <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 20px; margin: 0 0 8px;">AI for Science &amp; Society</h3>
+          <p style="font-size: 13.5px; line-height: 1.55; color: #535d6e; margin: 0 0 12px;">How to create meaningful impact through AI beyond traditional computer vision and machine learning applications.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Agriculture</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">BioScience</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Geography</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Health</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Public Safety</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Transportation</span>
+            <span style="font-size: 12px; letter-spacing: 0.03em; color: #f4f8fc; background: #4a6f9e; padding: 5px 11px; border-radius: 20px;">Education</span>
+          </div>
+        </div>
+      </div>
 
-      <section id="funding" class="section section-funding" aria-labelledby="funding-heading">
-        <div class="container">
-          <header class="section-header">
-            <h2 id="funding-heading">Funding</h2>
-            <p class="section-subtitle">
-              My research has been supported in part by grants and programs from the following sponsors.
-            </p>
-          </header>
-          <ul class="sponsor-logos" role="list">
-            <li class="sponsor-card">
-              <a
-                class="sponsor-logo-link"
-                href="https://www.nsf.gov/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  class="sponsor-logo"
-                  src="assets/img/sponsors/nsf.png"
-                  alt="National Science Foundation"
-                  width="180"
-                  height="50"
-                  loading="lazy"
-                />
-              </a>
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin: 24px 0 12px; flex-wrap: wrap; gap: 10px;">
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 22px; margin: 0;">Selected Publications</h3>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=Gw10rFEAAAAJ" target="_blank" rel="noopener noreferrer">Full list on Google Scholar →</a>
+      </div>
+      <p style="font-size: 16px; color: #535d6e; line-height: 1.65; margin: 0 0 0.6rem;">A selection of recent and representative publications. For a full, up-to-date list, please see my Google Scholar profile.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size: 12.5px; color: #807d78; margin-top: 0.25rem;">No publications match the current filters.</p>
+        </sc-if>
+        <sc-for list="{{ pubGroups }}" as="grp" hint-placeholder-count="3">
+          <section>
+            <sc-for list="{{ grp.items }}" as="pub" hint-placeholder-count="3">
+              <article style="padding: {{ pub.padding }}; border-top: 1px solid #e6e2da; border-radius: 3px; border-left: {{ pub.borderLeft }}; background: {{ pub.bg }};" style-hover="background-color: rgba(138, 90, 68, 0.05);">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+                  <div style="font-size: 15.5px; color: #2a3140; line-height: 1.5; margin-bottom: 4px;">
+                    <sc-if value="{{ pub.paperLink }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ pub.paperLink }}" target="_blank" rel="noopener noreferrer" style="color: #2a3140;" style-hover="color: #8a5a44;">{{ pub.title }}</a>
+                    </sc-if>
+                    <sc-if value="{{ pub.noPaperLink }}" hint-placeholder-val="{{ true }}">{{ pub.title }}</sc-if>
+                  </div>
+                  <div style="font-size: 12.5px; color: #807d78; white-space: nowrap; flex-shrink: 0;">{{ pub.meta }}</div>
+                </div>
+                <div style="font-size: 13px; color: #807d78; font-family: 'Courier New', monospace;">
+                  <sc-for list="{{ pub.authorTokens }}" as="tok" hint-placeholder-count="4">
+                    <span style="font-weight: {{ tok.weight }}; color: {{ tok.color }};">{{ tok.text }}</span><sc-if value="{{ tok.notLast }}" hint-placeholder-val="{{ false }}">, </sc-if>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ pub.hasLinks }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.45rem;">
+                    <sc-for list="{{ pub.links }}" as="lnk" hint-placeholder-count="2">
+                      <a href="{{ lnk.href }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.72rem; color: #8a5a44; border: 1px solid #e6e2da; border-radius: 999px; padding: 0.16rem 0.6rem; background: rgba(255,255,255,0.6);" style-hover="color: #fff; background: #8a5a44; text-decoration: none;">{{ lnk.label }}</a>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ pub.hasTags }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.4rem;">
+                    <sc-for list="{{ pub.tags }}" as="tag" hint-placeholder-count="3">
+                      <span style="font-size: 0.66rem; background: #e4ecf2; color: #2d4c62; padding: 0.14rem 0.5rem; border-radius: 999px;">{{ tag }}</span>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </article>
+            </sc-for>
+          </section>
+        </sc-for>
+      </div>
+    </section>
+
+    <div style="max-width: 1068px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 0 56px;">
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+      <div style="width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #8a5a44; flex-shrink: 0;"></div>
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+    </div>
+
+    <!-- TEACHING -->
+    <section id="teaching" style="max-width: 1180px; margin: 0 auto; padding: 32px 48px; position: relative;">
+      <div style="position: relative; margin-bottom: 16px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="position: absolute; left: -14px; top: -26px; font-family: 'Source Serif 4', Georgia, serif; font-size: 72px; color: #8a5a44; opacity: 0.08; line-height: 1; user-select: none;">教学</div>
+        <div style="display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0;">
+          <span style="width: 22px; height: 1px; background: #8a5a44; display: block;"></span>
+          <span style="font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a5a44">Teaching</span>
+        </div>
+        <p style="font-size: 16px; color: #535d6e; line-height: 1.65; margin: 0; flex: 1; min-width: 280px;">Courses in computer vision, deep learning, data science, and representation learning at the undergraduate and graduate levels.</p>
+      </div>
+
+      <div style="padding: 20px 24px; border: 1px solid #c9dff0; background: #f7f5f0; border-radius: 3px; margin-bottom: 20px;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a5a44; margin-bottom: 12px;">Current · Fall 2026</div>
+        <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: 20px; margin: 0 0 6px;">CSCI 8945 — Advanced Representation Learning</h3>
+        <p style="font-size: 15px; color: #535d6e; line-height: 1.55; margin: 0 0 10px; max-width: 640px;">Deep dive into representation learning and its applications; research project component.</p>
+        <a href="./_teaching/Fall2026/index.html" target="_blank" rel="noopener noreferrer" style="font-size: 13.5px; letter-spacing: 0.03em; color: #8a5a44; border-bottom: 1px solid #8a5a44; padding-bottom: 2px;" style-hover="text-decoration: none;">Course information →</a>
+      </div>
+
+      <div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #807d78; margin-bottom: 10px;">Previous courses</div>
+      <div style="border: 1px solid #e6e2da; border-radius: 3px; background: rgba(255,255,255,0.5); overflow: hidden;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0.55rem 0.9rem; border-bottom: 1px solid #e6e2da;">
+          <div style="font-size: 0.85rem; color: #2a3140;"><a href="./_teaching/Fall2026/index.html" target="_blank" rel="noopener noreferrer" style="color: #2a3140;" style-hover="color: #8a5a44;">CSCI 8945: Advanced Representation Learning</a></div>
+          <div style="font-size: 0.72rem; color: #807d78; white-space: nowrap;">Fall 2026, 2025, 2024, <a href="./_teaching/Fall2023/Fall2023-CSCI8945.html" target="_blank" rel="noopener noreferrer">2023</a></div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0.55rem 0.9rem; border-bottom: 1px solid #e6e2da;">
+          <div style="font-size: 0.85rem; color: #2a3140;"><a href="./_teaching/Spring2026/index.html" target="_blank" rel="noopener noreferrer" style="color: #2a3140;" style-hover="color: #8a5a44;">CSCI 4900/6900: Computer Vision — The Deep Learning Approach</a></div>
+          <div style="font-size: 0.72rem; color: #807d78; white-space: nowrap;">Spring 2026, Fall 2022</div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0.55rem 0.9rem; border-bottom: 1px solid #e6e2da;">
+          <div style="font-size: 0.85rem; color: #2a3140;">CSCI 3360: Data Science I</div>
+          <div style="font-size: 0.72rem; color: #807d78; white-space: nowrap;">Spring 2025, 2024</div>
+        </div>
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0.55rem 0.9rem;">
+          <div style="font-size: 0.85rem; color: #2a3140;"><a href="./_teaching/Spring2023/Spring2023-NHT.html" target="_blank" rel="noopener noreferrer" style="color: #2a3140;" style-hover="color: #8a5a44;">CSCI 8000: New and Hot Topics in Computer Vision and Deep Learning</a></div>
+          <div style="font-size: 0.72rem; color: #807d78; white-space: nowrap;">Spring 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <div style="max-width: 1068px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 0 56px;">
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+      <div style="width: 6px; height: 6px; transform: rotate(45deg); border: 1px solid #8a5a44; flex-shrink: 0;"></div>
+      <div style="flex: 1; height: 1px; background: #e6e2da;"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" style="max-width: 1180px; margin: 0 auto; padding: 32px 48px; position: relative;">
+      <div style="position: relative; margin-bottom: 8px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap;">
+        <div style="position: absolute; left: -14px; top: -26px; font-family: 'Source Serif 4', Georgia, serif; font-size: 72px; color: #8a5a44; opacity: 0.08; line-height: 1; user-select: none;">简介</div>
+        <div style="display: flex; align-items: center; gap: 12px; position: relative; flex-shrink: 0;">
+          <span style="width: 22px; height: 1px; background: #8a5a44; display: block;"></span>
+          <span style="font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a5a44">About</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; margin-top: 12px;">
+        <div>
+          <p style="font-size: 16px; line-height: 1.65; color: #535d6e; margin: 0 0 14px;">I'm currently an Assistant Professor in the School of Computing and a Faculty Fellow at the Institute for Artificial Intelligence at the University of Georgia. I'm also a Lilly Teaching Fellow.</p>
+          <p style="font-size: 16px; line-height: 1.65; color: #535d6e; margin: 0 0 14px;">I have spent wonderful years at the following places. Previously, I was a Postdoctoral Associate at <a href="https://tech.cornell.edu/" target="_blank" rel="noopener noreferrer">Cornell Tech</a>, working with <a href="http://www.cs.cornell.edu/~snavely/" target="_blank" rel="noopener noreferrer">Prof. Noah Snavely</a>. I received my PhD in Computer Science from the University of Maryland, advised by <a href="http://www.cs.umd.edu/~djacobs/" target="_blank" rel="noopener noreferrer">Prof. David Jacobs</a>. I was in a 3+2 program, receiving a Master's degree in Computer and Information Science from Temple University, advised by <a href="https://www3.cs.stonybrook.edu/~hling/" target="_blank" rel="noopener noreferrer">Prof. Haibin Ling</a>, and a Bachelor's degree in Automation from the University of Science and Technology of China (USTC).</p>
+        </div>
+        <div>
+          <ul style="display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none;">
+            <li style="display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 9px 0; border-top: 1px solid #e6e2da;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; color: #8a5a44;">2022 – Present</div>
+              <div>
+                <div style="font-size: 14.5px; color: #2a3140; font-weight: 500; margin-bottom: 2px;">Assistant Professor</div>
+                <div style="font-size: 13.5px; color: #807d78;">School of Computing<br>University of Georgia<br>Athens, Georgia, United States</div>
+              </div>
             </li>
-            <li class="sponsor-card">
-              <a
-                class="sponsor-logo-link"
-                href="https://www.nih.gov/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  class="sponsor-logo"
-                  src="assets/img/sponsors/nih.png"
-                  alt="National Institutes of Health"
-                  width="140"
-                  height="50"
-                  loading="lazy"
-                />
-              </a>
+            <li style="display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 9px 0; border-top: 1px solid #e6e2da;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; color: #8a5a44;">2018 – 2021</div>
+              <div>
+                <div style="font-size: 14.5px; color: #2a3140; font-weight: 500; margin-bottom: 2px;">Postdoctoral Associate</div>
+                <div style="font-size: 13.5px; color: #807d78;">Cornell Tech<br>New York, New York, United States</div>
+              </div>
             </li>
-            <li class="sponsor-card">
-              <a
-                class="sponsor-logo-link"
-                href="https://www.transportation.gov/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  class="sponsor-logo"
-                  src="assets/img/sponsors/usdot.png"
-                  width="240"
-                  height="52"
-                  alt="U.S. Department of Transportation"
-                  loading="lazy"
-                />
-              </a>
+            <li style="display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 9px 0; border-top: 1px solid #e6e2da;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; color: #8a5a44;">PhD</div>
+              <div>
+                <div style="font-size: 14.5px; color: #2a3140; font-weight: 500; margin-bottom: 2px;">Computer Science</div>
+                <div style="font-size: 13.5px; color: #807d78;">University of Maryland<br>College Park, Maryland, United States</div>
+              </div>
             </li>
-            <li class="sponsor-card">
-              <a
-                class="sponsor-logo-link"
-                href="https://research.google/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  class="sponsor-logo"
-                  src="assets/img/sponsors/google.webp"
-                  alt="Google"
-                  width="160"
-                  height="45"
-                  loading="lazy"
-                />
-              </a>
+            <li style="display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 9px 0; border-top: 1px solid #e6e2da;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; color: #8a5a44;">MS</div>
+              <div>
+                <div style="font-size: 14.5px; color: #2a3140; font-weight: 500; margin-bottom: 2px;">Computer and Information Science</div>
+                <div style="font-size: 13.5px; color: #807d78;">Temple University<br>Philadelphia, Pennsylvania, United States</div>
+              </div>
+            </li>
+            <li style="display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding: 9px 0; border-top: 1px solid #e6e2da;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; color: #8a5a44;">BEng</div>
+              <div>
+                <div style="font-size: 14.5px; color: #2a3140; font-weight: 500; margin-bottom: 2px;">Automation</div>
+                <div style="font-size: 13.5px; color: #807d78;">University of Science and Technology of China (USTC)<br>Hefei, Anhui, China</div>
+              </div>
             </li>
           </ul>
         </div>
-      </section>
-    </main>
+      </div>
+      <div style="margin-top: 16px;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #807d78; margin-bottom: 8px;">Professional Bio</div>
+        <p style="margin: 0; font-size: 16px; line-height: 1.65; color: #535d6e;">Dr. Jin Sun is an Assistant Professor in the School of Computing and a Faculty Fellow at the Institute for Artificial Intelligence at the University of Georgia. He is also a Lilly Teaching Fellow. His main research area is computer vision—understanding the world using visual data with the help of state-of-the-art deep learning models. In particular, he is passionate about understanding objects in diverse and complex environments using images and videos. He is actively collaborating with researchers to apply AI in interdisciplinary research to push the boundaries of scientific discovery and improve people's quality of life. His work has been published in top computer vision and machine learning conferences such as CVPR, ECCV, ICCV, NeurIPS, ICML, and ICLR. His research work has been selected as Notable Books and Articles in ACM Computing Reviews in 2014 and Best Paper Nominee in CVPR 2020.</p>
+      </div>
+    </section>
+  </main>
 
-    <footer class="site-footer" data-shared-footer></footer>
+  <footer id="contact" style="background: #2d4558; margin-top: 24px;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 28px 48px 18px; display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 32px; align-items: start;">
+      <div>
+        <div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; color: #fbfaf7; margin-bottom: 16px;">Jin Sun</div>
+        <p style="font-size: 14.5px; line-height: 1.8; color: #c9dff0; max-width: 320px; margin: 0;">804 Boyd Research Center<br>Athens, Georgia 30602<br>United States</p>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 251, 245, 0.72); margin-bottom: 14px; text-align: center;">Sponsors</div>
+        <div style="display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 22px;">
+          <a href="https://www.nsf.gov/" target="_blank" rel="noopener noreferrer"><img src="assets/img/sponsors/nsf.png" alt="National Science Foundation" loading="lazy" style="width: 84px; height: 48px; object-fit: contain; filter: grayscale(1) brightness(1.8); display: block;"></a>
+          <a href="https://www.nih.gov/" target="_blank" rel="noopener noreferrer"><img src="assets/img/sponsors/nih.png" alt="National Institutes of Health" loading="lazy" style="width: 84px; height: 48px; object-fit: contain; filter: grayscale(1) brightness(1.8); display: block;"></a>
+          <a href="https://www.transportation.gov/" target="_blank" rel="noopener noreferrer"><img src="assets/img/sponsors/usdot.png" alt="U.S. Department of Transportation" loading="lazy" style="width: 84px; height: 48px; object-fit: contain; filter: grayscale(1) brightness(1.8); display: block;"></a>
+          <a href="https://research.google/" target="_blank" rel="noopener noreferrer"><img src="assets/img/sponsors/google.webp" alt="Google" loading="lazy" style="width: 84px; height: 48px; object-fit: contain; filter: grayscale(1) brightness(1.8); display: block;"></a>
+        </div>
+      </div>
+      <div style="justify-self: end;">
+        <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 251, 245, 0.72); margin-bottom: 14px;">Connect</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=Gw10rFEAAAAJ" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #c9dff0;" style-hover="color: #c9dff0; text-decoration: none;">Google Scholar</a>
+          <a href="https://www.linkedin.com/in/jin-sun-7bba4017a" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #c9dff0;" style-hover="color: #c9dff0; text-decoration: none;">LinkedIn</a>
+          <a href="mailto:jinsun@uga.edu" style="font-size: 14px; color: #c9dff0;" style-hover="color: #c9dff0; text-decoration: none;">jinsun@uga.edu</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width: 1180px; margin: 0 auto; padding: 12px 48px; border-top: 1px solid #3f5a70; font-size: 12.5px; color: rgba(255, 251, 245, 0.72);">
+      © {{ year }} Jin Sun. All rights reserved.
+    </div>
+  </footer>
+</div>
 
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/news.js" defer></script>
-  </body>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;newsInitialCount&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 10, &quot;tsType&quot;: &quot;number&quot;, &quot;min&quot;: 3, &quot;max&quot;: 25, &quot;step&quot;: 1, &quot;section&quot;: &quot;News&quot;}}">
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+  const match = String(dateStr).match(/^(\d{4})-(\d{2})/);
+  const dt = match ? new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, 1) : new Date(dateStr);
+  if (Number.isNaN(dt.getTime())) return dateStr;
+  return dt.toLocaleDateString(undefined, { year: "numeric", month: "short" });
+}
+
+function getTypeInfo(rawType) {
+  const t = String(rawType || "").toLowerCase();
+  if (!t) return null;
+  switch (t) {
+    case "paper": return { icon: "fa-solid fa-scroll", label: "Paper" };
+    case "grant": return { icon: "fa-solid fa-hand-holding-dollar", label: "Grant" };
+    case "talk": return { icon: "fa-solid fa-microphone-lines", label: "Talk" };
+    case "activity": return { icon: "fa-solid fa-people-group", label: "Activity" };
+    default: return { icon: "fa-solid fa-circle-dot", label: rawType };
+  }
+}
+
+function buildNewsItem(entry) {
+  const typeInfo = getTypeInfo(entry.type);
+  return {
+    dateLabel: formatDate(entry.date),
+    title: entry.title,
+    link: entry.link || "",
+    noLink: !entry.link,
+    description: entry.description || "",
+    hasIcon: !!typeInfo,
+    iconClass: typeInfo ? typeInfo.icon : "",
+    iconLabel: typeInfo ? typeInfo.label : "",
+  };
+}
+
+function buildAuthorTokens(authorsStr) {
+  const names = (authorsStr || "").split(",").map((s) => s.trim()).filter(Boolean);
+  return names.map((name, i) => ({
+    text: name,
+    weight: /jin sun/i.test(name) ? 600 : 400,
+    color: /jin sun/i.test(name) ? "#8a5a44" : "#807d78",
+    notLast: i < names.length - 1,
+  }));
+}
+
+class Component extends DCLogic {
+  state = { navScrolled: false, newsExpanded: false, pubKind: "all", pubQuery: "", news: [], pubs: [] };
+
+  setHeroRef = (el) => { this.heroEl = el; };
+
+  onScroll = () => {
+    if (!this.heroEl) return;
+    const show = this.heroEl.getBoundingClientRect().bottom < 60;
+    if (show !== this.state.navScrolled) this.setState({ navScrolled: show });
+  };
+
+  toggleNews = () => this.setState((s) => ({ newsExpanded: !s.newsExpanded }));
+
+  setPubQuery = (e) => this.setState({ pubQuery: e.target.value });
+
+  setPubKind(kind) {
+    this.setState({ pubKind: kind });
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    this.onScroll();
+    fetch("assets/data/news.json").then((r) => (r.ok ? r.json() : [])).then((data) => this.setState({ news: Array.isArray(data) ? data : [] })).catch(() => {});
+    fetch("assets/data/publications.json").then((r) => (r.ok ? r.json() : [])).then((data) => this.setState({ pubs: Array.isArray(data) ? data : [] })).catch(() => {});
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const props = this.props || {};
+    const initialCount = props.newsInitialCount ?? 10;
+
+    const sortedNews = [...s.news].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const recentRaw = sortedNews.slice(0, initialCount);
+    const pastRaw = sortedNews.slice(initialCount);
+
+    const kinds = [
+      { kind: "all", label: "All" },
+      { kind: "conference", label: "Conference" },
+      { kind: "journal", label: "Journal" },
+      { kind: "workshop", label: "Workshop" },
+    ];
+    const pubKinds = kinds.map((k) => {
+      const active = s.pubKind === k.kind;
+      return {
+        ...k,
+        onClick: () => this.setPubKind(k.kind),
+        bg: active ? "#8a5a44" : "rgba(255,255,255,0.6)",
+        color: active ? "#fff" : "#535d6e",
+        borderColor: active ? "transparent" : "#e6e2da",
+      };
+    });
+
+    const filtered = s.pubs.filter((pub) => {
+      if (!pub.highlight) return false;
+      if (s.pubKind !== "all" && pub.kind !== s.pubKind) return false;
+      return true;
+    });
+
+    const pubGroups = [{
+      year: "",
+      items: filtered.map((pub) => {
+        const links = [];
+        if (pub.links) {
+          if (pub.links.paper) links.push({ label: "Paper", href: pub.links.paper });
+          if (pub.links.arxiv) links.push({ label: "arXiv", href: pub.links.arxiv });
+          if (pub.links.code) links.push({ label: "Code", href: pub.links.code });
+          if (pub.links.project) links.push({ label: "Project page", href: pub.links.project });
+        }
+        const metaParts = [];
+        if (pub.venue) metaParts.push(pub.venue);
+        if (pub.year) metaParts.push(pub.year);
+        return {
+          title: pub.title,
+          paperLink: pub.links && pub.links.paper ? pub.links.paper : "",
+          noPaperLink: !(pub.links && pub.links.paper),
+          authorTokens: buildAuthorTokens(pub.authors),
+          meta: metaParts.join(" · "),
+          hasLinks: links.length > 0,
+          links,
+          hasTags: (pub.tags || []).length > 0,
+          tags: pub.tags || [],
+          padding: pub.highlight ? "12px 10px 12px 14px" : "12px 10px",
+          borderLeft: pub.highlight ? "3px solid #8a5a44" : "none",
+          bg: pub.highlight ? "#f7f5f0" : "transparent",
+        };
+      }),
+    }];
+
+    return {
+      year: new Date().getFullYear(),
+      navBrandOpacity: s.navScrolled ? 1 : 0,
+      navBrandPointer: s.navScrolled ? "auto" : "none",
+      setHeroRef: this.setHeroRef,
+      newsRecent: recentRaw.map(buildNewsItem),
+      newsPast: pastRaw.map(buildNewsItem),
+      hasPast: pastRaw.length > 0,
+      pastDisplay: s.newsExpanded ? "flex" : "none",
+      newsExpanded: s.newsExpanded,
+      newsToggleLabel: s.newsExpanded ? "Show less" : `View past news (${pastRaw.length})`,
+      toggleNews: this.toggleNews,
+      pubKinds,
+      pubQuery: s.pubQuery,
+      setPubQuery: this.setPubQuery,
+      pubGroups,
+      noResults: filtered.length === 0,
+    };
+  }
+}
+</script>
+</body>
 </html>

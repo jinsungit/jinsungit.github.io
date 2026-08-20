@@ -68,4 +68,37 @@
       }
     });
   }
+
+  // Highlight the closest upcoming class in a schedule table. Rows for actual
+  // class meetings carry data-date="YYYY-MM-DD"; rows for breaks/reading days/
+  // finals period are left untagged and are never highlighted.
+  const scheduleRows = document.querySelectorAll("tr[data-date]");
+  if (scheduleRows.length) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let nextRow = null;
+    let nextDiff = Infinity;
+
+    scheduleRows.forEach((row) => {
+      const [y, m, d] = row.getAttribute("data-date").split("-").map(Number);
+      const rowDate = new Date(y, m - 1, d);
+      const diff = rowDate - today;
+      if (diff >= 0 && diff < nextDiff) {
+        nextDiff = diff;
+        nextRow = row;
+      }
+    });
+
+    if (nextRow) {
+      nextRow.classList.add("sched-next-row");
+      const dateCell = nextRow.querySelector("td:first-child");
+      if (dateCell) {
+        const label = document.createElement("span");
+        label.className = "sched-next-label";
+        label.textContent = nextDiff === 0 ? "Today" : "Next class";
+        dateCell.appendChild(label);
+      }
+    }
+  }
 })();

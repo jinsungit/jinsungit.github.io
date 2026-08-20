@@ -1,4 +1,47 @@
-[  
+[
+
+  {
+    "year": 2026,
+    "title": "Self-Evolving Code-with-Image Reasoning",
+    "authors": "Tianze Yang, Liang Wu, Ruitong Sun, Yucheng Shi, Yanqiao Wang, Mayank Darbari, Ninghao Liu, Jin Sun, Liangjie Hong",
+    "venue": "arXiv",
+    "kind": "preprint",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.11292"
+    },
+    "tags": ["lvlm"],
+    "highlight": true
+  },
+  {
+    "year": 2026,
+    "title": "TRON: Targeted rule-verifiable online environments for visual reasoning RL",
+    "authors": "Tianze Yang, Yucheng Shi, Ruitong Sun, Jingyuan Huang, Ninghao Liu, Jin Sun",
+    "venue": "arXiv",
+    "kind": "preprint",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.01599"
+    },
+    "tags": ["lvlm"],
+    "highlight": true
+  },
+  {
+    "year": 2026,
+    "title": "Self-Improving Small Object Groundiung in LVLMs",
+    "authors": "Tianze Yang, Yucheng Shi, Ruitong Sun, Ninghao Liu, Jin Sun",
+    "venue": "arXiv",
+    "kind": "preprint",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.01612"
+    },
+    "tags": ["lvlm"],
+    "highlight": true
+  },
   {
     "year": 2026,
     "title": "RSTR: Reducing SpatioTemporal Redundancy in Diffusion Transformers",
@@ -12,12 +55,12 @@
     },
     "tags": ["diffusion", "optimization"],
     "highlight": true
-  }, 
+  },
   {
     "year": 2026,
     "title": "Common Inpainted Objects In-N-Out of Context",
     "authors": "Tianze Yang*, Tyson Jordan*, Ruitong Sun*, Ninghao Liu, Jin Sun",
-    "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    "venue": "CVPR",
     "kind": "conference",
     "blurb": "",
     "cover": "",
@@ -26,7 +69,7 @@
     },
     "tags": ["context", "VLM", "diffusion"],
     "highlight": true
-  },  
+  },
   {
     "year": 2026,
     "title": "Dense cotton boll counting with transformer-based video tracking and a customized phenotyping robot for data collection",
@@ -40,7 +83,7 @@
     },
     "tags": ["agriculture", "counting", "tracking"],
     "highlight": false
-  }, 
+  },
   {
     "year": 2026,
     "title": "When AI Watches the Does: Can Vision-Language Models Perform TB Medication Adherence Assessments Like Clinicians?",
@@ -54,7 +97,7 @@
     },
     "tags": ["health", "VLM"],
     "highlight": false
-  }, 
+  },
   {
     "year": 2025,
     "title": "Cotton3DGaussians: Multiview 3D Gaussian Splatting for boll mapping and plant architecture analysis",
