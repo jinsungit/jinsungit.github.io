@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inner, Outer &amp; Cross Products of 2D Vectors | CSCI 8945 | Jin Sun</title>
+    <meta
+      name="description"
+      content="Interactive visualization of the inner product, outer product, and cross product of two 2D vectors — CSCI 8945, Fall 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+    <style>
+      .lab-main { max-width: 1180px; margin: 0 auto; padding: 44px 48px 60px; }
+
+      .controls-card {
+        display: flex; flex-wrap: wrap; gap: 1.4rem;
+        background: var(--accent-faint); border: 1px solid var(--hairline);
+        border-radius: var(--radius-md); padding: 1.1rem 1.3rem; margin-top: 1.2rem;
+      }
+      .vec-group { flex: 1 1 220px; min-width: 220px; }
+      .vec-group h3 {
+        font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.6rem;
+      }
+      .vec-group.u h3 { color: var(--u-color); }
+      .vec-group.v h3 { color: var(--v-color); }
+      .slider-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; }
+      .slider-row:last-child { margin-bottom: 0; }
+      .slider-row label { font-family: var(--font-serif); font-size: 0.95rem; width: 1.3rem; color: var(--ink-soft); flex-shrink: 0; }
+      .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+      .slider-row .val {
+        font-variant-numeric: tabular-nums; font-size: 0.82rem; color: var(--ink);
+        width: 2.6rem; text-align: right; flex-shrink: 0;
+      }
+      .reset-btn {
+        align-self: center; background: none; border: 1px solid var(--hairline);
+        border-radius: var(--radius); padding: 0.5rem 0.9rem; font-family: var(--font-sans);
+        font-size: 0.8rem; color: var(--ink-soft); cursor: pointer; transition: all 0.15s ease;
+      }
+      .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+      :root {
+        --u-color: #35597a;
+        --v-color: #b0502f;
+        --w-color: #4f8a5b;
+        --mw-color: #8a4f8a;
+        --n-color: #c07f1f;
+        --dash-color: #9c968c;
+      }
+
+      .lab-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; margin-top: 2rem;
+      }
+      .lab-panel {
+        background: #fff; border: 1px solid var(--hairline); border-radius: var(--radius-md);
+        padding: 1.1rem 1.2rem 1.3rem; box-shadow: var(--shadow-soft);
+        display: flex; flex-direction: column;
+      }
+      .lab-panel h2 {
+        font-family: var(--font-serif); font-weight: 500; font-size: 1.08rem; margin: 0 0 0.3rem; color: var(--ink);
+      }
+      .lab-panel .formula {
+        font-size: 0.8rem; color: var(--ink-faint); margin: 0 0 0.8rem; line-height: 1.5;
+      }
+      .lab-panel svg { width: 100%; height: auto; background: var(--accent-faint); border-radius: var(--radius); }
+      #svg3 { cursor: grab; touch-action: none; }
+      #svg3.dragging { cursor: grabbing; }
+      .hint { font-size: 0.72rem; color: var(--ink-faint); text-align: center; margin: 0.45rem 0 0; }
+      .readout {
+        margin-top: 0.75rem; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7;
+      }
+      .readout strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+      .readout .tag-u { color: var(--u-color); }
+      .readout .tag-v { color: var(--v-color); }
+      .readout .tag-w { color: var(--w-color); }
+      .readout .tag-mw { color: var(--mw-color); }
+      .readout .tag-n { color: var(--n-color); }
+
+      .w-controls {
+        margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px dashed var(--hairline);
+      }
+      .w-controls .label {
+        font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--w-color); margin-bottom: 0.5rem; display: block;
+      }
+
+      .matrix-wrap { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.7rem; }
+      .matrix {
+        display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.2rem 0.7rem;
+        padding: 0.4rem 0.9rem; border-left: 2px solid var(--ink-soft); border-right: 2px solid var(--ink-soft);
+        font-variant-numeric: tabular-nums; font-size: 0.88rem; color: var(--ink);
+      }
+
+      @media (max-width: 980px) {
+        .lab-grid { grid-template-columns: 1fr; }
+        .lab-main { padding: 36px 22px 48px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="subpage-nav">
+      <div class="subpage-nav-inner">
+        <a href="../../index.html" class="brand-name">Jin Sun</a>
+        <nav aria-label="Main">
+          <a href="../../index.html#research">Research</a>
+          <a href="../../index.html#teaching">Teaching</a>
+          <a href="../../index.html#about">About</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main class="lab-main">
+      <p class="course-eyebrow">CSCI 8945 &middot; In-class tool</p>
+      <h1 class="course-title">Inner, outer, and cross products of 2D vectors</h1>
+      <p class="course-lead">
+        Drag the sliders to change vectors <strong style="color:var(--u-color)">u</strong> and
+        <strong style="color:var(--v-color)">v</strong>. All three panels update live, so you can see
+        how the same two vectors produce three very different kinds of results &mdash; a scalar length,
+        a transformation, and a signed area with direction.
+      </p>
+
+      <section class="controls-card">
+        <div class="vec-group u">
+          <h3>Vector u</h3>
+          <div class="slider-row">
+            <label for="ux">u&#8321;</label>
+            <input type="range" id="ux" min="-5" max="5" step="0.1" value="3" />
+            <span class="val" id="ux-val">3.0</span>
+          </div>
+          <div class="slider-row">
+            <label for="uy">u&#8322;</label>
+            <input type="range" id="uy" min="-5" max="5" step="0.1" value="1" />
+            <span class="val" id="uy-val">1.0</span>
+          </div>
+        </div>
+        <div class="vec-group v">
+          <h3>Vector v</h3>
+          <div class="slider-row">
+            <label for="vx">v&#8321;</label>
+            <input type="range" id="vx" min="-5" max="5" step="0.1" value="1" />
+            <span class="val" id="vx-val">1.0</span>
+          </div>
+          <div class="slider-row">
+            <label for="vy">v&#8322;</label>
+            <input type="range" id="vy" min="-5" max="5" step="0.1" value="3" />
+            <span class="val" id="vy-val">3.0</span>
+          </div>
+        </div>
+        <button class="reset-btn" id="reset-btn">Reset vectors</button>
+      </section>
+
+      <!-- shared marker defs, referenced by all three panels -->
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <marker id="arrow-u" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--u-color)" />
+          </marker>
+          <marker id="arrow-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--v-color)" />
+          </marker>
+          <marker id="arrow-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--w-color)" />
+          </marker>
+          <marker id="arrow-mw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--mw-color)" />
+          </marker>
+          <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--dash-color)" />
+          </marker>
+          <marker id="arrow-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--n-color)" />
+          </marker>
+        </defs>
+      </svg>
+
+      <div class="lab-grid">
+        <!-- PANEL 1: INNER (DOT) PRODUCT -->
+        <div class="lab-panel">
+          <h2>Inner product</h2>
+          <p class="formula">u&middot;v = u&#8321;v&#8321; + u&#8322;v&#8322; = |u||v|cos&theta;<br />shown as the projection of v onto u.</p>
+          <svg id="svg1" viewBox="0 0 300 300"></svg>
+          <div class="readout">
+            <span class="tag-u">u</span>&middot;<span class="tag-v">v</span> = <strong id="dot-val">&mdash;</strong><br />
+            length of v projected onto u = <strong id="proj-val">&mdash;</strong>
+          </div>
+        </div>
+
+        <!-- PANEL 2: OUTER PRODUCT -->
+        <div class="lab-panel">
+          <h2>Outer product</h2>
+          <p class="formula">u&otimes;v = uv<sup>T</sup>, a rank-1 matrix. Applied to a vector w it gives
+          (u&otimes;v)w = u(v&middot;w) &mdash; always a multiple of u.</p>
+          <svg id="svg2" viewBox="0 0 300 300"></svg>
+          <div class="matrix-wrap">
+            <span style="font-size:0.8rem;color:var(--ink-faint)">u&otimes;v =</span>
+            <div class="matrix">
+              <span id="m00">&mdash;</span><span id="m01">&mdash;</span>
+              <span id="m10">&mdash;</span><span id="m11">&mdash;</span>
+            </div>
+          </div>
+          <div class="readout">
+            <span class="tag-v">v</span>&middot;<span class="tag-w">w</span> = <strong id="vw-val">&mdash;</strong><br />
+            (u&otimes;v)<span class="tag-w">w</span> = <strong id="mw-val" class="tag-mw">&mdash;</strong>
+          </div>
+          <div class="w-controls">
+            <span class="label">Third vector w (for the transformation)</span>
+            <div class="slider-row">
+              <label for="wx">w&#8321;</label>
+              <input type="range" id="wx" min="-2" max="2" step="0.1" value="0.5" />
+              <span class="val" id="wx-val">0.5</span>
+            </div>
+            <div class="slider-row">
+              <label for="wy">w&#8322;</label>
+              <input type="range" id="wy" min="-2" max="2" step="0.1" value="-0.5" />
+              <span class="val" id="wy-val">-0.5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: CROSS PRODUCT -->
+        <div class="lab-panel">
+          <h2>Cross product</h2>
+          <p class="formula">u&times;v = u&#8321;v&#8322; &minus; u&#8322;v&#8321;. Shown here in 3D: u and v lie flat
+          in the xy-plane, and the normal <span class="tag-n">n</span> = u&times;v rises straight up or dips straight
+          down out of that plane, with length equal to the parallelogram's area.</p>
+          <svg id="svg3" viewBox="0 0 300 300"></svg>
+          <p class="hint">Drag to rotate &middot; double-click to reset the view</p>
+          <div class="readout">
+            <span class="tag-u">u</span>&times;<span class="tag-v">v</span> = <strong id="cross-val">&mdash;</strong><br />
+            parallelogram area = <strong id="area-val">&mdash;</strong>, normal <span class="tag-n">n</span> <strong id="normal-val">&mdash;</strong>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer-legal" data-shared-footer style="margin-top: 2.5rem; border-top: 1px solid var(--hairline); padding-top: 1rem; color: var(--ink-faint);"></footer>
+    </main>
+
+    <script src="../../assets/js/main.js" defer></script>
+    <script>
+      (function () {
+        "use strict";
+
+        // ---- view / coordinate setup (shared by all three panels) ----
+        var SIZE = 300, CENTER = 150, VIEW = 5.6; // math units visible from center to edge
+        var SCALE = (SIZE / 2 - 14) / VIEW;
+
+        function toSvg(x, y) { return [CENTER + x * SCALE, CENTER - y * SCALE]; }
+        function fmt(n) { return (Math.round(n * 100) / 100).toFixed(2); }
+        function fmt1(n) { return (Math.round(n * 10) / 10).toFixed(1); }
+
+        var SVGNS = "http://www.w3.org/2000/svg";
+        function el(tag, attrs) {
+          var e = document.createElementNS(SVGNS, tag);
+          for (var k in attrs) e.setAttribute(k, attrs[k]);
+          return e;
+        }
+
+        function buildGrid(svg) {
+          var g = el("g", { class: "grid" });
+          for (var i = -Math.floor(VIEW); i <= Math.floor(VIEW); i++) {
+            var p1 = toSvg(i, -VIEW), p2 = toSvg(i, VIEW);
+            g.appendChild(el("line", { x1: p1[0], y1: 0, x2: p1[0], y2: SIZE, stroke: "#fff", "stroke-width": i === 0 ? 1.6 : 0.8, opacity: i === 0 ? 0.9 : 0.55 }));
+            var q1 = toSvg(-VIEW, i), q2 = toSvg(VIEW, i);
+            g.appendChild(el("line", { x1: 0, y1: q1[1], x2: SIZE, y2: q1[1], stroke: "#fff", "stroke-width": i === 0 ? 1.6 : 0.8, opacity: i === 0 ? 0.9 : 0.55 }));
+          }
+          svg.appendChild(g);
+        }
+
+        function arrow(svg, colorMarker, extraClass) {
+          var l = el("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--" + extraClass + "-color)", "stroke-width": 2.4, "marker-end": "url(#arrow-" + colorMarker + ")" });
+          svg.appendChild(l);
+          return l;
+        }
+
+        function label(svg, cls) {
+          var t = el("text", { class: "vec-label", fill: "var(--" + cls + "-color)", "font-size": 12, "font-family": "var(--font-serif)", "font-weight": 600 });
+          svg.appendChild(t);
+          return t;
+        }
+
+        function placeLabel(t, x, y, vx, vy) {
+          var len = Math.hypot(vx, vy) || 1;
+          var ox = (vx / len) * 12, oy = -(vy / len) * 12;
+          t.setAttribute("x", x + ox);
+          t.setAttribute("y", y + oy);
+        }
+
+        function clip(x, y, max) {
+          var len = Math.hypot(x, y);
+          if (len <= max || len === 0) return [x, y, false];
+          var s = max / len;
+          return [x * s, y * s, true];
+        }
+
+        // ---- rotatable 3D projection (panel 3 only) ----
+        var ISO_SCALE = 13.5, ISO_ORIGIN = [150, 190];
+        var DEFAULT_AZ = -0.7854, DEFAULT_EL = 0.6155; // ~-45°, ~35.26° (classic isometric)
+        var EL_MIN = 0.1, EL_MAX = 1.45;
+        var viewAz = DEFAULT_AZ, viewEl = DEFAULT_EL;
+
+        function toIso(x, y, z) {
+          z = z || 0;
+          var ca = Math.cos(viewAz), sa = Math.sin(viewAz);
+          var x1 = x * ca - y * sa;
+          var y1 = x * sa + y * ca;
+          var ce = Math.cos(viewEl), se = Math.sin(viewEl);
+          var z2 = y1 * se + z * ce;
+          return [ISO_ORIGIN[0] + x1 * ISO_SCALE, ISO_ORIGIN[1] - z2 * ISO_SCALE];
+        }
+
+        function placeLabelScreen(t, pTip, pOrigin, offset) {
+          var dx = pTip[0] - pOrigin[0], dy = pTip[1] - pOrigin[1];
+          var len = Math.hypot(dx, dy) || 1;
+          var ox = (dx / len) * offset, oy = (dy / len) * offset;
+          t.setAttribute("x", pTip[0] + ox);
+          t.setAttribute("y", pTip[1] + oy);
+        }
+
+        // ---- state ----
+        var u = { x: 3, y: 1 }, v = { x: 1, y: 3 }, w = { x: 0.5, y: -0.5 };
+        var DEFAULTS = { u: { x: 3, y: 1 }, v: { x: 1, y: 3 }, w: { x: 0.5, y: -0.5 } };
+
+        // ---- panel 1: inner product ----
+        var svg1 = document.getElementById("svg1");
+        buildGrid(svg1);
+        var lineU1 = arrow(svg1, "u", "u");
+        var lineV1 = arrow(svg1, "v", "v");
+        var lineProj = el("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--dash-color)", "stroke-width": 2.6, "stroke-dasharray": "5 4", "marker-end": "url(#arrow-dash)" });
+        svg1.appendChild(lineProj);
+        var lineDrop = el("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--dash-color)", "stroke-width": 1, "stroke-dasharray": "2 3" });
+        svg1.appendChild(lineDrop);
+        var labelU1 = label(svg1, "u"), labelV1 = label(svg1, "v");
+
+        function drawPanel1() {
+          var p1 = toSvg(u.x, u.y), p2 = toSvg(v.x, v.y);
+          lineU1.setAttribute("x2", p1[0]); lineU1.setAttribute("y2", p1[1]);
+          lineV1.setAttribute("x2", p2[0]); lineV1.setAttribute("y2", p2[1]);
+          placeLabel(labelU1, p1[0], p1[1], u.x, u.y);
+          placeLabel(labelV1, p2[0], p2[1], v.x, v.y);
+          labelU1.textContent = "u"; labelV1.textContent = "v";
+
+          var dot = u.x * v.x + u.y * v.y;
+          var uLen = Math.hypot(u.x, u.y);
+          document.getElementById("dot-val").textContent = fmt(dot);
+
+          if (uLen < 1e-6) {
+            lineProj.style.display = "none";
+            lineDrop.style.display = "none";
+            document.getElementById("proj-val").textContent = "undefined (u is the zero vector)";
+          } else {
+            var scalarProj = dot / uLen;
+            var ux0 = u.x / uLen, uy0 = u.y / uLen;
+            var projX = scalarProj * ux0, projY = scalarProj * uy0;
+            var pp = toSvg(projX, projY);
+            lineProj.style.display = "";
+            lineDrop.style.display = "";
+            lineProj.setAttribute("x2", pp[0]); lineProj.setAttribute("y2", pp[1]);
+            var vp = toSvg(v.x, v.y);
+            lineDrop.setAttribute("x1", vp[0]); lineDrop.setAttribute("y1", vp[1]);
+            lineDrop.setAttribute("x2", pp[0]); lineDrop.setAttribute("y2", pp[1]);
+            document.getElementById("proj-val").textContent = fmt(scalarProj);
+          }
+        }
+
+        // ---- panel 2: outer product ----
+        var svg2 = document.getElementById("svg2");
+        buildGrid(svg2);
+        var lineImage = el("line", { x1: 0, y1: 0, x2: 0, y2: 0, stroke: "var(--u-color)", "stroke-width": 1, "stroke-dasharray": "3 4", opacity: 0.55 });
+        svg2.appendChild(lineImage);
+        var lineU2 = arrow(svg2, "u", "u");
+        var lineW2 = arrow(svg2, "w", "w");
+        var lineMw2 = arrow(svg2, "mw", "mw");
+        var labelU2 = label(svg2, "u"), labelW2 = label(svg2, "w"), labelMw2 = label(svg2, "mw");
+
+        function drawPanel2() {
+          var uLen = Math.hypot(u.x, u.y);
+          if (uLen < 1e-6) {
+            lineImage.style.display = "none";
+          } else {
+            lineImage.style.display = "";
+            var ux0 = u.x / uLen, uy0 = u.y / uLen;
+            var span = VIEW * 1.6;
+            var a = toSvg(-ux0 * span, -uy0 * span), b = toSvg(ux0 * span, uy0 * span);
+            lineImage.setAttribute("x1", a[0]); lineImage.setAttribute("y1", a[1]);
+            lineImage.setAttribute("x2", b[0]); lineImage.setAttribute("y2", b[1]);
+          }
+
+          var pu = toSvg(u.x, u.y);
+          lineU2.setAttribute("x2", pu[0]); lineU2.setAttribute("y2", pu[1]);
+          placeLabel(labelU2, pu[0], pu[1], u.x, u.y); labelU2.textContent = "u";
+
+          var pw = toSvg(w.x, w.y);
+          lineW2.setAttribute("x2", pw[0]); lineW2.setAttribute("y2", pw[1]);
+          placeLabel(labelW2, pw[0], pw[1], w.x, w.y); labelW2.textContent = "w";
+
+          var vw = v.x * w.x + v.y * w.y;
+          var mwX = u.x * vw, mwY = u.y * vw;
+          var clipped = clip(mwX, mwY, VIEW * 0.98);
+          var pmw = toSvg(clipped[0], clipped[1]);
+          lineMw2.setAttribute("x2", pmw[0]); lineMw2.setAttribute("y2", pmw[1]);
+          placeLabel(labelMw2, pmw[0], pmw[1], clipped[0], clipped[1]);
+          labelMw2.textContent = "Mw" + (clipped[2] ? " (capped)" : "");
+
+          document.getElementById("m00").textContent = fmt1(u.x * v.x);
+          document.getElementById("m01").textContent = fmt1(u.x * v.y);
+          document.getElementById("m10").textContent = fmt1(u.y * v.x);
+          document.getElementById("m11").textContent = fmt1(u.y * v.y);
+          document.getElementById("vw-val").textContent = fmt(vw);
+          document.getElementById("mw-val").textContent = "(" + fmt(mwX) + ", " + fmt(mwY) + ")";
+        }
+
+        // ---- panel 3: cross product, drawn as a rotatable 3D scene ----
+        // Rebuilt from scratch on every render (grid + vectors + labels), since
+        // dragging changes the projection angles and everything must re-project.
+        var svg3 = document.getElementById("svg3");
+
+        function drawPanel3() {
+          svg3.textContent = "";
+          var n = Math.floor(VIEW);
+          var g = el("g", { class: "grid" });
+          for (var i = -n; i <= n; i++) {
+            var a = toIso(i, -VIEW, 0), b = toIso(i, VIEW, 0);
+            g.appendChild(el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: "#fff", "stroke-width": i === 0 ? 1.6 : 0.8, opacity: i === 0 ? 0.9 : 0.5 }));
+            var c = toIso(-VIEW, i, 0), d = toIso(VIEW, i, 0);
+            g.appendChild(el("line", { x1: c[0], y1: c[1], x2: d[0], y2: d[1], stroke: "#fff", "stroke-width": i === 0 ? 1.6 : 0.8, opacity: i === 0 ? 0.9 : 0.5 }));
+          }
+          svg3.appendChild(g);
+
+          var zBot = toIso(0, 0, -VIEW * 0.22), zTop = toIso(0, 0, VIEW * 0.95);
+          svg3.appendChild(el("line", { x1: zBot[0], y1: zBot[1], x2: zTop[0], y2: zTop[1], stroke: "var(--ink-faint)", "stroke-width": 1, "stroke-dasharray": "2 3", opacity: 0.6 }));
+          var zLabel = el("text", { x: zTop[0] + 5, y: zTop[1] - 2, "font-size": 10, fill: "var(--ink-faint)", "font-family": "var(--font-sans)" });
+          zLabel.textContent = "z";
+          svg3.appendChild(zLabel);
+
+          var xEnd = toIso(VIEW * 0.9, 0, 0), yEnd = toIso(0, VIEW * 0.9, 0);
+          var xLabel = el("text", { x: xEnd[0] + 3, y: xEnd[1] + 10, "font-size": 10, fill: "var(--ink-faint)", "font-family": "var(--font-sans)" });
+          xLabel.textContent = "x";
+          svg3.appendChild(xLabel);
+          var yLabel = el("text", { x: yEnd[0] - 12, y: yEnd[1] + 10, "font-size": 10, fill: "var(--ink-faint)", "font-family": "var(--font-sans)" });
+          yLabel.textContent = "y";
+          svg3.appendChild(yLabel);
+
+          var O3 = toIso(0, 0, 0);
+          var pU = toIso(u.x, u.y, 0), pV = toIso(v.x, v.y, 0), pUV = toIso(u.x + v.x, u.y + v.y, 0);
+          var poly3 = el("polygon", { points: O3.join(",") + " " + pU.join(",") + " " + pUV.join(",") + " " + pV.join(","), fill: "var(--accent)", opacity: 0.22, stroke: "var(--accent)", "stroke-width": 1 });
+          svg3.appendChild(poly3);
+
+          var lineU3 = el("line", { x1: O3[0], y1: O3[1], x2: pU[0], y2: pU[1], stroke: "var(--u-color)", "stroke-width": 2.4, "marker-end": "url(#arrow-u)" });
+          var lineV3 = el("line", { x1: O3[0], y1: O3[1], x2: pV[0], y2: pV[1], stroke: "var(--v-color)", "stroke-width": 2.4, "marker-end": "url(#arrow-v)" });
+          svg3.appendChild(lineU3);
+          svg3.appendChild(lineV3);
+          var labelU3 = label(svg3, "u"), labelV3 = label(svg3, "v");
+          placeLabelScreen(labelU3, pU, O3, 12); labelU3.textContent = "u";
+          placeLabelScreen(labelV3, pV, O3, 12); labelV3.textContent = "v";
+
+          var cross = u.x * v.y - u.y * v.x;
+          var area = Math.abs(cross);
+          var cx = (u.x + v.x) / 2, cy = (u.y + v.y) / 2;
+          var nzMag = area < 1e-6 ? 0 : Math.min(VIEW * 0.95, 1.3 + Math.sqrt(area) * 0.65);
+          var nz = cross > 0 ? nzMag : cross < 0 ? -nzMag : 0;
+
+          if (Math.abs(nz) > 1e-6) {
+            var pN0 = toIso(cx, cy, 0), pN1 = toIso(cx, cy, nz);
+            var lineN3 = el("line", { x1: pN0[0], y1: pN0[1], x2: pN1[0], y2: pN1[1], stroke: "var(--n-color)", "stroke-width": 2.6, "marker-end": "url(#arrow-n)" });
+            svg3.appendChild(lineN3);
+            var labelN3 = label(svg3, "n");
+            labelN3.setAttribute("x", pN1[0] + 8);
+            labelN3.setAttribute("y", pN1[1] + (nz > 0 ? -3 : 12));
+            labelN3.textContent = "n";
+          }
+
+          document.getElementById("cross-val").textContent = fmt(cross);
+          document.getElementById("area-val").textContent = fmt(area);
+          var normalText = cross > 1e-6 ? "rises up out of the plane (+z)" : cross < -1e-6 ? "dips down through the plane (−z)" : "is undefined (zero area)";
+          document.getElementById("normal-val").textContent = normalText;
+        }
+
+        // ---- drag-to-rotate for panel 3 ----
+        (function wireDrag() {
+          var dragging = false, startX = 0, startY = 0, startAz = 0, startEl = 0, rectW = 300;
+          svg3.addEventListener("pointerdown", function (evt) {
+            dragging = true;
+            startX = evt.clientX; startY = evt.clientY;
+            startAz = viewAz; startEl = viewEl;
+            rectW = svg3.getBoundingClientRect().width || 300;
+            svg3.classList.add("dragging");
+            svg3.setPointerCapture(evt.pointerId);
+            evt.preventDefault();
+          });
+          svg3.addEventListener("pointermove", function (evt) {
+            if (!dragging) return;
+            var dx = evt.clientX - startX, dy = evt.clientY - startY;
+            viewAz = startAz + (dx / rectW) * Math.PI * 1.4;
+            viewEl = Math.max(EL_MIN, Math.min(EL_MAX, startEl - (dy / rectW) * Math.PI * 1.4));
+            drawPanel3();
+            evt.preventDefault();
+          });
+          function endDrag(evt) {
+            dragging = false;
+            svg3.classList.remove("dragging");
+          }
+          svg3.addEventListener("pointerup", endDrag);
+          svg3.addEventListener("pointercancel", endDrag);
+          svg3.addEventListener("dblclick", function () {
+            viewAz = DEFAULT_AZ; viewEl = DEFAULT_EL;
+            drawPanel3();
+          });
+        })();
+
+        function updateAll() {
+          drawPanel1();
+          drawPanel2();
+          drawPanel3();
+        }
+
+        // ---- slider wiring ----
+        function bindSlider(id, target, key) {
+          var input = document.getElementById(id);
+          var valSpan = document.getElementById(id + "-val");
+          input.addEventListener("input", function () {
+            target[key] = parseFloat(input.value);
+            valSpan.textContent = fmt1(target[key]);
+            updateAll();
+          });
+        }
+        bindSlider("ux", u, "x"); bindSlider("uy", u, "y");
+        bindSlider("vx", v, "x"); bindSlider("vy", v, "y");
+        bindSlider("wx", w, "x"); bindSlider("wy", w, "y");
+
+        document.getElementById("reset-btn").addEventListener("click", function () {
+          u.x = DEFAULTS.u.x; u.y = DEFAULTS.u.y;
+          v.x = DEFAULTS.v.x; v.y = DEFAULTS.v.y;
+          w.x = DEFAULTS.w.x; w.y = DEFAULTS.w.y;
+          ["ux", "uy", "vx", "vy", "wx", "wy"].forEach(function (id) {
+            var group = id[0] === "u" ? u : id[0] === "v" ? v : w;
+            var key = id[1];
+            document.getElementById(id).value = group[key];
+            document.getElementById(id + "-val").textContent = fmt1(group[key]);
+          });
+          updateAll();
+        });
+
+        updateAll();
+      })();
+    </script>
+  </body>
+</html>
