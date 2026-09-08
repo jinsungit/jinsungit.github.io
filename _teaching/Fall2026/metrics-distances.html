@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inner Products, Norms &amp; Distances | CSCI 8945 | Jin Sun</title>
+    <meta
+      name="description"
+      content="Conceptual guide to inner products, norms, distances, metrics, and manifolds for representation learning — CSCI 8945, Fall 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+
+    <!-- MathJax 3 -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [["$", "$"]],
+          displayMath: [["$$", "$$"]]
+        },
+        options: { skipHtmlTags: ["script", "noscript", "style", "textarea"] }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" crossorigin="anonymous"></script>
+
+    <style>
+      .lab-main { max-width: 820px; margin: 0 auto; padding: 44px 48px 64px; }
+
+      :root {
+        --u-col:   #35597a;
+        --v-col:   #b0502f;
+        --l2-col:  #4f8a5b;
+        --l1-col:  #c07f1f;
+        --proj-col:#7a4fa0;
+      }
+
+      /* ── section prose ── */
+      .exp-section { margin: 2.8rem 0 0; }
+      .exp-section h2 {
+        font-family: var(--font-serif); font-size: 1.38rem; font-weight: 600;
+        color: var(--ink); margin: 0 0 0.85rem;
+        padding-bottom: 0.35rem; border-bottom: 1px solid var(--hairline);
+      }
+      .exp-section h3 {
+        font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600;
+        color: var(--ink); margin: 1.9rem 0 0.6rem;
+      }
+      .exp-section p {
+        font-size: 0.96rem; line-height: 1.78; color: var(--ink-soft);
+        margin: 0 0 0.75rem;
+      }
+      .exp-section p:last-child { margin-bottom: 0; }
+
+      /* ── formula display block ── */
+      .fbox {
+        background: var(--accent-faint); border: 1px solid var(--hairline);
+        border-radius: var(--radius-md); padding: 0.75rem 1.1rem;
+        margin: 0.9rem 0; text-align: center; font-size: 1.05rem;
+        overflow-x: auto;
+      }
+
+      /* ── insight / callout box ── */
+      .insight {
+        border-left: 3px solid var(--accent);
+        background: var(--accent-faint);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        padding: 0.7rem 1rem; margin: 1rem 0;
+        font-size: 0.88rem; line-height: 1.65; color: var(--ink-soft);
+      }
+      .insight strong { color: var(--ink); }
+
+      /* ── properties list ── */
+      .prop-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+      .prop-list li {
+        border-left: 2px solid var(--hairline);
+        padding: 0.45rem 0.7rem 0.45rem 0.85rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft);
+      }
+      .prop-list li strong { color: var(--ink); }
+
+      /* ── table ── */
+      .exp-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.87rem; }
+      .exp-table th, .exp-table td {
+        padding: 0.5rem 0.85rem; text-align: left;
+        border-bottom: 1px solid var(--hairline); color: var(--ink-soft);
+      }
+      .exp-table th {
+        background: var(--accent-faint); color: var(--ink-faint);
+        font-family: var(--font-sans); font-size: 0.68rem;
+        letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500;
+      }
+      .exp-table td:first-child { color: var(--ink); font-weight: 500; }
+
+      /* ── hierarchy diagram ── */
+      .hier { margin: 1.3rem 0; }
+      .hier-level {
+        border-radius: var(--radius-md); padding: 0.85rem 1rem 0.65rem;
+      }
+      .hier-level + .hier-level { margin-top: 0; }
+      .hier-metric { background: #fdf6ec; border: 1.5px solid #c07f1f; }
+      .hier-normed { background: #f0f6f0; border: 1.5px solid #4f8a5b; margin: 0.65rem 0 0 1.4rem; }
+      .hier-ip     { background: #eaf0f6; border: 1.5px solid #35597a; margin: 0.65rem 0 0 1.4rem; }
+      .hier-euclid { background: #d4e2ee; border: 2px solid #35597a;   margin: 0.65rem 0 0.2rem 1.4rem; }
+      .hier-name {
+        font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600;
+        color: var(--ink); display: block;
+      }
+      .hier-eg {
+        font-size: 0.77rem; color: var(--ink-faint); font-family: var(--font-sans);
+        display: block; margin-top: 0.1rem;
+      }
+      .hier-tools {
+        font-size: 0.77rem; color: var(--ink-soft); margin-top: 0.25rem; display: block;
+      }
+
+      /* ── manifold SVG wrapper ── */
+      .manifold-fig {
+        margin: 1.2rem 0;
+        background: var(--accent-faint); border: 1px solid var(--hairline);
+        border-radius: var(--radius-md); padding: 0.5rem 0.8rem 0.3rem;
+      }
+      .manifold-fig svg { display: block; width: 100%; max-width: 500px; margin: 0 auto; }
+      .manifold-caption {
+        text-align: center; font-size: 0.76rem; color: var(--ink-faint);
+        font-family: var(--font-sans); margin: 0.25rem 0 0.3rem;
+      }
+
+      /* ── ML connection cards ── */
+      .ml-cards {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: 0.85rem; margin: 1rem 0;
+      }
+      .ml-card {
+        background: var(--accent-faint); border: 1px solid var(--hairline);
+        border-radius: var(--radius-md); padding: 0.8rem 1rem;
+      }
+      .ml-card h4 {
+        font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.09em;
+        text-transform: uppercase; color: var(--accent); margin: 0 0 0.4rem;
+      }
+      .ml-card p { font-size: 0.83rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+      /* ── widget panel ── */
+      .widget {
+        background: #fff; border: 1px solid var(--hairline); border-radius: var(--radius-md);
+        box-shadow: var(--shadow-soft); padding: 1.1rem 1.2rem 1.3rem;
+        margin: 1.4rem 0; display: flex; gap: 1.4rem; flex-wrap: wrap; align-items: flex-start;
+      }
+      .widget-title {
+        font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.9rem;
+        flex-basis: 100%;
+      }
+      .widget-canvas svg {
+        display: block; border-radius: var(--radius);
+        background: var(--accent-faint);
+      }
+      .widget-controls { flex: 1 1 180px; min-width: 170px; }
+
+      /* sliders */
+      .grp-label {
+        font-family: var(--font-sans); font-size: 0.67rem; letter-spacing: 0.09em;
+        text-transform: uppercase; display: block; margin: 0 0 0.45rem;
+      }
+      .slider-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.48rem; }
+      .slider-row label {
+        font-family: var(--font-serif); font-size: 0.92rem; width: 1.55rem;
+        color: var(--ink-soft); flex-shrink: 0;
+      }
+      .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); min-width: 70px; }
+      .slider-row .val {
+        font-variant-numeric: tabular-nums; font-size: 0.81rem; color: var(--ink);
+        width: 2.9rem; text-align: right; flex-shrink: 0;
+      }
+
+      /* readout */
+      .readout {
+        margin-top: 1rem; font-size: 0.85rem; line-height: 1.9;
+        color: var(--ink-soft); border-top: 1px dashed var(--hairline); padding-top: 0.75rem;
+      }
+      .readout strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+      .interp-chip {
+        display: inline-block; font-size: 0.78rem;
+        background: var(--accent-faint); border-radius: var(--radius);
+        padding: 0.15rem 0.5rem; color: var(--ink-soft); margin-top: 0.15rem;
+      }
+
+      .reset-btn {
+        background: none; border: 1px solid var(--hairline); border-radius: var(--radius);
+        padding: 0.38rem 0.75rem; font-family: var(--font-sans); font-size: 0.77rem;
+        color: var(--ink-soft); cursor: pointer; transition: all 0.15s; margin-top: 0.55rem;
+      }
+      .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+      .hint { font-size: 0.7rem; color: var(--ink-faint); text-align: center; margin: 0.35rem 0 0; }
+
+      /* color tags */
+      .cu { color: var(--u-col); font-weight: 600; }
+      .cv { color: var(--v-col); font-weight: 600; }
+      .cl2 { color: var(--l2-col); font-weight: 600; }
+      .cl1 { color: var(--l1-col); font-weight: 600; }
+
+      @media (max-width: 680px) {
+        .lab-main { padding: 28px 18px 48px; }
+        .widget { flex-direction: column; }
+        .widget-canvas svg { width: 100% !important; height: auto !important; }
+        .hier-normed, .hier-ip, .hier-euclid { margin-left: 0.7rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="subpage-nav">
+      <div class="subpage-nav-inner">
+        <a href="../../index.html" class="brand-name">Jin Sun</a>
+        <nav aria-label="Main">
+          <a href="../../index.html#research">Research</a>
+          <a href="../../index.html#teaching">Teaching</a>
+          <a href="../../index.html#about">About</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main class="lab-main">
+      <p class="course-eyebrow">CSCI 8945 &middot; Math background</p>
+      <h1 class="course-title">Inner products, norms, and distances</h1>
+      <p class="course-lead">
+        A representation learning model takes raw data &mdash; pixels, words, audio &mdash; and maps it to a point in some
+        high-dimensional space. Everything that happens next (clustering, retrieval, loss functions) depends on the
+        <em>geometry</em> of that space: what does it mean for two points to be close, or for two directions to be
+        aligned? This page builds up those geometric concepts from scratch, and connects them to the manifold and
+        metric learning ideas that appear throughout the course.
+      </p>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 1: INNER PRODUCT                               -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>1. Inner product &mdash; measuring alignment</h2>
+        <p>
+          A vector $\mathbf{u} \in \mathbb{R}^n$ is a list of $n$ numbers. The <strong>inner product</strong>
+          (also called the dot product) of two vectors $\mathbf{u}$ and $\mathbf{v}$ is:
+        </p>
+        <div class="fbox">
+          $\mathbf{u} \cdot \mathbf{v} \;=\; u_1 v_1 + u_2 v_2 + \cdots + u_n v_n$
+        </div>
+        <p>
+          That&rsquo;s the formula, but the geometric meaning is what really counts. The inner product is tied to
+          the angle $\theta$ between the two vectors:
+        </p>
+        <div class="fbox">
+          $\mathbf{u} \cdot \mathbf{v} \;=\; \|\mathbf{u}\|\,\|\mathbf{v}\|\cos\theta$
+        </div>
+        <p>
+          Reading this left to right: when $\theta$ is small (vectors point the same way), $\cos\theta \approx 1$
+          and the inner product is large and positive. When $\theta = 90°$, $\cos\theta = 0$ and the inner product
+          is exactly zero &mdash; the vectors are <em>perpendicular</em>. When $\theta > 90°$,
+          $\cos\theta < 0$ and the inner product is negative.
+        </p>
+
+        <div class="insight">
+          <strong>Intuition.</strong> The inner product measures <em>alignment</em>. Think of it as asking: &ldquo;how
+          much of $\mathbf{v}$ points in the same direction as $\mathbf{u}$?&rdquo; It&rsquo;s the length of
+          $\mathbf{v}$&rsquo;s shadow cast onto $\mathbf{u}$, scaled by $\|\mathbf{u}\|$.
+        </div>
+
+        <h3>What makes something an inner product?</h3>
+        <p>
+          The standard dot product is the most familiar choice, but the term &ldquo;inner product&rdquo; refers to
+          any operation $\langle\cdot,\cdot\rangle$ satisfying three rules. These rules are what make geometry
+          work &mdash; you need them for angles, projections, and orthogonality to behave sensibly:
+        </p>
+        <ul class="prop-list">
+          <li>
+            <strong>Symmetric:</strong> $\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle$.
+            Order doesn&rsquo;t matter.
+          </li>
+          <li>
+            <strong>Linear:</strong> $\langle \alpha\mathbf{u} + \beta\mathbf{w},\, \mathbf{v} \rangle = \alpha\langle\mathbf{u},\mathbf{v}\rangle + \beta\langle\mathbf{w},\mathbf{v}\rangle$.
+            Scaling or adding vectors in the first slot scales or adds the result.
+          </li>
+          <li>
+            <strong>Positive-definite:</strong> $\langle \mathbf{u}, \mathbf{u} \rangle > 0$ for any $\mathbf{u} \neq \mathbf{0}$.
+            A non-zero vector always has positive &ldquo;self-alignment&rdquo; &mdash; it has real length.
+          </li>
+        </ul>
+        <p>
+          Any operation satisfying these three rules is a valid inner product and induces its own geometry.
+          A well-known alternative to the standard dot product is the <strong>weighted inner product</strong>:
+        </p>
+        <div class="fbox">
+          $\langle \mathbf{u}, \mathbf{v} \rangle_W \;=\; \mathbf{u}^\top W \mathbf{v}$
+        </div>
+        <p>
+          where $W$ is any positive-definite matrix. This stretches or rotates space &mdash; some directions
+          count more than others. Setting $W = \Sigma^{-1}$ (the inverse covariance of the data distribution)
+          gives the <strong>Mahalanobis inner product</strong>. Its induced distance automatically accounts for
+          correlations between dimensions and is scale-invariant: a feature measured in kilometers and another in
+          grams get put on equal footing. It&rsquo;s one of the workhorses of metric learning.
+        </p>
+
+        <!-- WIDGET 1 -->
+        <div class="widget">
+          <p class="widget-title">Interactive &mdash; inner product of two 2D vectors</p>
+          <div class="widget-canvas">
+            <svg id="svg-dot" width="290" height="290" viewBox="0 0 290 290"></svg>
+            <p class="hint">Adjust sliders to rotate &amp; scale the vectors</p>
+          </div>
+          <div class="widget-controls">
+            <span class="grp-label" style="color:var(--u-col)">Vector <strong>u</strong></span>
+            <div class="slider-row">
+              <label for="u1">u&#x2081;</label>
+              <input type="range" id="u1" min="-4" max="4" step="0.1" value="3" />
+              <span class="val" id="u1v">3.0</span>
+            </div>
+            <div class="slider-row">
+              <label for="u2">u&#x2082;</label>
+              <input type="range" id="u2" min="-4" max="4" step="0.1" value="1" />
+              <span class="val" id="u2v">1.0</span>
+            </div>
+
+            <span class="grp-label" style="color:var(--v-col); margin-top:0.9rem;">Vector <strong>v</strong></span>
+            <div class="slider-row">
+              <label for="v1">v&#x2081;</label>
+              <input type="range" id="v1" min="-4" max="4" step="0.1" value="1" />
+              <span class="val" id="v1v">1.0</span>
+            </div>
+            <div class="slider-row">
+              <label for="v2">v&#x2082;</label>
+              <input type="range" id="v2" min="-4" max="4" step="0.1" value="3" />
+              <span class="val" id="v2v">3.0</span>
+            </div>
+            <button class="reset-btn" id="dot-reset">Reset</button>
+
+            <div class="readout">
+              <span class="cu">u</span>&nbsp;&middot;&nbsp;<span class="cv">v</span>
+              &nbsp;=&nbsp;<strong id="dot-val">&mdash;</strong><br />
+              angle &theta; &nbsp;=&nbsp;<strong id="dot-ang">&mdash;</strong><br />
+              <span class="interp-chip" id="dot-interp">&mdash;</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 2: NORMS                                       -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>2. Norms &mdash; the length of a vector</h2>
+        <p>
+          The inner product of a vector with <em>itself</em> gives its squared length:
+          $\mathbf{u} \cdot \mathbf{u} = u_1^2 + u_2^2 + \cdots + u_n^2$.
+          Taking the square root gives the <strong>Euclidean norm</strong> ($L^2$ norm):
+        </p>
+        <div class="fbox">
+          $\|\mathbf{u}\|_2 \;=\; \sqrt{\mathbf{u} \cdot \mathbf{u}} \;=\; \sqrt{u_1^2 + u_2^2 + \cdots + u_n^2}$
+        </div>
+        <p>
+          This is just the Pythagorean theorem generalized to $n$ dimensions. But $L^2$ is not the only
+          option. Different norms measure &ldquo;size&rdquo; differently, and this choice matters in ML:
+        </p>
+        <table class="exp-table">
+          <thead>
+            <tr><th>Name</th><th>Formula</th><th>Also called</th><th>Intuition</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$L^1$ norm</td>
+              <td>$\sum_i |u_i|$</td>
+              <td>Manhattan / taxicab</td>
+              <td>Total distance walking on a city grid &mdash; no diagonals allowed</td>
+            </tr>
+            <tr>
+              <td>$L^2$ norm</td>
+              <td>$\sqrt{\sum_i u_i^2}$</td>
+              <td>Euclidean</td>
+              <td>Straight-line (as-the-crow-flies) distance from the origin</td>
+            </tr>
+            <tr>
+              <td>$L^\infty$ norm</td>
+              <td>$\max_i |u_i|$</td>
+              <td>Chebyshev</td>
+              <td>The largest coordinate &mdash; worst-case deviation across all dimensions</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="insight">
+          <strong>Why norms matter in ML.</strong> Regularization penalizes weight vectors with large norms.
+          <em>$L^1$ regularization</em> (Lasso) drives many weights to exactly zero &mdash; it produces
+          <em>sparse</em> solutions. <em>$L^2$ regularization</em> (Ridge / weight decay) keeps all weights
+          small but spread out. The choice of norm directly shapes what the model can learn.
+        </div>
+        <p>
+          Notice that the $L^2$ norm arises directly from the inner product &mdash; it is the
+          only norm that &ldquo;knows about angles.&rdquo; The $L^1$ and $L^\infty$ norms do
+          <em>not</em> come from any inner product; there is no $\langle\cdot,\cdot\rangle$ that produces them.
+          A quick check: a norm comes from an inner product if and only if it satisfies the
+          <strong>parallelogram law</strong>:
+          $\|\mathbf{u}+\mathbf{v}\|^2 + \|\mathbf{u}-\mathbf{v}\|^2 = 2(\|\mathbf{u}\|^2 + \|\mathbf{v}\|^2)$.
+          The $L^1$ norm fails this, which means there is no notion of &ldquo;angle&rdquo; in $L^1$ space.
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 3: DISTANCE                                    -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>3. Distance &mdash; how far apart are two points?</h2>
+        <p>
+          Given a norm, the distance between two points is the norm of their difference. The <strong>Euclidean
+          distance</strong> is:
+        </p>
+        <div class="fbox">
+          $d_2(\mathbf{u}, \mathbf{v}) \;=\; \|\mathbf{u} - \mathbf{v}\|_2 \;=\; \sqrt{\sum_{i=1}^{n}(u_i - v_i)^2}$
+        </div>
+        <p>
+          Swapping in the $L^1$ norm gives <strong>Manhattan distance</strong>, which counts the total
+          coordinate-wise displacement:
+        </p>
+        <div class="fbox">
+          $d_1(\mathbf{u}, \mathbf{v}) \;=\; \|\mathbf{u} - \mathbf{v}\|_1 \;=\; \sum_{i=1}^{n}|u_i - v_i|$
+        </div>
+        <p>
+          Any reasonable distance function (a <strong>metric</strong>) obeys three common-sense rules:
+        </p>
+        <ul class="prop-list">
+          <li>
+            <strong>Non-negative, zero iff identical:</strong>
+            $d(\mathbf{u}, \mathbf{v}) \geq 0$, and $d(\mathbf{u}, \mathbf{v}) = 0$ only when $\mathbf{u} = \mathbf{v}$.
+            Two distinct points can&rsquo;t be at distance zero.
+          </li>
+          <li>
+            <strong>Symmetric:</strong> $d(\mathbf{u}, \mathbf{v}) = d(\mathbf{v}, \mathbf{u})$.
+            The distance from A to B equals the distance from B to A.
+          </li>
+          <li>
+            <strong>Triangle inequality:</strong>
+            $d(\mathbf{u}, \mathbf{w}) \leq d(\mathbf{u}, \mathbf{v}) + d(\mathbf{v}, \mathbf{w})$.
+            A detour through a third point is never shorter than going directly.
+          </li>
+        </ul>
+
+        <!-- WIDGET 2 -->
+        <div class="widget">
+          <p class="widget-title">Interactive &mdash; L1 vs L2 distance</p>
+          <div class="widget-canvas">
+            <svg id="svg-dist" width="290" height="290" viewBox="0 0 290 290" style="touch-action:none;cursor:default;"></svg>
+            <p class="hint">Drag point <strong style="color:var(--u-col)">A</strong> or <strong style="color:var(--v-col)">B</strong></p>
+          </div>
+          <div class="widget-controls">
+            <div class="readout" style="border-top:none;padding-top:0;margin-top:0;">
+              <span class="cl2">&#9632; L2 (Euclidean)</span><br />
+              $d_2 = $ <strong id="d2-val">&mdash;</strong><br /><br />
+              <span class="cl1">&#9632; L1 (Manhattan)</span><br />
+              $d_1 = $ <strong id="d1-val">&mdash;</strong><br /><br />
+              ratio &nbsp;$d_1 / d_2 = $<strong id="ratio-val">&mdash;</strong>
+            </div>
+            <div class="insight" style="margin-top:1.1rem;font-size:0.82rem;">
+              $d_1 \geq d_2$ always &mdash; the straight line is never longer than the
+              grid path. When one coordinate dominates, the two are nearly equal.
+              The worst case is $|dx| = |dy|$: then $d_1 = \sqrt{2}\,d_2 \approx 1.41\,d_2$.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 4: HIERARCHY OF STRUCTURE                      -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>4. The hierarchy of structure</h2>
+        <p>
+          Euclidean space $\mathbb{R}^n$ is not just any space &mdash; it has an unusually rich geometric
+          structure. The concepts above form a strict hierarchy: each level adds more tools but also requires
+          more assumptions about the space.
+        </p>
+
+        <div class="hier">
+          <div class="hier-level hier-metric">
+            <span class="hier-name">Metric space</span>
+            <span class="hier-eg">Examples: word edit distance, graph shortest-path, dynamic time warping (DTW)</span>
+            <span class="hier-tools">Tools: nearest-neighbor search, clustering by distance, triangle inequality bounds</span>
+
+            <div class="hier-level hier-normed">
+              <span class="hier-name">Normed space (vector space + norm)</span>
+              <span class="hier-eg">Examples: $\mathbb{R}^n$ with $L^1$ norm, $L^p$ spaces</span>
+              <span class="hier-tools">+ Tools: vector arithmetic, regularization, interpolation between points</span>
+
+              <div class="hier-level hier-ip">
+                <span class="hier-name">Inner product space (norm comes from an inner product)</span>
+                <span class="hier-eg">Examples: $\mathbb{R}^n$ with dot product, Hilbert spaces, function spaces</span>
+                <span class="hier-tools">+ Tools: angles, projections, orthogonality, PCA, cosine similarity</span>
+
+                <div class="hier-level hier-euclid">
+                  <span class="hier-name">Euclidean space $\mathbb{R}^n$</span>
+                  <span class="hier-eg">Flat, finite-dimensional, standard basis vectors $\mathbf{e}_1, \ldots, \mathbf{e}_n$</span>
+                  <span class="hier-tools">The default workspace of most ML algorithms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight">
+          <strong>Why this matters.</strong> The structure your data lives in determines what tools are
+          available. Cosine similarity and PCA require an inner product. $k$-means and interpolation need a
+          vector space with a norm. $k$-NN search only requires a metric. If your data has a natural
+          non-Euclidean metric &mdash; graph distances, string edit distances, tree distances &mdash;
+          many standard ML algorithms silently assume flat Euclidean space and give wrong results. The
+          field of <em>metric learning</em> is largely about choosing or learning the right notion of
+          distance for a given task.
+        </div>
+        <p>
+          One important consequence: not every metric comes from a norm, and not every norm comes from an
+          inner product. So a method that requires angles (like PCA or cosine similarity) cannot be
+          directly applied to, say, a graph-distance metric space. Embedding such data into $\mathbb{R}^n$
+          &mdash; which is exactly what representation learning does &mdash; is one way to work around this:
+          you find coordinates that approximately preserve the original distances, gaining access to all
+          the inner-product tools in the process.
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 5: COSINE SIMILARITY                           -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>5. Cosine similarity &mdash; direction without magnitude</h2>
+        <p>
+          From the geometric form of the inner product, dividing by both magnitudes isolates just the angle:
+        </p>
+        <div class="fbox">
+          $\text{sim}_{\cos}(\mathbf{u}, \mathbf{v}) \;=\; \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|_2\,\|\mathbf{v}\|_2} \;=\; \cos\theta \;\in [-1,\, +1]$
+        </div>
+        <p>
+          Cosine similarity measures <em>direction only</em>. Two vectors that point the same way have
+          cosine similarity $+1$ regardless of how long they are. Two perpendicular vectors have cosine $0$.
+          Two opposite vectors have cosine $-1$.
+        </p>
+        <p>
+          <strong>Concrete example.</strong> Let $\mathbf{u} = (1, 2)$ and $\mathbf{v} = (3, 6)$.
+          The L2 distance is $\sqrt{(3-1)^2+(6-2)^2} = \sqrt{20} \approx 4.47$ &mdash; they look far apart.
+          But $\cos\theta = (1 \cdot 3 + 2 \cdot 6)\,/\,(\sqrt{5} \cdot \sqrt{45}) = 15/15 = 1.0$ &mdash;
+          they point in exactly the same direction. In word embedding spaces, &ldquo;run&rdquo; and
+          &ldquo;running&rdquo; often differ in magnitude but are nearly co-directional: cosine similarity
+          correctly says they&rsquo;re close.
+        </p>
+
+        <div class="insight">
+          <strong>Unit-sphere trick.</strong> If you $L^2$-normalize all embeddings before computing
+          distances (i.e., divide each vector by its own norm so $\|\hat{\mathbf{u}}\| = 1$), then
+          the L2 distance and cosine similarity give exactly the same ranking, because
+          $\|\hat{\mathbf{u}} - \hat{\mathbf{v}}\|_2^2 = 2 - 2\cos\theta$. This is why many modern
+          models (CLIP, SimCLR) normalize embeddings before computing losses.
+        </div>
+
+        <table class="exp-table" style="margin-top:1.1rem;">
+          <thead>
+            <tr><th>Measure</th><th>Sensitive to magnitude?</th><th>Range</th><th>Common use in ML</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dot product $\mathbf{u} \cdot \mathbf{v}$</td>
+              <td>Yes</td>
+              <td>$(-\infty, +\infty)$</td>
+              <td>Attention scores, unnormalized logits</td>
+            </tr>
+            <tr>
+              <td>Cosine similarity</td>
+              <td>No (direction only)</td>
+              <td>$[-1, +1]$</td>
+              <td>Text &amp; image retrieval, CLIP, sentence embeddings</td>
+            </tr>
+            <tr>
+              <td>L2 distance</td>
+              <td>Yes</td>
+              <td>$[0, +\infty)$</td>
+              <td>k-NN, metric learning, Gaussian RBF kernel</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 6: BEYOND FLAT SPACE — MANIFOLDS               -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>6. Beyond flat space: distances on manifolds</h2>
+        <p>
+          Everything so far assumes we are in flat, infinite $\mathbb{R}^n$. But real high-dimensional data
+          rarely fills all of space &mdash; it tends to cluster near a lower-dimensional curved surface.
+        </p>
+
+        <p>
+          The <strong>manifold hypothesis</strong> &mdash; one of the central ideas of this course &mdash;
+          says that data like images or speech signals, while formally living in a very high-dimensional space
+          (millions of pixels or samples), actually lies near a much lower-dimensional <strong>manifold</strong>.
+          The genuine degrees of freedom are small; most of that ambient high-dimensional space is empty.
+          A face image has millions of pixels, but the space of realistic face images is far smaller &mdash;
+          parameterized by pose, expression, lighting, identity, and a handful of other factors.
+        </p>
+
+        <!-- Manifold illustration -->
+        <div class="manifold-fig">
+          <svg viewBox="0 0 500 155" xmlns="http://www.w3.org/2000/svg">
+            <!-- faint full manifold curve -->
+            <path d="M 20 110 C 55 110 65 55 100 65 C 135 75 145 120 185 108
+                     C 225 96 235 45 275 52 C 315 59 325 105 365 95 C 395 87 420 85 480 88"
+                  fill="none" stroke="#35597a" stroke-width="2" opacity="0.18"/>
+            <!-- highlighted geodesic section A→B (along the curve) -->
+            <path d="M 100 65 C 135 75 145 120 185 108 C 225 96 235 45 275 52"
+                  fill="none" stroke="#35597a" stroke-width="3" stroke-linecap="round"/>
+            <!-- Euclidean straight line A→B (dashed, red) -->
+            <line x1="100" y1="65" x2="275" y2="52"
+                  stroke="#b0502f" stroke-width="1.8" stroke-dasharray="6 4"/>
+            <!-- point A -->
+            <circle cx="100" cy="65" r="5.5" fill="#35597a"/>
+            <text x="90" y="56" font-size="12" font-weight="700" fill="#35597a" font-family="serif">A</text>
+            <!-- point B -->
+            <circle cx="275" cy="52" r="5.5" fill="#35597a"/>
+            <text x="280" y="50" font-size="12" font-weight="700" fill="#35597a" font-family="serif">B</text>
+            <!-- geodesic label -->
+            <text x="188" y="128" text-anchor="middle" font-size="10" fill="#35597a" font-family="sans-serif">geodesic distance (along manifold)</text>
+            <!-- euclidean label -->
+            <text x="188" y="36" text-anchor="middle" font-size="10" fill="#b0502f" font-family="sans-serif">Euclidean distance (straight line)</text>
+            <!-- arrows pointing to labels -->
+            <line x1="188" y1="120" x2="188" y2="108" stroke="#35597a" stroke-width="1" marker-end="url(#arr-geo)"/>
+            <line x1="188" y1="40"  x2="188" y2="53"  stroke="#b0502f" stroke-width="1" marker-end="url(#arr-euc)"/>
+            <defs>
+              <marker id="arr-geo" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#35597a"/>
+              </marker>
+              <marker id="arr-euc" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#b0502f"/>
+              </marker>
+            </defs>
+          </svg>
+          <p class="manifold-caption">On a curved manifold, the shortest path between A and B follows the surface (geodesic), not the straight Euclidean chord. The Euclidean distance underestimates the true distance.</p>
+        </div>
+
+        <p>
+          On a curved surface, Euclidean distance (the straight-line path through the ambient space) may be
+          physically unreachable &mdash; you&rsquo;d have to leave the surface. The <strong>geodesic
+          distance</strong> is the length of the shortest path that stays on the surface. On Earth, the
+          geodesic between two cities is a great-circle arc, not a chord through the globe.
+        </p>
+
+        <div class="insight">
+          <strong>Consequence for embeddings.</strong> Two points can be nearby in Euclidean distance but
+          far apart on the manifold (they lie on different &ldquo;sheets&rdquo; that happen to be close in
+          the ambient space). Manifold learning methods like Isomap and UMAP estimate geodesic distances
+          rather than Euclidean distances, then find a flat embedding that preserves them as well as possible.
+          This is a core theme we&rsquo;ll return to throughout the course.
+        </div>
+
+        <h3>Riemannian geometry: a local inner product</h3>
+        <p>
+          A smooth manifold can be equipped with an inner product at each point. This is called the
+          <strong>Riemannian metric tensor</strong> $g_p$: it lives in the <em>tangent space</em> at $p$
+          &mdash; the flat plane that just touches the manifold there. The inner product tells you how to
+          measure lengths and angles in that local neighborhood.
+        </p>
+        <p>
+          Crucially, $g_p$ can <em>vary</em> from point to point. Flat Euclidean space is the special case
+          where $g_p = I$ everywhere &mdash; the same identity matrix at every point. On a curved manifold,
+          $g_p$ changes, which is why straight lines are no longer shortest paths.
+        </p>
+        <p>
+          In practice, many deep learning models implicitly learn something like a Riemannian structure:
+          the embedding space gets &ldquo;bent&rdquo; by the model so that regions of high data density
+          are stretched apart (more discriminative) while sparse regions are compressed. <em>Hyperbolic
+          embeddings</em> &mdash; used for hierarchical data like knowledge graphs and taxonomies &mdash;
+          are a concrete example of deliberately non-Euclidean geometry in ML. We will revisit these ideas
+          when we discuss manifold learning and subspace structures later in the course.
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- SECTION 7: SO WHAT?                                    -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section">
+        <h2>7. So what? Connections to this course</h2>
+        <p>
+          Every representation learning method encodes a notion of similarity through the geometry of its
+          embedding space. The choice of metric &mdash; which distances are small, which are large &mdash;
+          <em>is</em> what the model learns to shape. As you go through the course, notice which layer of
+          the hierarchy each method assumes and what happens when that assumption breaks.
+        </p>
+        <div class="ml-cards">
+          <div class="ml-card">
+            <h4>Contrastive learning</h4>
+            <p>Pull embeddings of similar items close (small L2 or large cosine); push dissimilar items apart. The loss is literally a distance computation in embedding space.</p>
+          </div>
+          <div class="ml-card">
+            <h4>$k$-NN retrieval</h4>
+            <p>Classify or retrieve by finding the $k$ nearest neighbors in embedding space. The choice of metric determines what &ldquo;nearest&rdquo; means &mdash; and can be learned.</p>
+          </div>
+          <div class="ml-card">
+            <h4>Attention</h4>
+            <p>In Transformers, attention scores are dot products (scaled by $1/\sqrt{d_k}$). A large dot product means &ldquo;attend more to this token&rdquo; &mdash; pure inner-product geometry.</p>
+          </div>
+          <div class="ml-card">
+            <h4>PCA / MDS</h4>
+            <p>PCA finds orthogonal directions of maximum variance &mdash; it requires an inner product. MDS embeds data by preserving pairwise distances &mdash; only a metric is needed.</p>
+          </div>
+          <div class="ml-card">
+            <h4>Kernel methods</h4>
+            <p>A kernel $k(\mathbf{x},\mathbf{y})$ is an inner product in disguise: $k(\mathbf{x},\mathbf{y}) = \langle\phi(\mathbf{x}),\phi(\mathbf{y})\rangle$ for some feature map $\phi$. SVMs and kernel PCA work in potentially infinite-dimensional spaces without ever computing $\phi$ explicitly &mdash; the geometry is defined entirely by the kernel.</p>
+          </div>
+          <div class="ml-card">
+            <h4>Manifold learning</h4>
+            <p>Isomap, LLE, UMAP approximate geodesic distances on the data manifold, then embed into flat $\mathbb{R}^k$. The metric is non-Euclidean; the result is Euclidean. This is the bridge between Sections 4 and 6 above.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- REFERENCES                                             -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section class="exp-section" style="margin-top:2.8rem;">
+        <h2 style="font-size:1.1rem;">References</h2>
+        <p style="font-size:0.88rem;margin-bottom:0.5rem;">
+          Wikipedia articles for each concept covered above:
+        </p>
+        <ul style="list-style:none;padding:0;margin:0 0 1.2rem;columns:2;column-gap:2rem;">
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Inner_product_space" target="_blank" rel="noopener">Inner product space</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank" rel="noopener">Dot product</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Mahalanobis_distance" target="_blank" rel="noopener">Mahalanobis distance</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Norm_(mathematics)" target="_blank" rel="noopener">Norm (mathematics)</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Lp_space" target="_blank" rel="noopener">L<sup>p</sup> space</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Parallelogram_law" target="_blank" rel="noopener">Parallelogram law</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Metric_space" target="_blank" rel="noopener">Metric space</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank" rel="noopener">Euclidean distance</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Taxicab_geometry" target="_blank" rel="noopener">Taxicab (Manhattan) distance</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="_blank" rel="noopener">Cosine similarity</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Manifold" target="_blank" rel="noopener">Manifold</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Geodesic" target="_blank" rel="noopener">Geodesic</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Riemannian_manifold" target="_blank" rel="noopener">Riemannian manifold</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Hyperbolic_space" target="_blank" rel="noopener">Hyperbolic space</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Kernel_method" target="_blank" rel="noopener">Kernel method</a></li>
+          <li style="font-size:0.86rem;padding:0.18rem 0;break-inside:avoid;"><a href="https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction" target="_blank" rel="noopener">Nonlinear dimensionality reduction</a></li>
+        </ul>
+        <p style="font-size:0.88rem;margin-bottom:0.4rem;">
+          Relevant sections in the course reading materials:
+        </p>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.86rem;">
+          <li style="padding:0.18rem 0;">Goodfellow, Bengio &amp; Courville, <em>Deep Learning</em> &mdash; Appendix, Part I: Applied Math and Machine Learning Basics (linear algebra, probability). <a href="https://www.deeplearningbook.org/contents/linear_algebra.html" target="_blank" rel="noopener">Ch. 2: Linear Algebra</a>.</li>
+          <li style="padding:0.18rem 0;">Blum, Hopcroft &amp; Kannan, <em>Foundations of Data Science</em> &mdash; <a href="https://www.cs.cornell.edu/jeh/book.pdf" target="_blank" rel="noopener">Ch. 2: High-Dimensional Space</a> (norms, distances, geometry of high dimensions).</li>
+        </ul>
+      </section>
+
+      <footer class="footer-legal" data-shared-footer style="margin-top:2.8rem;border-top:1px solid var(--hairline);padding-top:1rem;color:var(--ink-faint);"></footer>
+    </main>
+
+    <script src="../../assets/js/main.js" defer></script>
+    <script>
+    (function () {
+      "use strict";
+
+      var NS = "http://www.w3.org/2000/svg";
+      function mk(tag, attrs) {
+        var e = document.createElementNS(NS, tag);
+        for (var k in attrs) e.setAttribute(k, attrs[k]);
+        return e;
+      }
+      function fmt2(n) { return (Math.round(n * 100) / 100).toFixed(2); }
+
+      /* ── shared geometry helpers ─────────────────────────── */
+      var SZ = 290, CX = 145, CY = 145, VIEW = 4.5;
+      var SCALE = (SZ / 2 - 15) / VIEW;
+
+      function toSvg(mx, my) { return [CX + mx * SCALE, CY - my * SCALE]; }
+      function fromSvg(sx, sy) { return [(sx - CX) / SCALE, -(sy - CY) / SCALE]; }
+
+      /* ── build a grid + axes into an svg element ─────────── */
+      function buildGrid(svg) {
+        var g = mk("g", {});
+        for (var i = -Math.ceil(VIEW); i <= Math.ceil(VIEW); i++) {
+          var p = toSvg(i, i);
+          g.appendChild(mk("line", { x1: p[0], y1: 0, x2: p[0], y2: SZ,
+            stroke: "#fff", "stroke-width": i === 0 ? 1.5 : 0.75, opacity: i === 0 ? 0.85 : 0.45 }));
+          g.appendChild(mk("line", { x1: 0, y1: p[1], x2: SZ, y2: p[1],
+            stroke: "#fff", "stroke-width": i === 0 ? 1.5 : 0.75, opacity: i === 0 ? 0.85 : 0.45 }));
+        }
+        svg.appendChild(g);
+      }
+
+      /* ── arrowhead marker factory ─────────────────────────── */
+      function mkMarker(id, color) {
+        var m = mk("marker", { id: id, viewBox: "0 0 10 10", refX: "8", refY: "5",
+          markerWidth: "6", markerHeight: "6", orient: "auto-start-reverse" });
+        m.appendChild(mk("path", { d: "M0,1 L9,5 L0,9 z", fill: color }));
+        return m;
+      }
+
+      /* ═══════════════════════════════════════════════════════
+         WIDGET 1 — Inner Product
+      ═══════════════════════════════════════════════════════ */
+      (function () {
+        var svg = document.getElementById("svg-dot");
+        var defs = mk("defs", {});
+        defs.appendChild(mkMarker("arr-u", "var(--u-col)"));
+        defs.appendChild(mkMarker("arr-v", "var(--v-col)"));
+        svg.appendChild(defs);
+
+        buildGrid(svg);
+
+        var arc  = mk("path", { fill: "none", stroke: "#9c968c", "stroke-width": "1.2", opacity: "0.8" });
+        var drop = mk("line", { stroke: "var(--proj-col)", "stroke-width": "1.4",
+          "stroke-dasharray": "4 3", opacity: "0" });
+        var lineU = mk("line", { stroke: "var(--u-col)", "stroke-width": "2.6", "marker-end": "url(#arr-u)" });
+        var lineV = mk("line", { stroke: "var(--v-col)", "stroke-width": "2.6", "marker-end": "url(#arr-v)" });
+        var thetaLbl = mk("text", { "font-size": "10.5", "font-family": "serif", fill: "#6c665c" });
+
+        [arc, drop, lineU, lineV, thetaLbl].forEach(function (e) { svg.appendChild(e); });
+
+        var lblU = mk("text", { "font-size": "13", "font-family": "serif", "font-weight": "700", fill: "var(--u-col)" });
+        var lblV = mk("text", { "font-size": "13", "font-family": "serif", "font-weight": "700", fill: "var(--v-col)" });
+        lblU.textContent = "u"; lblV.textContent = "v";
+        svg.appendChild(lblU); svg.appendChild(lblV);
+
+        function readSlider(id, valId) {
+          var v = +document.getElementById(id).value;
+          document.getElementById(valId).textContent = v.toFixed(1);
+          return v;
+        }
+
+        function update() {
+          var u1 = readSlider("u1", "u1v"), u2 = readSlider("u2", "u2v");
+          var v1 = readSlider("v1", "v1v"), v2 = readSlider("v2", "v2v");
+
+          var o  = toSvg(0, 0), pu = toSvg(u1, u2), pv = toSvg(v1, v2);
+
+          function setLine(el, p1, p2) {
+            el.setAttribute("x1", p1[0]); el.setAttribute("y1", p1[1]);
+            el.setAttribute("x2", p2[0]); el.setAttribute("y2", p2[1]);
+          }
+          setLine(lineU, o, pu); setLine(lineV, o, pv);
+
+          function placeLabel(lbl, tip, dx, dy) {
+            var len = Math.hypot(dx, dy) || 1;
+            lbl.setAttribute("x", tip[0] + (dx / len) * 14);
+            lbl.setAttribute("y", tip[1] - (dy / len) * 8);
+          }
+          placeLabel(lblU, pu, u1, u2); placeLabel(lblV, pv, v1, v2);
+
+          var dot  = u1 * v1 + u2 * v2;
+          var magU = Math.hypot(u1, u2), magV = Math.hypot(v1, v2);
+
+          if (magU < 0.05 || magV < 0.05) {
+            arc.setAttribute("d", ""); drop.setAttribute("opacity", "0");
+            thetaLbl.textContent = "";
+            document.getElementById("dot-val").textContent = fmt2(dot);
+            document.getElementById("dot-ang").textContent = "—";
+            document.getElementById("dot-interp").textContent = "—";
+            return;
+          }
+
+          var cosT  = Math.max(-1, Math.min(1, dot / (magU * magV)));
+          var theta = Math.acos(cosT);
+          var ang1  = Math.atan2(-u2, u1), ang2 = Math.atan2(-v2, v1);
+          var R     = 32;
+          var ax1   = CX + R * Math.cos(ang1), ay1 = CY + R * Math.sin(ang1);
+          var ax2   = CX + R * Math.cos(ang2), ay2 = CY + R * Math.sin(ang2);
+          var diff  = ((ang2 - ang1 + 3 * Math.PI) % (2 * Math.PI)) - Math.PI;
+          var sweep = diff >= 0 ? 1 : 0, large = Math.abs(diff) > Math.PI ? 1 : 0;
+          arc.setAttribute("d",
+            "M " + ax1.toFixed(1) + " " + ay1.toFixed(1) +
+            " A " + R + " " + R + " 0 " + large + " " + sweep +
+            " " + ax2.toFixed(1) + " " + ay2.toFixed(1));
+
+          var midAng = ang1 + diff / 2, lr = R + 13;
+          thetaLbl.setAttribute("x", (CX + lr * Math.cos(midAng) - 5).toFixed(1));
+          thetaLbl.setAttribute("y", (CY + lr * Math.sin(midAng) + 4).toFixed(1));
+          thetaLbl.textContent = (theta * 180 / Math.PI).toFixed(0) + "°";
+
+          var t = dot / (magU * magU), foot = toSvg(t * u1, t * u2);
+          setLine(drop, pv, foot);
+          drop.setAttribute("opacity", "0.75");
+
+          document.getElementById("dot-val").textContent = fmt2(dot);
+          document.getElementById("dot-ang").textContent = (theta * 180 / Math.PI).toFixed(1) + "°";
+          var interp;
+          if (theta < 0.18) interp = "same direction ↗";
+          else if (theta < 1.30) interp = "roughly aligned";
+          else if (Math.abs(theta - Math.PI / 2) < 0.18) interp = "perpendicular ⊥";
+          else if (theta < Math.PI - 0.18) interp = "pointing apart";
+          else interp = "opposite directions ↙";
+          document.getElementById("dot-interp").textContent = interp;
+        }
+
+        ["u1", "u2", "v1", "v2"].forEach(function (id) {
+          document.getElementById(id).addEventListener("input", update);
+        });
+        document.getElementById("dot-reset").addEventListener("click", function () {
+          document.getElementById("u1").value = 3; document.getElementById("u2").value = 1;
+          document.getElementById("v1").value = 1; document.getElementById("v2").value = 3;
+          update();
+        });
+        update();
+      }());
+
+      /* ═══════════════════════════════════════════════════════
+         WIDGET 2 — Distance (L1 vs L2)
+      ═══════════════════════════════════════════════════════ */
+      (function () {
+        var svg = document.getElementById("svg-dist");
+        var defs = mk("defs", {}); svg.appendChild(defs);
+        buildGrid(svg);
+
+        var l2line = mk("line", { stroke: "var(--l2-col)", "stroke-width": "2.5" });
+        var l1segH = mk("line", { stroke: "var(--l1-col)", "stroke-width": "2", "stroke-dasharray": "5 3.5" });
+        var l1segV = mk("line", { stroke: "var(--l1-col)", "stroke-width": "2", "stroke-dasharray": "5 3.5" });
+        var dotA   = mk("circle", { r: "8", fill: "var(--u-col)", cursor: "grab" });
+        var dotB   = mk("circle", { r: "8", fill: "var(--v-col)", cursor: "grab" });
+        var lblA   = mk("text", { "font-size": "13", "font-family": "serif", "font-weight": "700", fill: "var(--u-col)" });
+        var lblB   = mk("text", { "font-size": "13", "font-family": "serif", "font-weight": "700", fill: "var(--v-col)" });
+        lblA.textContent = "A"; lblB.textContent = "B";
+
+        [l2line, l1segH, l1segV, dotA, dotB, lblA, lblB].forEach(function (e) { svg.appendChild(e); });
+
+        var ptA = { x: -2.2, y: -1.5 }, ptB = { x: 2.2, y: 1.8 };
+        var dragging = null;
+
+        function clamp(v) { return Math.max(-VIEW + 0.3, Math.min(VIEW - 0.3, v)); }
+
+        function update() {
+          var a = toSvg(ptA.x, ptA.y), b = toSvg(ptB.x, ptB.y);
+          var corner = toSvg(ptB.x, ptA.y);
+
+          l2line.setAttribute("x1", a[0]); l2line.setAttribute("y1", a[1]);
+          l2line.setAttribute("x2", b[0]); l2line.setAttribute("y2", b[1]);
+          l1segH.setAttribute("x1", a[0]);      l1segH.setAttribute("y1", a[1]);
+          l1segH.setAttribute("x2", corner[0]); l1segH.setAttribute("y2", corner[1]);
+          l1segV.setAttribute("x1", corner[0]); l1segV.setAttribute("y1", corner[1]);
+          l1segV.setAttribute("x2", b[0]);      l1segV.setAttribute("y2", b[1]);
+          dotA.setAttribute("cx", a[0]); dotA.setAttribute("cy", a[1]);
+          dotB.setAttribute("cx", b[0]); dotB.setAttribute("cy", b[1]);
+          lblA.setAttribute("x", a[0] + 11); lblA.setAttribute("y", a[1] - 7);
+          lblB.setAttribute("x", b[0] + 11); lblB.setAttribute("y", b[1] - 7);
+
+          var dx = ptB.x - ptA.x, dy = ptB.y - ptA.y;
+          var d2 = Math.hypot(dx, dy), d1 = Math.abs(dx) + Math.abs(dy);
+          document.getElementById("d2-val").textContent   = fmt2(d2);
+          document.getElementById("d1-val").textContent   = fmt2(d1);
+          document.getElementById("ratio-val").textContent = d2 > 0.001 ? fmt2(d1 / d2) : "—";
+        }
+
+        function svgCoords(e) {
+          var rect = svg.getBoundingClientRect();
+          var src  = e.touches ? e.touches[0] : e;
+          var sx = (src.clientX - rect.left) * SZ / rect.width;
+          var sy = (src.clientY - rect.top)  * SZ / rect.height;
+          return fromSvg(sx, sy);
+        }
+
+        function startDrag(pt) {
+          return function (e) { e.preventDefault(); dragging = pt; };
+        }
+        dotA.addEventListener("mousedown",  startDrag(ptA));
+        dotB.addEventListener("mousedown",  startDrag(ptB));
+        dotA.addEventListener("touchstart", startDrag(ptA), { passive: false });
+        dotB.addEventListener("touchstart", startDrag(ptB), { passive: false });
+
+        function onMove(e) {
+          if (!dragging) return; e.preventDefault();
+          var m = svgCoords(e);
+          dragging.x = clamp(m[0]); dragging.y = clamp(m[1]);
+          update();
+        }
+        svg.addEventListener("mousemove", onMove);
+        svg.addEventListener("touchmove", onMove, { passive: false });
+        window.addEventListener("mouseup",  function () { dragging = null; });
+        window.addEventListener("touchend", function () { dragging = null; });
+
+        update();
+      }());
+
+    }());
+    </script>
+  </body>
+</html>
