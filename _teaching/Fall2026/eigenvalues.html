@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eigenvalues &amp; Eigenvectors | CSCI 8945 | Jin Sun</title>
+    <meta
+      name="description"
+      content="Interactive visualization of eigenvalues and eigenvectors of a 2×2 matrix — CSCI 8945, Fall 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+    <style>
+      .lab-main { max-width: 1100px; margin: 0 auto; padding: 44px 48px 60px; }
+
+      :root {
+        --v-color:  #35597a;   /* input vector – blue  */
+        --tv-color: #4f8a5b;   /* transformed vector – green */
+        --e1-color: #c0392b;   /* eigenvector 1 – red */
+        --e2-color: #b5670f;   /* eigenvector 2 – amber */
+      }
+
+      /* ---- controls card ---- */
+      .controls-card {
+        display: flex; flex-wrap: wrap; gap: 1.4rem;
+        background: var(--accent-faint); border: 1px solid var(--hairline);
+        border-radius: var(--radius-md); padding: 1.1rem 1.3rem; margin-top: 1.2rem;
+      }
+
+      .ctrl-group { flex: 1 1 240px; min-width: 220px; }
+      .ctrl-group h3 {
+        font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.7rem;
+      }
+      .ctrl-group.mat h3 { color: var(--ink-faint); }
+      .ctrl-group.vec h3 { color: var(--v-color); }
+
+      /* Matrix sliders + live preview side-by-side */
+      .mat-body { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+      .mat-sliders { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.9rem; }
+
+      .slider-row { display: flex; align-items: center; gap: 0.55rem; }
+      .slider-row label {
+        font-family: var(--font-serif); font-size: 0.92rem; width: 1.4rem;
+        color: var(--ink-soft); flex-shrink: 0;
+      }
+      .slider-row input[type="range"] { flex: 1; min-width: 70px; accent-color: var(--accent); }
+      .slider-row .val {
+        font-variant-numeric: tabular-nums; font-size: 0.8rem; color: var(--ink);
+        width: 2.6rem; text-align: right; flex-shrink: 0;
+      }
+
+      /* Live matrix preview next to sliders */
+      .mat-preview { display: flex; align-items: center; gap: 0.55rem; flex-shrink: 0; }
+      .mat-preview .eq { font-size: 0.85rem; color: var(--ink-faint); }
+      .mat-live {
+        display: grid; grid-template-columns: repeat(2, max-content);
+        gap: 0.15rem 0.8rem; padding: 0.4rem 0.85rem;
+        border-left: 2.5px solid var(--ink-soft); border-right: 2.5px solid var(--ink-soft);
+        font-variant-numeric: tabular-nums; font-size: 0.92rem; color: var(--ink); font-weight: 500;
+      }
+      .mat-stats {
+        font-size: 0.78rem; color: var(--ink-soft); line-height: 1.85;
+        border-left: 1px solid var(--hairline); padding-left: 0.8rem;
+      }
+      .mat-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+      .reset-btn {
+        align-self: center; background: none; border: 1px solid var(--hairline);
+        border-radius: var(--radius); padding: 0.5rem 0.9rem; font-family: var(--font-sans);
+        font-size: 0.8rem; color: var(--ink-soft); cursor: pointer; transition: all 0.15s ease;
+      }
+      .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+      /* ---- two-panel grid ---- */
+      .lab-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin-top: 2rem;
+      }
+      .lab-panel {
+        background: #fff; border: 1px solid var(--hairline); border-radius: var(--radius-md);
+        padding: 1.1rem 1.2rem 1.3rem; box-shadow: var(--shadow-soft);
+        display: flex; flex-direction: column;
+      }
+      .lab-panel h2 {
+        font-family: var(--font-serif); font-weight: 500; font-size: 1.08rem;
+        margin: 0 0 0.3rem; color: var(--ink);
+      }
+      .lab-panel .formula {
+        font-size: 0.8rem; color: var(--ink-faint); margin: 0 0 0.85rem; line-height: 1.55;
+      }
+      .lab-panel svg {
+        width: 100%; height: auto; background: var(--accent-faint); border-radius: var(--radius);
+      }
+
+      /* ---- info panel ---- */
+      .info-block {
+        background: var(--accent-faint); border-radius: var(--radius);
+        padding: 0.7rem 0.9rem; margin-bottom: 0.55rem;
+      }
+      .info-block:last-child { margin-bottom: 0; }
+      .block-title {
+        font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.45rem;
+      }
+
+      .readout { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.85; }
+      .readout strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+      .tag-v  { color: var(--v-color);  font-weight: 600; }
+      .tag-tv { color: var(--tv-color); font-weight: 600; }
+      .tag-e1 { color: var(--e1-color); font-weight: 600; }
+      .tag-e2 { color: var(--e2-color); font-weight: 600; }
+
+      .eig-row { margin-bottom: 0.3rem; font-size: 0.84rem; }
+      .eig-vec { font-size: 0.78rem; color: var(--ink-soft); margin: 0.05rem 0 0.5rem 0.8rem; }
+
+      .hint-box {
+        margin-top: 0.65rem; padding: 0.6rem 0.8rem;
+        border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+        font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5;
+        background: var(--accent-faint);
+      }
+      .hint-box.aligned {
+        border-left-color: var(--e1-color); color: var(--e1-color); font-weight: 500;
+      }
+      .hint-box.aligned2 {
+        border-left-color: var(--e2-color); color: var(--e2-color); font-weight: 500;
+      }
+
+      .complex-msg { color: var(--ink-faint); font-size: 0.82rem; line-height: 1.5; }
+
+      @media (max-width: 860px) {
+        .lab-grid { grid-template-columns: 1fr; }
+        .lab-main { padding: 36px 22px 48px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="subpage-nav">
+      <div class="subpage-nav-inner">
+        <a href="../../index.html" class="brand-name">Jin Sun</a>
+        <nav aria-label="Main">
+          <a href="../../index.html#research">Research</a>
+          <a href="../../index.html#teaching">Teaching</a>
+          <a href="../../index.html#about">About</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main class="lab-main">
+      <p class="course-eyebrow">CSCI 8945 &middot; In-class tool</p>
+      <h1 class="course-title">Eigenvalues &amp; eigenvectors of a 2&times;2 matrix</h1>
+      <p class="course-lead">
+        Adjust the matrix <strong>M</strong> and rotate the input vector
+        <strong style="color:var(--v-color)">v</strong> with the sliders.
+        The <strong style="color:var(--e1-color)">red</strong> and
+        <strong style="color:var(--e2-color)">orange</strong> lines mark the eigenvector directions &mdash;
+        the only two orientations where the
+        <strong style="color:var(--tv-color)">transformed vector Mv</strong> stays parallel to
+        <strong style="color:var(--v-color)">v</strong>, just scaled by an eigenvalue.
+      </p>
+
+      <!-- Controls -->
+      <section class="controls-card">
+        <!-- 2×2 matrix sliders + live preview -->
+        <div class="ctrl-group mat">
+          <h3>Matrix M</h3>
+          <div class="mat-body">
+            <!-- sliders arranged as the matrix: [a b / c d] -->
+            <div class="mat-sliders">
+              <div class="slider-row">
+                <label for="ma">a</label>
+                <input type="range" id="ma" min="-3" max="3" step="0.1" value="2" />
+                <span class="val" id="ma-val">2.0</span>
+              </div>
+              <div class="slider-row">
+                <label for="mb">b</label>
+                <input type="range" id="mb" min="-3" max="3" step="0.1" value="1" />
+                <span class="val" id="mb-val">1.0</span>
+              </div>
+              <div class="slider-row">
+                <label for="mc">c</label>
+                <input type="range" id="mc" min="-3" max="3" step="0.1" value="1" />
+                <span class="val" id="mc-val">1.0</span>
+              </div>
+              <div class="slider-row">
+                <label for="md">d</label>
+                <input type="range" id="md" min="-3" max="3" step="0.1" value="2" />
+                <span class="val" id="md-val">2.0</span>
+              </div>
+            </div>
+            <!-- live matrix display + stats -->
+            <div class="mat-preview">
+              <span class="eq">M&nbsp;=</span>
+              <div class="mat-live">
+                <span id="disp-a">2.0</span><span id="disp-b">1.0</span>
+                <span id="disp-c">1.0</span><span id="disp-d">2.0</span>
+              </div>
+              <div class="mat-stats">
+                trace = <strong id="disp-trace">4.00</strong><br />
+                det &nbsp;= <strong id="disp-det">3.00</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vector controls -->
+        <div class="ctrl-group vec">
+          <h3>Input vector v</h3>
+          <div class="slider-row">
+            <label for="vangle">&theta;</label>
+            <input type="range" id="vangle" min="0" max="360" step="1" value="30" />
+            <span class="val" id="vangle-val">30&deg;</span>
+          </div>
+          <div class="slider-row">
+            <label for="vmag">r</label>
+            <input type="range" id="vmag" min="0.5" max="3.5" step="0.1" value="2" />
+            <span class="val" id="vmag-val">2.0</span>
+          </div>
+        </div>
+
+        <button class="reset-btn" id="reset-btn">Reset</button>
+      </section>
+
+      <!-- Shared SVG marker defs -->
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <marker id="arrow-v"  viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--v-color)" />
+          </marker>
+          <marker id="arrow-tv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--tv-color)" />
+          </marker>
+          <marker id="arrow-e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--e1-color)" />
+          </marker>
+          <marker id="arrow-e2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--e2-color)" />
+          </marker>
+        </defs>
+      </svg>
+
+      <div class="lab-grid">
+        <!-- LEFT: Visualization -->
+        <div class="lab-panel">
+          <h2>Transformation view</h2>
+          <p class="formula">
+            <span class="tag-v">v</span> = input &nbsp;&middot;&nbsp;
+            <span class="tag-tv">Mv</span> = output &nbsp;&middot;&nbsp;
+            <span class="tag-e1">&#8212;</span><span class="tag-e2">&#8212;</span> eigenvector lines (dashed)
+          </p>
+          <svg id="svg-main" viewBox="0 0 340 340"></svg>
+        </div>
+
+        <!-- RIGHT: Numbers -->
+        <div class="lab-panel">
+          <h2>Eigendecomposition</h2>
+          <p class="formula">
+            Mv = &lambda;v &nbsp;&Rightarrow;&nbsp; v is an eigenvector with eigenvalue &lambda;.
+          </p>
+
+          <!-- Eigenvalue / eigenvector block -->
+          <div class="info-block">
+            <div class="block-title">Eigenvalues &amp; eigenvectors</div>
+            <div id="eig-content">—</div>
+          </div>
+
+          <!-- Current vector info -->
+          <div class="info-block">
+            <div class="block-title">Current vectors</div>
+            <div class="readout">
+              <span class="tag-v">v</span> = <strong id="disp-v">—</strong><br />
+              <span class="tag-tv">Mv</span> = <strong id="disp-mv">—</strong><br />
+              |Mv| / |v| = <strong id="disp-scale">—</strong> &nbsp;&nbsp;
+              angle(v, Mv) = <strong id="disp-angle">—</strong>
+            </div>
+          </div>
+
+          <!-- Alignment hint -->
+          <div class="hint-box" id="hint-box">
+            Drag the &theta; slider to rotate v. When v aligns with an eigenvector line, Mv becomes parallel to v.
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer-legal" data-shared-footer
+        style="margin-top:2.5rem;border-top:1px solid var(--hairline);padding-top:1rem;color:var(--ink-faint)"></footer>
+    </main>
+
+    <script src="../../assets/js/main.js" defer></script>
+    <script>
+    (function () {
+      "use strict";
+
+      /* ---- coordinate setup ---- */
+      var SIZE = 340, CENTER = 170, VIEW = 5.5;
+      var SCALE = (SIZE / 2 - 15) / VIEW;
+      var SVGNS = "http://www.w3.org/2000/svg";
+
+      function toSvg(x, y) { return [CENTER + x * SCALE, CENTER - y * SCALE]; }
+      function fmt(n)  { return (Math.round(n * 100) / 100).toFixed(2); }
+      function fmt1(n) { return (Math.round(n * 10)  / 10 ).toFixed(1); }
+
+      function svgEl(tag, attrs) {
+        var e = document.createElementNS(SVGNS, tag);
+        for (var k in attrs) e.setAttribute(k, attrs[k]);
+        return e;
+      }
+
+      /* ---- state ---- */
+      var M = { a: 2, b: 1, c: 1, d: 2 };
+      var vAngle = 30; // degrees
+      var vMag   = 2;
+      var DEF = { a: 2, b: 1, c: 1, d: 2, angle: 30, mag: 2 };
+
+      /* ---- build static SVG structure ---- */
+      var svg = document.getElementById("svg-main");
+
+      // Grid
+      (function () {
+        var g = svgEl("g", {});
+        for (var i = -Math.floor(VIEW); i <= Math.floor(VIEW); i++) {
+          var px = toSvg(i, 0)[0];
+          g.appendChild(svgEl("line", {
+            x1: px, y1: 0, x2: px, y2: SIZE,
+            stroke: "#fff", "stroke-width": i === 0 ? 1.8 : 0.8, opacity: i === 0 ? 0.9 : 0.5
+          }));
+          var py = toSvg(0, i)[1];
+          g.appendChild(svgEl("line", {
+            x1: 0, y1: py, x2: SIZE, y2: py,
+            stroke: "#fff", "stroke-width": i === 0 ? 1.8 : 0.8, opacity: i === 0 ? 0.9 : 0.5
+          }));
+        }
+        svg.appendChild(g);
+      })();
+
+      // Eigenvector span lines (dashed, extend full canvas)
+      var spanE1 = svgEl("line", { x1: 0, y1: 0, x2: 0, y2: 0, stroke: "var(--e1-color)", "stroke-width": 1.6, "stroke-dasharray": "7 5", opacity: 0.6 });
+      var spanE2 = svgEl("line", { x1: 0, y1: 0, x2: 0, y2: 0, stroke: "var(--e2-color)", "stroke-width": 1.6, "stroke-dasharray": "7 5", opacity: 0.6 });
+      svg.appendChild(spanE1);
+      svg.appendChild(spanE2);
+
+      // Input vector
+      var lineV  = svgEl("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--v-color)",  "stroke-width": 2.8, "marker-end": "url(#arrow-v)"  });
+      svg.appendChild(lineV);
+      // Transformed vector
+      var lineTv = svgEl("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--tv-color)", "stroke-width": 2.8, "marker-end": "url(#arrow-tv)" });
+      svg.appendChild(lineTv);
+
+      // Eigenvector arrows (fixed display length)
+      var arrowE1 = svgEl("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--e1-color)", "stroke-width": 2.2, "marker-end": "url(#arrow-e1)" });
+      var arrowE2 = svgEl("line", { x1: CENTER, y1: CENTER, x2: CENTER, y2: CENTER, stroke: "var(--e2-color)", "stroke-width": 2.2, "marker-end": "url(#arrow-e2)" });
+      svg.appendChild(arrowE1);
+      svg.appendChild(arrowE2);
+
+      // Labels
+      function makeLabel(colorVar, txt) {
+        var t = svgEl("text", {
+          fill: "var(--" + colorVar + "-color)",
+          "font-size": 13, "font-family": "var(--font-serif)", "font-weight": 600
+        });
+        t.textContent = txt;
+        svg.appendChild(t);
+        return t;
+      }
+      var lblV  = makeLabel("v",  "v");
+      var lblTv = makeLabel("tv", "Mv");
+      var lblE1 = makeLabel("e1", "e₁");
+      var lblE2 = makeLabel("e2", "e₂");
+
+      function placeLabel(t, svgX, svgY, mathX, mathY, off) {
+        off = off || 15;
+        var len = Math.hypot(mathX, mathY) || 1;
+        t.setAttribute("x", svgX + (mathX / len) * off);
+        t.setAttribute("y", svgY - (mathY / len) * off + 4);
+      }
+
+      function clipToView(x, y) {
+        var len = Math.hypot(x, y);
+        var max = VIEW * 0.94;
+        if (len < 1e-9 || len <= max) return [x, y];
+        return [x * max / len, y * max / len];
+      }
+
+      /* ---- eigendecomposition ---- */
+      function computeEigens(a, b, c, d) {
+        var tr   = a + d;
+        var det  = a * d - b * c;
+        var disc = tr * tr - 4 * det;
+        if (disc < 0) return null; // complex eigenvalues
+
+        var sq   = Math.sqrt(Math.max(0, disc));
+        var lam1 = (tr + sq) / 2;
+        var lam2 = (tr - sq) / 2;
+
+        function eigvec(lam) {
+          var ex, ey;
+          if (Math.abs(b) > 1e-9) {
+            ex = b; ey = lam - a;
+          } else if (Math.abs(c) > 1e-9) {
+            ex = lam - d; ey = c;
+          } else {
+            // Diagonal — eigenvector is axis-aligned
+            ex = (Math.abs(lam - a) < 1e-9) ? 1 : 0;
+            ey = (Math.abs(lam - a) < 1e-9) ? 0 : 1;
+          }
+          var len = Math.hypot(ex, ey);
+          return len < 1e-9 ? [1, 0] : [ex / len, ey / len];
+        }
+
+        return { lam1: lam1, lam2: lam2, disc: disc,
+                 e1: eigvec(lam1), e2: eigvec(lam2) };
+      }
+
+      /* ---- main draw ---- */
+      function draw() {
+        var a = M.a, b = M.b, c = M.c, d = M.d;
+        var theta = vAngle * Math.PI / 180;
+        var vx  = vMag * Math.cos(theta), vy  = vMag * Math.sin(theta);
+        var tvx = a * vx + b * vy,        tvy = c * vx + d * vy;
+
+        /* Input vector */
+        var cv  = clipToView(vx,  vy);
+        var pv  = toSvg(cv[0], cv[1]);
+        lineV.setAttribute("x2", pv[0]); lineV.setAttribute("y2", pv[1]);
+        placeLabel(lblV, pv[0], pv[1], vx, vy);
+
+        /* Transformed vector */
+        var ctv = clipToView(tvx, tvy);
+        var ptv = toSvg(ctv[0], ctv[1]);
+        lineTv.setAttribute("x2", ptv[0]); lineTv.setAttribute("y2", ptv[1]);
+        placeLabel(lblTv, ptv[0], ptv[1], tvx || 0.001, tvy || 0.001);
+
+        /* Eigendecomposition */
+        var eigs = computeEigens(a, b, c, d);
+        var SPAN   = VIEW * 1.35;
+        var EIGLEN = 2.5; // display length for arrows (math units)
+
+        if (eigs) {
+          var e1 = eigs.e1, e2 = eigs.e2;
+
+          /* Span lines */
+          var s1a = toSvg(-e1[0]*SPAN, -e1[1]*SPAN), s1b = toSvg(e1[0]*SPAN, e1[1]*SPAN);
+          spanE1.setAttribute("x1", s1a[0]); spanE1.setAttribute("y1", s1a[1]);
+          spanE1.setAttribute("x2", s1b[0]); spanE1.setAttribute("y2", s1b[1]);
+          spanE1.removeAttribute("display");
+
+          var s2a = toSvg(-e2[0]*SPAN, -e2[1]*SPAN), s2b = toSvg(e2[0]*SPAN, e2[1]*SPAN);
+          spanE2.setAttribute("x1", s2a[0]); spanE2.setAttribute("y1", s2a[1]);
+          spanE2.setAttribute("x2", s2b[0]); spanE2.setAttribute("y2", s2b[1]);
+          spanE2.removeAttribute("display");
+
+          /* Eigenvector arrows */
+          var pe1 = toSvg(e1[0]*EIGLEN, e1[1]*EIGLEN);
+          arrowE1.setAttribute("x2", pe1[0]); arrowE1.setAttribute("y2", pe1[1]);
+          arrowE1.removeAttribute("display");
+          placeLabel(lblE1, pe1[0], pe1[1], e1[0], e1[1]);
+          lblE1.removeAttribute("display");
+
+          var pe2 = toSvg(e2[0]*EIGLEN, e2[1]*EIGLEN);
+          arrowE2.setAttribute("x2", pe2[0]); arrowE2.setAttribute("y2", pe2[1]);
+          arrowE2.removeAttribute("display");
+          placeLabel(lblE2, pe2[0], pe2[1], e2[0], e2[1]);
+          lblE2.removeAttribute("display");
+
+          /* Eigenvalue / eigenvector readout */
+          document.getElementById("eig-content").innerHTML =
+            '<div class="eig-row"><span class="tag-e1">λ₁ = ' + fmt(eigs.lam1) + '</span></div>' +
+            '<div class="eig-vec">e₁ = (' + fmt(e1[0]) + ', ' + fmt(e1[1]) + ')</div>' +
+            '<div class="eig-row"><span class="tag-e2">λ₂ = ' + fmt(eigs.lam2) + '</span></div>' +
+            '<div class="eig-vec">e₂ = (' + fmt(e2[0]) + ', ' + fmt(e2[1]) + ')</div>';
+
+          /* Alignment detection */
+          var vlen  = Math.hypot(vx, vy);
+          var cos1  = Math.abs(vx * e1[0] + vy * e1[1]) / vlen;
+          var cos2  = Math.abs(vx * e2[0] + vy * e2[1]) / vlen;
+          var hintEl = document.getElementById("hint-box");
+          hintEl.className = "hint-box";
+          if (cos1 > 0.997) {
+            hintEl.className = "hint-box aligned";
+            hintEl.textContent = "✓ v is aligned with e₁ — Mv = λ₁·v ≈ " + fmt(eigs.lam1) + "·v";
+          } else if (cos2 > 0.997) {
+            hintEl.className = "hint-box aligned2";
+            hintEl.textContent = "✓ v is aligned with e₂ — Mv = λ₂·v ≈ " + fmt(eigs.lam2) + "·v";
+          } else {
+            hintEl.textContent = "Rotate θ to align v with an eigenvector line. Notice how Mv is not parallel to v — except in those two special directions.";
+          }
+
+        } else {
+          /* Complex eigenvalues */
+          [spanE1, spanE2, arrowE1, arrowE2].forEach(function(el) { el.setAttribute("display", "none"); });
+          [lblE1, lblE2].forEach(function(el) { el.setAttribute("display", "none"); });
+          document.getElementById("eig-content").innerHTML =
+            '<span class="complex-msg">Discriminant &lt; 0 &mdash; eigenvalues are complex.<br>' +
+            'The matrix encodes a rotation+scaling; no real direction is preserved.</span>';
+          var hintEl = document.getElementById("hint-box");
+          hintEl.className = "hint-box";
+          hintEl.textContent = "Try changing the matrix so that |trace|² ≥ 4·det (real eigenvalues).";
+        }
+
+        /* Matrix display */
+        document.getElementById("disp-a").textContent = fmt1(a);
+        document.getElementById("disp-b").textContent = fmt1(b);
+        document.getElementById("disp-c").textContent = fmt1(c);
+        document.getElementById("disp-d").textContent = fmt1(d);
+        document.getElementById("disp-trace").textContent = fmt(a + d);
+        document.getElementById("disp-det").textContent   = fmt(a*d - b*c);
+
+        /* Vector numerics */
+        document.getElementById("disp-v" ).textContent = "(" + fmt(vx)  + ", " + fmt(vy)  + ")";
+        document.getElementById("disp-mv").textContent = "(" + fmt(tvx) + ", " + fmt(tvy) + ")";
+
+        var vLen  = Math.hypot(vx,  vy);
+        var tvLen = Math.hypot(tvx, tvy);
+        if (vLen < 1e-9 || tvLen < 1e-9) {
+          document.getElementById("disp-scale").textContent = "—";
+          document.getElementById("disp-angle").textContent = "—";
+        } else {
+          document.getElementById("disp-scale").textContent = fmt(tvLen / vLen);
+          var cosA = Math.max(-1, Math.min(1, (vx*tvx + vy*tvy) / (vLen * tvLen)));
+          document.getElementById("disp-angle").textContent = fmt(Math.acos(cosA) * 180 / Math.PI) + "°";
+        }
+      }
+
+      /* ---- slider wiring ---- */
+      function bind(id, setter, display) {
+        var inp  = document.getElementById(id);
+        var span = document.getElementById(id + "-val");
+        inp.addEventListener("input", function () {
+          setter(parseFloat(inp.value));
+          span.textContent = display(parseFloat(inp.value));
+          draw();
+        });
+      }
+
+      bind("ma",     function(v) { M.a = v; },      fmt1);
+      bind("mb",     function(v) { M.b = v; },      fmt1);
+      bind("mc",     function(v) { M.c = v; },      fmt1);
+      bind("md",     function(v) { M.d = v; },      fmt1);
+      bind("vangle", function(v) { vAngle = v; },   function(v) { return v + "°"; });
+      bind("vmag",   function(v) { vMag = v; },     fmt1);
+
+      document.getElementById("reset-btn").addEventListener("click", function () {
+        M.a = DEF.a; M.b = DEF.b; M.c = DEF.c; M.d = DEF.d;
+        vAngle = DEF.angle; vMag = DEF.mag;
+
+        document.getElementById("ma").value = DEF.a;
+        document.getElementById("mb").value = DEF.b;
+        document.getElementById("mc").value = DEF.c;
+        document.getElementById("md").value = DEF.d;
+        document.getElementById("ma-val").textContent = fmt1(DEF.a);
+        document.getElementById("mb-val").textContent = fmt1(DEF.b);
+        document.getElementById("mc-val").textContent = fmt1(DEF.c);
+        document.getElementById("md-val").textContent = fmt1(DEF.d);
+
+        document.getElementById("vangle").value = DEF.angle;
+        document.getElementById("vangle-val").textContent = DEF.angle + "°";
+        document.getElementById("vmag").value = DEF.mag;
+        document.getElementById("vmag-val").textContent = fmt1(DEF.mag);
+
+        draw();
+      });
+
+      draw();
+    })();
+    </script>
+  </body>
+</html>
