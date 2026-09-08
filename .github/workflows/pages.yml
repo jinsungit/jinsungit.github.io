@@ -32,10 +32,18 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare site (exclude large legacy directories)
+        run: |
+          rsync -a \
+            --exclude='.git' \
+            --exclude='old_files' \
+            --exclude='_site' \
+            . _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
