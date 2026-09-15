@@ -673,6 +673,7 @@ a:hover {
 .badge-presentation { background: #e4dcf7; color: #5a3aa3; }
 .badge-project { background: #d9f0df; color: #1f6b3a; }
 .sched-note { font-size: 0.8rem; color: var(--ink-faint); margin: 0.5rem 0 0; }
+.presenters { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.18rem; }
 
 .sched-next-row td { background: var(--accent-faint); }
 .sched-next-row td:first-child { box-shadow: inset 3px 0 0 var(--accent); font-weight: 600; }
