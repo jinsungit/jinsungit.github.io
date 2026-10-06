@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Policy Gradient Training: PPO, DPO &amp; GRPO | CSCI 8945 | Jin Sun</title>
+    <meta
+      name="description"
+      content="Policy-gradient methods for aligning LLMs — PPO, DPO, and GRPO — with term-by-term math and intuition. CSCI 8945, Fall 2026."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+
+    <style>
+      .lab-main { max-width: 820px; margin: 0 auto; padding: 44px 48px 64px; }
+
+      .pg {
+        --text: var(--ink); --text-secondary: var(--ink-soft); --border: var(--hairline);
+        --ppo-hue: #2563EB; --ppo-bg: #EFF6FF; --ppo-border: #BFDBFE;
+        --dpo-hue: #9333EA; --dpo-bg: #F5F3FF; --dpo-border: #DDD6FE;
+        --grpo-hue: #059669; --grpo-bg: #ECFDF5; --grpo-border: #A7F3D0;
+        --cr: #E11D48; --cp: #2563EB; --crf: #7C3AED; --ck: #D97706; --ca: #059669; --cb: #6366F1;
+        font-family: var(--font-serif); font-size: 16.5px; line-height: 1.72; color: var(--text);
+      }
+      .pg h2 { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; margin: 3rem 0 0.5rem; color: var(--ink); }
+      .pg h3 { font-family: var(--font-serif); font-size: 1.12rem; font-weight: 600; margin: 1.8rem 0 0.4rem; color: var(--ink); }
+      .pg p { margin: 0 0 1rem; }
+      .pg code { font-family: 'JetBrains Mono', monospace; }
+
+      /* === MATH STYLING === */
+      .pg .eq {
+        font-family: 'Times New Roman', 'Latin Modern Math', 'STIX Two Math', Georgia, serif;
+        font-style: italic; letter-spacing: 0.01em;
+      }
+      .pg .eq .fn, .pg .eq .op { font-style: normal; }
+      .pg .eq .op { font-weight: normal; }
+      .pg .eq sub, .pg .eq sup { font-size: 0.72em; }
+      .pg .eq .sm { font-size: 0.82em; }
+
+      .pg .formula-box {
+        background: rgba(255,255,255,0.55); border: 1px solid var(--border); border-radius: 8px;
+        padding: 1.1rem 1.2rem; margin: 1.2rem 0; overflow-x: auto;
+        text-align: center; font-size: 1.15rem; line-height: 2.2;
+      }
+
+      .pg .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.1em; text-align: center; }
+      .pg .frac .num { border-bottom: 1.2px solid var(--text); padding: 0 0.25em 0.15em; line-height: 1.3; }
+      .pg .frac .den { padding: 0.15em 0.25em 0; line-height: 1.3; }
+      .pg .frac .num, .pg .frac .den { font-size: 0.88em; }
+      .pg .big-bracket { font-size: 1.6em; vertical-align: middle; font-style: normal; font-weight: 300; }
+      .pg .med-bracket { font-size: 1.3em; vertical-align: middle; font-style: normal; font-weight: 300; }
+      .pg .sum-sym { font-size: 1.4em; vertical-align: middle; font-style: normal; position: relative; }
+      .pg .sum-lim { font-size: 0.6em; display: block; line-height: 1; font-style: italic; }
+      .pg .sum-wrap { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.15em; }
+
+      .pg .cp { color: var(--cp); } .pg .crf { color: var(--crf); } .pg .cr { color: var(--cr); }
+      .pg .ck { color: var(--ck); } .pg .ca { color: var(--ca); } .pg .cb { color: var(--cb); }
+
+      .pg .underbrace-wrap { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.15em; }
+      .pg .underbrace-content { border-bottom: 1.5px solid var(--text-secondary); padding-bottom: 0.2em; }
+      .pg .underbrace-label { font-size: 0.7em; color: var(--text-secondary); font-style: normal; padding-top: 0.15em; line-height: 1.2; }
+
+      /* === LAYOUT === */
+      .pg .legend {
+        display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; padding: 1rem 1.25rem;
+        border: 1px solid var(--border); border-radius: 8px; margin: 1.5rem 0 2.5rem; font-size: 0.92rem;
+      }
+      .pg .legend-title { width: 100%; font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 0.1rem; }
+      .pg .legend .item { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .pg .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
+
+      .pg .method-card { border-radius: 10px; padding: 1.6rem 1.5rem; margin: 2rem 0; border: 1.5px solid; }
+      .pg .method-card.ppo { background: var(--ppo-bg); border-color: var(--ppo-border); }
+      .pg .method-card.dpo { background: var(--dpo-bg); border-color: var(--dpo-border); }
+      .pg .method-card.grpo { background: var(--grpo-bg); border-color: var(--grpo-border); }
+      .pg .method-tag {
+        font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 500;
+        letter-spacing: 0.04em; padding: 0.15rem 0.6rem; border-radius: 4px; display: inline-block; margin-bottom: 0.6rem;
+      }
+      .pg .ppo .method-tag { background: var(--ppo-hue); color: #fff; }
+      .pg .dpo .method-tag { background: var(--dpo-hue); color: #fff; }
+      .pg .grpo .method-tag { background: var(--grpo-hue); color: #fff; }
+      .pg .method-card h2 { margin-top: 0; }
+
+      .pg .term-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+      .pg .term-table td { padding: 0.45rem 0.7rem; vertical-align: top; border-bottom: 1px solid var(--border); }
+      .pg .term-table td:first-child { width: 170px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; }
+
+      .pg .intuition { border-left: 3px solid; padding: 0.8rem 1rem; margin: 1rem 0; font-style: italic; font-size: 0.97rem; border-radius: 0 6px 6px 0; }
+      .pg .ppo .intuition { border-color: var(--ppo-hue); }
+      .pg .dpo .intuition { border-color: var(--dpo-hue); }
+      .pg .grpo .intuition { border-color: var(--grpo-hue); }
+
+      .pg .comparison-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+      .pg .comparison-table th, .pg .comparison-table td { padding: 0.6rem 0.8rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+      .pg .comparison-table th { font-weight: 600; font-size: 0.85rem; }
+      .pg .comparison-table th.ppo-col { background: var(--ppo-bg); color: var(--ppo-hue); }
+      .pg .comparison-table th.dpo-col { background: var(--dpo-bg); color: var(--dpo-hue); }
+      .pg .comparison-table th.grpo-col { background: var(--grpo-bg); color: var(--grpo-hue); }
+
+      @media (max-width: 680px) {
+        .lab-main { padding: 28px 18px 48px; }
+        .pg { font-size: 16px; }
+        .pg .method-card { padding: 1.2rem 1rem; }
+        .pg .formula-box { padding: 0.8rem 0.5rem; font-size: 1rem; }
+        .pg .term-table td:first-child { width: 110px; }
+        .pg .comparison-table { font-size: 0.82rem; }
+        .pg .comparison-table th, .pg .comparison-table td { padding: 0.4rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="subpage-nav">
+      <div class="subpage-nav-inner">
+        <a href="../../index.html" class="brand-name">Jin Sun</a>
+        <nav aria-label="Main">
+          <a href="../../index.html#research">Research</a>
+          <a href="../../index.html#teaching">Teaching</a>
+          <a href="../../index.html#about">About</a>
+        </nav>
+      </div>
+    </nav>
+
+    <main class="lab-main">
+      <p class="course-eyebrow">CSCI 8945 &middot; Post training</p>
+      <h1 class="course-title">Aligning LLMs: PPO vs DPO vs GRPO</h1>
+      <p class="course-lead">
+        High-level math, intuition, and term-by-term breakdowns of the three policy-optimization methods behind
+        modern LLM alignment: Proximal Policy Optimization, Direct Preference Optimization, and Group Relative
+        Policy Optimization.
+      </p>
+
+      <div class="pg">
+      <div class="legend">
+        <div class="legend-title">Color Legend — Consistent Across All Formulas</div>
+        <span class="item"><span class="swatch" style="background:var(--cp)"></span> <b class="cp">π<sub>θ</sub></b>&ensp;current policy</span>
+        <span class="item"><span class="swatch" style="background:var(--crf)"></span> <b class="crf">π<sub>ref</sub></b>&ensp;reference policy</span>
+        <span class="item"><span class="swatch" style="background:var(--cr)"></span> <b class="cr">r(·)</b>&ensp;reward signal</span>
+        <span class="item"><span class="swatch" style="background:var(--ck)"></span> <b class="ck">KL / clip</b>&ensp;regularization</span>
+        <span class="item"><span class="swatch" style="background:var(--ca)"></span> <b class="ca">A(·)</b>&ensp;advantage</span>
+        <span class="item"><span class="swatch" style="background:var(--cb)"></span> <b class="cb">baseline</b>&ensp;variance reduction</span>
+      </div>
+
+      <!-- ==================== RL BACKGROUND ==================== -->
+
+      <h2>Background: Key RL Concepts</h2>
+      <p>Before diving into the three methods, here is a quick refresher on the reinforcement learning vocabulary they share. If you are coming from supervised learning, the core shift is this: instead of learning from fixed (input, label) pairs, an <em>agent</em> learns by <strong>taking actions</strong> in an environment and observing <strong>rewards</strong>.</p>
+
+      <div style="border:1px solid var(--border); border-radius:10px; padding:1.4rem 1.5rem; margin:1.2rem 0;">
+
+      <table class="term-table" style="margin:0;">
+
+      <tr>
+        <td><b>State&ensp;<span class="eq">s</span></b></td>
+        <td>A snapshot of the world at a given moment. In the LLM setting, the state at time step <em>t</em> is the prompt <em>x</em> concatenated with all tokens generated so far: <span class="eq">s<sub>t</sub> = (x, y<sub>1</sub>, …, y<sub>t−1</sub>)</span>.</td>
+      </tr>
+
+      <tr>
+        <td><b>Action&ensp;<span class="eq">a</span></b></td>
+        <td>A decision the agent makes. For a language model, each action is choosing the next token from the vocabulary: <span class="eq">a<sub>t</sub> = y<sub>t</sub></span>. A full response is a <em>sequence</em> of actions.</td>
+      </tr>
+
+      <tr>
+        <td><b>Policy&ensp;<span class="eq cp">π<sub>θ</sub></span></b></td>
+        <td>The agent's strategy — a function that maps states to a probability distribution over actions. For an LLM, this is the model itself: <span class="eq"><span class="cp">π<sub>θ</sub></span>(a<sub>t</sub> | s<sub>t</sub>)</span> is the probability of generating token <em>a<sub>t</sub></em> given everything so far. The subscript θ are the model's learnable parameters.</td>
+      </tr>
+
+      <tr>
+        <td><b>Reward&ensp;<span class="eq cr">r</span></b></td>
+        <td>A scalar signal that tells the agent how good an action (or a completed sequence) was. In RLHF, this comes from a <b class="cr">reward model</b> trained on human preferences: "humans preferred output A over output B." Higher reward = more aligned with human intent.</td>
+      </tr>
+
+      <tr>
+        <td><b>Discount&ensp;<span class="eq">γ</span></b></td>
+        <td>A factor in [0, 1] that controls how much the agent cares about future vs. immediate rewards. At <span class="eq">γ = 0</span> it is fully myopic (only the next reward matters); at <span class="eq">γ = 1</span> it weighs all future rewards equally. The discounted return from time <em>t</em> is <span class="eq">G<sub>t</sub> = r<sub>t</sub> + γ r<sub>t+1</sub> + γ² r<sub>t+2</sub> + …</span> In LLM alignment γ is typically close to 1, since we care about the quality of the full response.</td>
+      </tr>
+
+      <tr>
+        <td><b>Value Function&ensp;<span class="eq cb">V(s)</span></b></td>
+        <td>The expected total (discounted) reward the agent will collect starting from state <em>s</em> and following policy π thereafter: <span class="eq"><span class="cb">V<sup>π</sup>(s)</span> = 𝔼<sub>π</sub>[G<sub>t</sub> | s<sub>t</sub> = s]</span>. It answers: "how good is it to be in this state?" A separate neural network (the <em>critic</em>) is often trained to approximate this.</td>
+      </tr>
+
+      <tr>
+        <td><b>Advantage&ensp;<span class="eq ca">A(s, a)</span></b></td>
+        <td>How much better a specific action <em>a</em> is compared to the average action in state <em>s</em>: <span class="eq"><span class="ca">A(s, a)</span> = Q(s, a) − <span class="cb">V(s)</span></span>, where Q(s, a) is the expected return after taking action <em>a</em> in state <em>s</em>. Positive advantage → the action was better than average; negative → worse. This is the core training signal in policy gradient methods.</td>
+      </tr>
+
+      <tr>
+        <td><b>KL Divergence&ensp;<span class="eq ck">D<sub>KL</sub></span></b></td>
+        <td>A measure of how different two probability distributions are. In alignment, <span class="eq"><span class="ck">D<sub>KL</sub></span>[<span class="cp">π<sub>θ</sub></span> ‖ <span class="crf">π<sub>ref</sub></span>]</span> measures how far the fine-tuned model has drifted from the original pretrained model. It acts as a leash: the policy can improve, but not wander so far that it "forgets" general language ability or exploits reward model quirks (<em>reward hacking</em>).</td>
+      </tr>
+
+      <tr style="border-bottom:none;">
+        <td><b>On-policy vs. Off-policy</b></td>
+        <td><em>On-policy</em> methods (PPO, GRPO) generate fresh data from the current policy at each training step — what the model produces right now is what it learns from. <em>Off-policy</em> or <em>offline</em> methods (DPO) learn from a fixed dataset collected earlier, possibly by a different model. On-policy is more expensive (you must run inference every step) but avoids distribution mismatch between training data and the current model.</td>
+      </tr>
+
+      </table>
+      </div>
+
+      <p>With these building blocks in mind, we can now state the problem all three methods are trying to solve.</p>
+
+
+      <!-- ==================== SHARED SETUP ==================== -->
+
+      <h2>The Shared Setup</h2>
+
+      <p>All three methods start from the same RLHF goal: we have a pretrained language model (the <b class="crf">reference policy π<sub>ref</sub></b>) and we want to fine-tune it into an <b class="cp">aligned policy π<sub>θ</sub></b> that produces outputs humans prefer, while not straying too far from the original model. The core optimization <em>objective</em> (to be <strong>maximized</strong>) is:</p>
+
+      <div class="formula-box">
+        <span class="eq">
+          <span class="op">max</span><sub><span class="cp">π<sub>θ</sub></span></sub>
+          &ensp;<em>J</em>(<span class="cp">θ</span>)
+          &ensp;=&ensp;
+          <span class="op">max</span><sub><span class="cp">π<sub>θ</sub></span></sub>
+          &ensp;𝔼<sub><span class="sm">x∼𝒟, y∼<span class="cp">π<sub>θ</sub></span>(·|x)</span></sub>
+          <span class="big-bracket">[</span>
+          <span class="cr">r(x, y)</span>
+          <span class="big-bracket">]</span>
+          &ensp;−&ensp;
+          <span class="ck">β</span> · 𝔻<sub><span class="op sm">KL</span></sub><span class="big-bracket">[</span>
+          <span class="cp">π<sub>θ</sub></span>(·|x)
+          &ensp;‖&ensp;
+          <span class="crf">π<sub>ref</sub></span>(·|x)
+          <span class="big-bracket">]</span>
+        </span>
+      </div>
+
+      <p>In words: maximize the expected <b class="cr">reward</b> of outputs from the <b class="cp">current policy</b>, penalized by a <b class="ck">KL divergence</b> term that prevents the policy from drifting too far from the <b class="crf">reference</b>. The three methods differ in <em>how</em> they solve this problem.</p>
+
+      <div style="border-left: 3px solid var(--ck); padding: 0.8rem 1rem; margin: 1rem 0; border-radius: 0 6px 6px 0; font-size: 0.95rem;">
+        <strong>⚠ Notation note — <em>J</em> vs. ℒ:</strong>&ensp;The shared goal above is an <em>objective</em> <em>J</em>(θ) that we want to <strong>maximize</strong>. In each method below, we write a <em>loss</em> ℒ(θ) that we <strong>minimize</strong> via gradient descent. The relationship is simple:
+        <div class="formula-box" style="margin:0.8rem 0 0.4rem; font-size:1.05rem; padding:0.7rem 1rem;">
+          <span class="eq">
+            <span class="op">minimize</span>&ensp;ℒ(θ)
+            &ensp;⟺&ensp;
+            <span class="op">maximize</span>&ensp;<em>J</em>(θ) = −ℒ(θ)
+          </span>
+        </div>
+        <p style="margin:0.5rem 0 0;">For <strong>PPO</strong> and <strong>GRPO</strong>, the loss ℒ is the <em>negative</em> of the clipped surrogate objective (we negate it to turn a maximization into a minimization for the optimizer). For <strong>DPO</strong>, the loss is already written as a negative log-likelihood to minimize. In all cases: <strong>the optimizer calls <code style="font-size:0.85em;">loss.backward()</code> and steps downhill</strong>.</p>
+      </div>
+
+
+      <!-- ==================== PPO ==================== -->
+
+      <div class="method-card ppo">
+      <span class="method-tag">PPO</span>
+      <h2>Proximal Policy Optimization</h2>
+      <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">Schulman et al., 2017 · Applied to RLHF by Ouyang et al. (InstructGPT), 2022</p>
+
+      <h3>What it is</h3>
+      <p>PPO is a general-purpose reinforcement learning algorithm. In the RLHF pipeline, it is used as the optimizer <em>after</em> training a separate <b class="cr">reward model r<sub>ϕ</sub>(x, y)</b> on human preference data. The reward model scores outputs, and PPO updates the policy to get higher scores.</p>
+
+      <h3>The RLHF-PPO Objective <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">— maximize (negate to get loss: ℒ = −J)</span></h3>
+
+      <div class="formula-box">
+        <span class="eq">
+          <em>J</em><sup><span class="op sm">PPO</span></sup>(θ) &ensp;=&ensp;
+          𝔼<sub>t</sub>
+          <span class="big-bracket">[</span>
+          <span class="op">min</span><span class="med-bracket">(</span>
+          <span class="ck">ρ<sub>t</sub>(θ)</span> · <span class="ca">A<sub>t</sub></span>
+          ,&ensp;
+          <span class="ck">clip(ρ<sub>t</sub>(θ), 1−ε, 1+ε)</span> · <span class="ca">A<sub>t</sub></span>
+          <span class="med-bracket">)</span>
+          <span class="big-bracket">]</span>
+        </span>
+      </div>
+
+      <p>where the <b class="ck">probability ratio</b> is:</p>
+
+      <div class="formula-box">
+        <span class="eq">
+          <span class="ck">ρ<sub>t</sub>(θ)</span> &ensp;=&ensp;
+          <span class="frac">
+            <span class="num"><span class="cp">π<sub>θ</sub></span>(a<sub>t</sub> | s<sub>t</sub>)</span>
+            <span class="den"><span class="crf">π<sub>θ<sub>old</sub></sub></span>(a<sub>t</sub> | s<sub>t</sub>)</span>
+          </span>
+        </span>
+      </div>
+
+      <p>and the <b class="ca">advantage</b> is estimated via GAE (Generalized Advantage Estimation) using the <b class="cr">reward model</b> and a learned <b class="cb">value function V<sub>ψ</sub>(s)</b>:</p>
+
+      <div class="formula-box">
+        <span class="eq">
+          <span class="ca">A<sub>t</sub></span> &ensp;=&ensp;
+          <span class="sum-wrap">
+            <span class="sum-lim">T−t</span>
+            <span class="sum-sym">∑</span>
+            <span class="sum-lim">l=0</span>
+          </span>
+          (γλ)<sup>l</sup>
+          <span class="med-bracket">(</span>
+          <span class="cr">r<sub>t+l</sub></span>
+          &ensp;+&ensp; γ · <span class="cb">V<sub>ψ</sub>(s<sub>t+l+1</sub>)</span>
+          &ensp;−&ensp; <span class="cb">V<sub>ψ</sub>(s<sub>t+l</sub>)</span>
+          <span class="med-bracket">)</span>
+        </span>
+      </div>
+
+      <h3>Term-by-Term Intuition</h3>
+      <table class="term-table">
+        <tr><td><b class="ck">ρ<sub>t</sub>(θ)</b></td><td>How much more (or less) likely the <b class="cp">new policy</b> is to take action <em>a<sub>t</sub></em> compared to the <b class="crf">old policy</b> that generated the data. If ρ = 1.5, the new policy is 50% more likely to pick this action.</td></tr>
+        <tr><td><b class="ck">clip(ρ, 1−ε, 1+ε)</b></td><td>The trust region mechanism. Caps the ratio so the policy cannot change too aggressively in a single update. Typically ε = 0.2. This is the "proximal" part — stay close to the old policy.</td></tr>
+        <tr><td><b class="ca">A<sub>t</sub></b></td><td>The advantage: "how much better was this action than the average?" Positive → reinforce the action; negative → suppress it.</td></tr>
+        <tr><td><b>min(·, ·)</b></td><td>Takes the <em>pessimistic</em> (lower) bound. If the advantage is positive but ρ is too large, clipping kicks in and caps the gradient. If the advantage is negative and ρ is too small, clipping again caps the gradient. This prevents catastrophically large updates.</td></tr>
+        <tr><td><b class="cr">r<sub>t</sub></b></td><td>The per-token (or per-step) reward from the <b class="cr">reward model</b>, often with a <b class="ck">KL penalty</b> baked in: r<sub>t</sub> = r<sub>ϕ</sub>(x, y) − β·KL<sub>t</sub>.</td></tr>
+        <tr><td><b class="cb">V<sub>ψ</sub>(s)</b></td><td>A learned value function (critic) that predicts the expected future return from state <em>s</em>. It serves as a <b class="cb">baseline</b> to reduce variance of the advantage estimate. This is a <strong>separate neural network</strong> that must be trained alongside the policy.</td></tr>
+      </table>
+
+      <div class="intuition">
+        <strong>Intuition:</strong> PPO generates text from the current policy, scores it with a reward model, then asks "was this token better or worse than expected?" If better, increase its probability — but never by more than a clipped amount per step, keeping updates stable.
+      </div>
+      </div>
+
+
+      <!-- ==================== DPO ==================== -->
+
+      <div class="method-card dpo">
+      <span class="method-tag">DPO</span>
+      <h2>Direct Preference Optimization</h2>
+      <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">Rafailov et al., 2023</p>
+
+      <h3>What it is</h3>
+      <p>DPO's key insight is that you can <em>bypass</em> the reward model entirely. The authors show that the optimal solution to the KL-constrained reward maximization problem has a closed-form relationship between the reward and the policy. By substituting this relationship into the Bradley-Terry preference model, you get a loss function that directly trains the policy on preference pairs (y<sub>w</sub> ≻ y<sub>l</sub>) — no RL loop, no reward model, no value function.</p>
+
+      <h3>The Key Reparameterization</h3>
+      <p>The closed-form optimal policy satisfies:</p>
+
+      <div class="formula-box">
+        <span class="eq">
+          <span class="cr">r(x, y)</span> &ensp;=&ensp;
+          <span class="ck">β</span> · log
+          <span class="frac">
+            <span class="num"><span class="cp">π<sub>θ</sub></span>(y | x)</span>
+            <span class="den"><span class="crf">π<sub>ref</sub></span>(y | x)</span>
+          </span>
+          &ensp;+&ensp;
+          <span class="ck">β</span> · log Z(x)
+        </span>
+      </div>
+
+      <p>The partition function Z(x) cancels when plugged into the Bradley-Terry model <span class="eq">p(y<sub>w</sub> ≻ y<sub>l</sub>) = σ(<span class="cr">r</span>(x,y<sub>w</sub>) − <span class="cr">r</span>(x,y<sub>l</sub>))</span>, giving:</p>
+
+      <h3>The DPO Loss <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">— minimize directly</span></h3>
+
+      <div class="formula-box">
+        <span class="eq">
+          ℒ<sup><span class="op sm">DPO</span></sup>(θ) &ensp;=&ensp;
+          −𝔼<sub><span class="sm">(x, y<sub>w</sub>, y<sub>l</sub>) ∼ 𝒟</span></sub>
+          <span class="big-bracket">[</span>
+          log σ
+          <span class="med-bracket">(</span>
+          <span class="ck">β</span>
+          <span class="big-bracket">[</span>
+          <span class="underbrace-wrap">
+            <span class="underbrace-content">
+              log <span class="frac">
+                <span class="num"><span class="cp">π<sub>θ</sub></span>(y<sub>w</sub> | x)</span>
+                <span class="den"><span class="crf">π<sub>ref</sub></span>(y<sub>w</sub> | x)</span>
+              </span>
+            </span>
+            <span class="underbrace-label">implicit reward of y<sub>w</sub></span>
+          </span>
+          &ensp;−&ensp;
+          <span class="underbrace-wrap">
+            <span class="underbrace-content">
+              log <span class="frac">
+                <span class="num"><span class="cp">π<sub>θ</sub></span>(y<sub>l</sub> | x)</span>
+                <span class="den"><span class="crf">π<sub>ref</sub></span>(y<sub>l</sub> | x)</span>
+              </span>
+            </span>
+            <span class="underbrace-label">implicit reward of y<sub>l</sub></span>
+          </span>
+          <span class="big-bracket">]</span>
+          <span class="med-bracket">)</span>
+          <span class="big-bracket">]</span>
+        </span>
+      </div>
+
+      <h3>Term-by-Term Intuition</h3>
+      <table class="term-table">
+        <tr><td><b>σ(·)</b></td><td>The sigmoid function. Maps the reward difference to a probability in [0, 1]. The loss is minimized when this probability is high — i.e., when the model assigns higher implicit reward to the preferred output.</td></tr>
+        <tr>
+          <td><span style="white-space:normal">log <b class="cp">π<sub>θ</sub></b> / <b class="crf">π<sub>ref</sub></b></span></td>
+          <td>The <strong>implicit reward</strong>. How much more the <b class="cp">current policy</b> likes output <em>y</em> relative to the <b class="crf">reference</b>. This log-ratio acts as a reward signal without needing a separate reward model. It naturally embeds a KL constraint: the reward is measured relative to the reference.</td>
+        </tr>
+        <tr><td><b class="ck">β</b></td><td>Controls the strength of the KL constraint. Larger β → more conservative updates (stay closer to <b class="crf">π<sub>ref</sub></b>). Smaller β → more aggressively chase preferences.</td></tr>
+        <tr><td><b>y<sub>w</sub> , y<sub>l</sub></b></td><td>The <em>winner</em> (preferred) and <em>loser</em> (dispreferred) completions from the preference dataset. DPO needs paired data.</td></tr>
+        <tr><td><b>−log σ(·)</b></td><td>A cross-entropy–style loss. Gradient pushes up the implicit reward gap: increase the log-ratio for y<sub>w</sub>, decrease it for y<sub>l</sub>.</td></tr>
+      </table>
+
+      <div class="intuition">
+        <strong>Intuition:</strong> DPO treats alignment as a classification problem. Given a (winner, loser) pair, the loss says: "make the policy relatively more likely to produce the winner and less likely to produce the loser, compared to the reference model." The log-ratio <em>is</em> the reward — no separate reward model needed.
+      </div>
+      </div>
+
+
+      <!-- ==================== GRPO ==================== -->
+
+      <div class="method-card grpo">
+      <span class="method-tag">GRPO</span>
+      <h2>Group Relative Policy Optimization</h2>
+      <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1rem;">Shao et al. (DeepSeek), 2024</p>
+
+      <h3>What it is</h3>
+      <p>GRPO modifies PPO to eliminate the <b class="cb">value function (critic)</b>. Instead of training a separate network to estimate advantages, GRPO samples a <em>group</em> of G outputs for each prompt, scores them all with the <b class="cr">reward model</b>, and computes advantages by comparing each output's reward to the <b class="cb">group mean</b>. This saves the memory and compute of maintaining a critic network the same size as the policy.</p>
+
+      <h3>The GRPO Objective <span style="font-weight:400; font-size:0.85rem; color:var(--text-secondary);">— maximize (negate to get loss: ℒ = −J)</span></h3>
+
+      <div class="formula-box">
+        <span class="eq">
+          <em>J</em><sup><span class="op sm">GRPO</span></sup>(θ) &ensp;=&ensp;
+          𝔼<sub><span class="sm">x∼𝒟</span></sub>
+          <span class="big-bracket">[</span>
+          <span style="display:inline-flex; align-items:center; vertical-align:middle; gap:0.1em;">
+            <span class="frac">
+              <span class="num">1</span>
+              <span class="den"><em>G</em></span>
+            </span>
+            <span class="sum-wrap">
+              <span class="sum-lim"><em>G</em></span>
+              <span class="sum-sym">∑</span>
+              <span class="sum-lim">i=1</span>
+            </span>
+          </span>
+          <span class="op">min</span><span class="med-bracket">(</span>
+          <span class="ck">ρ<sub>i</sub></span> · <span class="ca">Â<sub>i</sub></span>
+          ,&ensp;
+          <span class="ck">clip(ρ<sub>i</sub>, 1−ε, 1+ε)</span> · <span class="ca">Â<sub>i</sub></span>
+          <span class="med-bracket">)</span>
+          &ensp;−&ensp;
+          <span class="ck">β</span> · 𝔻<sub><span class="op sm">KL</span></sub><span class="med-bracket">(</span><span class="cp">π<sub>θ</sub></span> ‖ <span class="crf">π<sub>ref</sub></span><span class="med-bracket">)</span>
+          <span class="big-bracket">]</span>
+        </span>
+      </div>
+
+      <p>The <b class="ca">group-relative advantage</b> is computed as:</p>
+
+      <div class="formula-box">
+        <span class="eq">
+          <span class="ca">Â<sub>i</sub></span> &ensp;=&ensp;
+          <span class="frac">
+            <span class="num"><span class="cr">r<sub>i</sub></span> &ensp;−&ensp; <span class="cb">mean({r<sub>1</sub>, …, r<sub>G</sub>})</span></span>
+            <span class="den"><span class="cb">std({r<sub>1</sub>, …, r<sub>G</sub>})</span></span>
+          </span>
+        </span>
+      </div>
+
+      <p>where {y<sub>1</sub>, …, y<sub>G</sub>} are <em>G</em> sampled outputs from <b class="crf">π<sub>θ<sub>old</sub></sub></b>(·|x) and <b class="cr">r<sub>i</sub></b> = <b class="cr">r<sub>ϕ</sub></b>(x, y<sub>i</sub>).</p>
+
+      <h3>Term-by-Term Intuition</h3>
+      <table class="term-table">
+        <tr><td><b class="cr">r<sub>i</sub></b></td><td>The reward model's score for the <em>i</em>-th sampled output. Unlike PPO's per-token rewards, GRPO typically uses an <em>outcome-level</em> reward (one score per complete output).</td></tr>
+        <tr><td><b class="cb">mean({r})</b></td><td>The group mean reward — this is the <b class="cb">baseline</b>. It replaces the learned value function V<sub>ψ</sub>. Conceptually, it answers: "how good is the average output for this prompt?"</td></tr>
+        <tr><td><b class="cb">std({r})</b></td><td>Normalizes the advantage so it has unit variance. This stabilizes training across prompts that have very different reward scales.</td></tr>
+        <tr><td><b class="ca">Â<sub>i</sub></b></td><td>The normalized advantage. Positive for outputs that scored above average in the group; negative for below average. This is a z-score: "how many standard deviations better (or worse) is this output?"</td></tr>
+        <tr><td><b class="ck">clip, ρ, ε</b></td><td>Same PPO-style clipping mechanism for trust region stability. Prevents the policy from changing too fast.</td></tr>
+        <tr><td><b class="ck">β · D<sub>KL</sub></b></td><td>An explicit KL penalty against the <b class="crf">reference policy</b>. In the DeepSeek formulation, this is computed per-token as an approximation rather than a full KL integral.</td></tr>
+        <tr><td><b>G</b></td><td>Group size — the number of outputs sampled per prompt. Larger G gives a more stable baseline estimate but costs more compute at generation time. Typical values: G = 8–64.</td></tr>
+      </table>
+
+      <div class="intuition">
+        <strong>Intuition:</strong> GRPO is "PPO without a critic." For each prompt, sample a batch of outputs, score them all, then use the group statistics as a baseline. Outputs better than the group average get reinforced; outputs worse than the group average get suppressed. No extra value network needed — just more samples.
+      </div>
+      </div>
+
+
+      <!-- ==================== COMPARISON ==================== -->
+
+      <h2>Side-by-Side Comparison</h2>
+
+      <div style="overflow-x: auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th style="min-width:120px;"></th>
+            <th class="ppo-col" style="min-width:160px;">PPO</th>
+            <th class="dpo-col" style="min-width:160px;">DPO</th>
+            <th class="grpo-col" style="min-width:160px;">GRPO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Paradigm</strong></td><td>RL (actor-critic)</td><td>Supervised (contrastive)</td><td>RL (actor only)</td></tr>
+          <tr><td><strong>Reward model?</strong></td><td>Yes — trained separately</td><td>No — implicit in the policy log-ratio</td><td>Yes — or rule-based reward</td></tr>
+          <tr><td><strong>Value function?</strong></td><td>Yes — same size as policy</td><td>No</td><td>No — replaced by group statistics</td></tr>
+          <tr><td><strong>Data</strong></td><td>Prompts (online generation)</td><td>Offline preference pairs (y<sub>w</sub>, y<sub>l</sub>)</td><td>Prompts (online generation)</td></tr>
+          <tr><td><strong>Advantage</strong></td><td>GAE with learned V<sub>ψ</sub></td><td>N/A (no advantage)</td><td>Group-normalized reward z-score</td></tr>
+          <tr><td><strong>KL control</strong></td><td>Clipping + optional KL penalty</td><td>Implicit via β and log-ratio structure</td><td>Clipping + explicit KL penalty</td></tr>
+          <tr><td><strong>Memory cost</strong></td><td>4 models (policy, ref, reward, critic)</td><td>2 models (policy, ref)</td><td>3 models (policy, ref, reward)</td></tr>
+          <tr><td><strong>Key strength</strong></td><td>Flexible; proven at scale (InstructGPT, ChatGPT)</td><td>Simple; stable; no RL instability</td><td>RL flexibility without critic overhead</td></tr>
+          <tr><td><strong>Key weakness</strong></td><td>Complex; unstable; expensive (4 models in memory)</td><td>Needs pre-collected preference pairs; can underperform on-policy methods</td><td>High generation cost (G samples per prompt)</td></tr>
+          <tr><td><strong>Used by</strong></td><td>InstructGPT, early ChatGPT, Llama 2</td><td>Zephyr, Intel Neural Chat, many open models</td><td>DeepSeek-R1, DeepSeek-Math</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+
+      <!-- ==================== BIG PICTURE ==================== -->
+
+      <h2>The Big Picture</h2>
+
+      <p>All three methods solve the same alignment problem. The difference is the path they take:</p>
+
+      <p><strong style="color:var(--ppo-hue)">PPO</strong> takes the full RL route: train a reward model, train a critic, then optimize the policy with clipped surrogate gradients. It is maximally flexible (any reward signal works) but heavyweight and tricky to stabilize.</p>
+
+      <p><strong style="color:var(--dpo-hue)">DPO</strong> eliminates the RL loop entirely by exploiting the closed-form solution to the KL-constrained optimization. The result is a simple supervised loss on preference pairs. It trades RL's flexibility for stability and simplicity.</p>
+
+      <p><strong style="color:var(--grpo-hue)">GRPO</strong> sits between the two: it keeps PPO's on-policy RL framework and reward model but removes the expensive critic by using within-group reward normalization as a baseline. It retains the ability to use any reward signal (including verifiable/rule-based rewards) while being substantially cheaper than full PPO.</p>
+
+      <h3>When to Use What</h3>
+
+      <p>If you have clean <strong>preference pair data</strong> and want simplicity → <strong style="color:var(--dpo-hue)">DPO</strong>. If you have a <strong>reward signal</strong> (learned or rule-based, as in math/code verification) and want on-policy learning → <strong style="color:var(--grpo-hue)">GRPO</strong>. If you need maximum flexibility and have the engineering budget → <strong style="color:var(--ppo-hue)">PPO</strong>.</p>
+
+
+      <!-- ==================== REFERENCES ==================== -->
+
+      <h2>References</h2>
+
+      <div style="font-size:0.93rem; line-height:1.7;">
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--ppo-hue)">[1]</strong>&ensp;Schulman, J., Wolski, F., Dhariwal, P., Radford, A., &amp; Klimov, O. (2017).
+      <em>Proximal Policy Optimization Algorithms.</em>
+      arXiv:1707.06347.
+      <a href="https://arxiv.org/abs/1707.06347" style="color:var(--ppo-hue)">arxiv.org/abs/1707.06347</a>
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--ppo-hue)">[2]</strong>&ensp;Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C., Mishkin, P., Zhang, C., Agarwal, S., Slama, K., Ray, A., Schulman, J., Hilton, J., Kelton, F., Miller, L., Simens, M., Askell, A., Welinder, P., Christiano, P., Leike, J., &amp; Lowe, R. (2022).
+      <em>Training language models to follow instructions with human feedback.</em>
+      NeurIPS 2022. arXiv:2203.02155.
+      <a href="https://arxiv.org/abs/2203.02155" style="color:var(--ppo-hue)">arxiv.org/abs/2203.02155</a>
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--ppo-hue)">[3]</strong>&ensp;Schulman, J., Moritz, P., Levine, S., Jordan, M., &amp; Abbeel, P. (2016).
+      <em>High-Dimensional Continuous Control Using Generalized Advantage Estimation.</em>
+      ICLR 2016. arXiv:1506.02438.
+      <a href="https://arxiv.org/abs/1506.02438" style="color:var(--ppo-hue)">arxiv.org/abs/1506.02438</a>
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--dpo-hue)">[4]</strong>&ensp;Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D., &amp; Finn, C. (2023).
+      <em>Direct Preference Optimization: Your Language Model is Secretly a Reward Model.</em>
+      NeurIPS 2023. arXiv:2305.18290.
+      <a href="https://arxiv.org/abs/2305.18290" style="color:var(--dpo-hue)">arxiv.org/abs/2305.18290</a>
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--grpo-hue)">[5]</strong>&ensp;Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Zhang, M., Li, Y., Wu, Y., &amp; Guo, D. (2024).
+      <em>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.</em>
+      arXiv:2402.03300.
+      <a href="https://arxiv.org/abs/2402.03300" style="color:var(--grpo-hue)">arxiv.org/abs/2402.03300</a>
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong style="color:var(--grpo-hue)">[6]</strong>&ensp;DeepSeek-AI, Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., Xu, R., Zhu, Q., Ma, S., Wang, P., Bi, X., &amp; Zhang, X. (2025).
+      <em>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.</em>
+      arXiv:2501.12948.
+      <a href="https://arxiv.org/abs/2501.12948" style="color:var(--grpo-hue)">arxiv.org/abs/2501.12948</a>
+      </p>
+
+      <h3 style="margin-top:2rem;">Related &amp; Further Reading</h3>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[7]</strong>&ensp;Christiano, P., Leike, J., Brown, T., Marber, M., Legg, S., &amp; Amodei, D. (2017).
+      <em>Deep Reinforcement Learning from Human Preferences.</em>
+      NeurIPS 2017. arXiv:1706.03741.
+      <a href="https://arxiv.org/abs/1706.03741" style="color:var(--text-secondary)">arxiv.org/abs/1706.03741</a>
+      &ensp;— The foundational RLHF paper.
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[8]</strong>&ensp;Ziegler, D., Stiennon, N., Wu, J., Brown, T., Radford, A., Amodei, D., Christiano, P., &amp; Irving, G. (2019).
+      <em>Fine-Tuning Language Models from Human Preferences.</em>
+      arXiv:1909.08593.
+      <a href="https://arxiv.org/abs/1909.08593" style="color:var(--text-secondary)">arxiv.org/abs/1909.08593</a>
+      &ensp;— Early application of RLHF to language models.
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[9]</strong>&ensp;Stiennon, N., Ouyang, L., Wu, J., Ziegler, D., Lowe, R., Voss, C., Radford, A., Amodei, D., &amp; Christiano, P. (2020).
+      <em>Learning to Summarize with Human Feedback.</em>
+      NeurIPS 2020. arXiv:2009.01325.
+      <a href="https://arxiv.org/abs/2009.01325" style="color:var(--text-secondary)">arxiv.org/abs/2009.01325</a>
+      &ensp;— PPO-based RLHF for summarization.
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[10]</strong>&ensp;Bradley, R. A. &amp; Terry, M. E. (1952).
+      <em>Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons.</em>
+      Biometrika, 39(3/4), 324–345.
+      &ensp;— The preference model underlying DPO's derivation.
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[11]</strong>&ensp;Azar, M. G., Rowland, M., Piot, B., Guo, D., Calandriello, D., Valko, M., &amp; Munos, R. (2023).
+      <em>A General Theoretical Paradigm to Understand Learning from Human Preferences.</em>
+      arXiv:2310.12036.
+      <a href="https://arxiv.org/abs/2310.12036" style="color:var(--text-secondary)">arxiv.org/abs/2310.12036</a>
+      &ensp;— IPO: a theoretical generalization of DPO.
+      </p>
+
+      <p style="margin-bottom:0.6rem; padding-left:1.8em; text-indent:-1.8em;">
+      <strong>[12]</strong>&ensp;Ahmadian, A., Cremer, C., Gallé, M., Fadaee, M., Kreutzer, J., Pietquin, O., Üstün, A., &amp; Hooker, S. (2024).
+      <em>Back to Basics: Revisiting REINFORCE-Style Optimization for Learning from Human Feedback in LLMs.</em>
+      ACL 2024. arXiv:2402.14740.
+      <a href="https://arxiv.org/abs/2402.14740" style="color:var(--text-secondary)">arxiv.org/abs/2402.14740</a>
+      &ensp;— Compares REINFORCE, PPO, and DPO-family methods.
+      </p>
+
+      </div>
+      </div>
+
+      <footer class="footer-legal" data-shared-footer style="margin-top:2.8rem;border-top:1px solid var(--hairline);padding-top:1rem;color:var(--ink-faint);"></footer>
+    </main>
+
+    <script src="../../assets/js/main.js" defer></script>
+  </body>
+</html>
