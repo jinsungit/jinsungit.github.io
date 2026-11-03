@@ -1,6 +1,34 @@
 [
 
   {
+    "year": 2027,
+    "title": "Self-Improving Small Object Groundiung in LVLMs",
+    "authors": "Tianze Yang, Yucheng Shi, Ruitong Sun, Ninghao Liu, Jin Sun",
+    "venue": "WACV",
+    "kind": "conference",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.01612"
+    },
+    "tags": ["lvlm"],
+    "highlight": true
+  },
+  {
+    "year": 2027,
+    "title": "Know-Your-Scene (KYS)-SLAM: Hierarchical Semantic-Motion Priors for Feature Matching in Stereo Visual SLAM",
+    "authors": "Preeti Chatterjee, Jin Lu, Jin Sun, Suchendra M. Bhandarkar",
+    "venue": "WACV",
+    "kind": "conference",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": ""
+    },
+    "tags": ["slam","semantics","3D"],
+    "highlight": true
+  },
+  {
     "year": 2026,
     "title": "Self-Evolving Code-with-Image Reasoning",
     "authors": "Tianze Yang, Liang Wu, Ruitong Sun, Yucheng Shi, Yanqiao Wang, Mayank Darbari, Ninghao Liu, Jin Sun, Liangjie Hong",
@@ -24,20 +52,6 @@
     "cover": "",
     "links": {
       "paper": "https://arxiv.org/abs/2606.01599"
-    },
-    "tags": ["lvlm"],
-    "highlight": true
-  },
-  {
-    "year": 2026,
-    "title": "Self-Improving Small Object Groundiung in LVLMs",
-    "authors": "Tianze Yang, Yucheng Shi, Ruitong Sun, Ninghao Liu, Jin Sun",
-    "venue": "arXiv",
-    "kind": "preprint",
-    "blurb": "",
-    "cover": "",
-    "links": {
-      "paper": "https://arxiv.org/abs/2606.01612"
     },
     "tags": ["lvlm"],
     "highlight": true

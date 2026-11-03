@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-25",
+    "title": "Will serve as Area Chair for ICML 2027",
+    "description": "",
+    "link": "",
+    "type": "activity"
+  },
+  {
+    "date": "2026-10-20",
+    "title": "New conference papers accepted at WACV 2027",
+    "description": "",
+    "link": "",
+    "type": "paper"
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Computer Vision for Crop Protection: Counting, Tracking, and 3D Reconstruction",
+    "description": "2026 AI in Crop Protection Symposium",
+    "link": "",
+    "type": "talk"
+  },
+  {
     "date": "2026-07-22",
     "title": "Computer Vision for Public Health at Makerere University, Uganda",
     "description": "2026 Short Course on the Foundations and Application of Artificial Intelligence in Public Health",
@@ -30,6 +51,13 @@
   {
     "date": "2026-04-27",
     "title": "Will serve as Area Chair for NeurIPS 2026",
+    "description": "",
+    "link": "",
+    "type": "activity"
+  },
+  {
+    "date": "2026-04-10",
+    "title": "Our team has won the 3rd place at CVPR 2026 ACCIDENT Kaggle Challenge",
     "description": "",
     "link": "",
     "type": "activity"
