@@ -30,6 +30,20 @@
   },
   {
     "year": 2026,
+    "title": "LAMP: 3D Source-Aware Lighting Estimation at Multiple Points",
+    "authors": "Yanqiao Wang, Jin Sun",
+    "venue": "arXiv",
+    "kind": "preprint",
+    "blurb": "",
+    "cover": "",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.19266"
+    },
+    "tags": ["lighting","lvlm","3D"],
+    "highlight": true
+  },
+  {
+    "year": 2026,
     "title": "Self-Evolving Code-with-Image Reasoning",
     "authors": "Tianze Yang, Liang Wu, Ruitong Sun, Yucheng Shi, Yanqiao Wang, Mayank Darbari, Ninghao Liu, Jin Sun, Liangjie Hong",
     "venue": "arXiv",
